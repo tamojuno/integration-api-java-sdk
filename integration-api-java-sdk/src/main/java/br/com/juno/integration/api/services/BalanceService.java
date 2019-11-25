@@ -14,6 +14,7 @@ public final class BalanceService {
     }
 
     public Response<Balance> getBalance(String resourceToken) {
+        resourceToken.getClass();
         return null;
     }
 }
