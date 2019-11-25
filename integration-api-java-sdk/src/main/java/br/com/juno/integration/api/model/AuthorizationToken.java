@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.juno.integration.api.utils.Clock;
+
 public final class AuthorizationToken implements Serializable {
+
     private static final long serialVersionUID = -8061124453931068922L;
 
     private final Long timestamp;
@@ -17,7 +20,7 @@ public final class AuthorizationToken implements Serializable {
     private String jti;
 
     public AuthorizationToken() {
-        timestamp = System.currentTimeMillis();
+        timestamp = Clock.getTimeInMillis();
     }
 
     public boolean isExpired() {
@@ -29,7 +32,7 @@ public final class AuthorizationToken implements Serializable {
             throw new IllegalStateException("expiredIn was not initialized");
         }
 
-        return System.currentTimeMillis() - timestamp <= expiresIn + minTimeAmount;
+        return timestamp - Clock.getTimeInMillis() <= expiresIn + minTimeAmount;
     }
 
     public String getAccessToken() {
