@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
-
-import com.fasterxml.jackson.core.type.TypeReference;
 
 import br.com.juno.integration.api.utils.Response;
 import br.com.juno.integration.api.utils.Responses;
@@ -18,7 +18,9 @@ public class BankTest extends AbstractTest {
 
     @Test
     public void jsonToObject() throws Exception {
-        Response<Bank> res = new Response<>(getObjectMapper().readValue(findOne(), new TypeReference<Resource<Bank>>() {}));
+        Response<Bank> res = new Response<>(getObjectMapper().readValue(findOne(), new TypeReference<Resource<Bank>>() {
+            // NTD
+        }));
 
         assertEquals(null, res.getHrefSelf());
 
@@ -30,7 +32,9 @@ public class BankTest extends AbstractTest {
 
     @Test
     public void jsonToCollection() throws Exception {
-        Responses<Bank> res = new Responses<>(getObjectMapper().readValue(findAll(), new TypeReference<Resources<Resource<Bank>>>() {}));
+        Responses<Bank> res = new Responses<>(getObjectMapper().readValue(findAll(), new TypeReference<Resources<Resource<Bank>>>() {
+            // NTD
+        }));
 
         assertEquals("https://sandbox.boletobancario.com/api-integration/data/banks", res.getHrefSelf());
         assertEquals(null, res.getHrefNext());
