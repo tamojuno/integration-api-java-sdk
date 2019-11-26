@@ -30,6 +30,10 @@ public final class ApiManager {
         return apiManager;
     }
 
+    public static boolean isInitialized() {
+        return apiManager != null;
+    }
+
     private final ApiConfig apiConfig;
 
     private DataService dataService = new DataService();

@@ -6,12 +6,17 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.juno.integration.api.services.ApiManager;
 import br.com.juno.integration.api.utils.Clock;
 
 public abstract class AbstractTest {
 
     @BeforeEach
     public void initialize() {
+        if (!ApiManager.isInitialized()) {
+            ApiManager.initialize("8hKM1sGxo963Zego", "Yb#2(i;X<owxphN{M1Iy_BFTDc,4?1ok", "resourceToken");
+        }
+
         setDate(CURRENT_DATE_TIME);
     }
 
