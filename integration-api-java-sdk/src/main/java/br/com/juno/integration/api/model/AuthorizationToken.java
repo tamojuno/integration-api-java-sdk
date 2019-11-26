@@ -32,7 +32,10 @@ public final class AuthorizationToken implements Serializable {
             throw new IllegalStateException("expiredIn was not initialized");
         }
 
-        return timestamp - Clock.getTimeInMillis() <= expiresIn + minTimeAmount;
+        System.out.println(Clock.getTimeInMillis() - timestamp);
+        System.out.println(getExpiresInMillis() - minTimeAmount);
+
+        return Clock.getTimeInMillis() - timestamp > getExpiresInMillis() - minTimeAmount;
     }
 
     public String getAccessToken() {
@@ -45,6 +48,10 @@ public final class AuthorizationToken implements Serializable {
 
     public Long getExpiresIn() {
         return expiresIn;
+    }
+
+    public Long getExpiresInMillis() {
+        return expiresIn == null ? null : expiresIn * 1000;
     }
 
     public String getScope() {

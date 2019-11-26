@@ -26,7 +26,7 @@ public class AuthorizationTokenTest extends AbstractTest {
         assertEquals(AUTH_TOKEN_SCOPE, authToken.getScope());
         assertEquals(AUTH_TOKEN_USER_NAME, authToken.getUserName());
         assertEquals(AUTH_TOKEN_JTI, authToken.getJti());
-        assertTrue(authToken.isExpired());
+        assertFalse(authToken.isExpired());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class AuthorizationTokenTest extends AbstractTest {
     public void isExpiredNotExpired() throws Exception {
         AuthorizationToken authToken = getAuthorizationToken();
 
-        Long notExpired = Clock.getTimeInMillis() - authToken.getExpiresIn() - 1L;
+        Long notExpired = Clock.getTimeInMillis() + authToken.getExpiresInMillis();
         Clock.setFixedCalendar(notExpired);
 
         assertFalse(authToken.isExpired());
@@ -51,7 +51,7 @@ public class AuthorizationTokenTest extends AbstractTest {
     public void isExpiredActuallyExpired() throws Exception {
         AuthorizationToken authToken = getAuthorizationToken();
 
-        Long expired = Clock.getTimeInMillis() - authToken.getExpiresIn() + 1L;
+        Long expired = Clock.getTimeInMillis() + authToken.getExpiresInMillis() + 1L;
         Clock.setFixedCalendar(expired);
 
         assertTrue(authToken.isExpired());
@@ -61,7 +61,7 @@ public class AuthorizationTokenTest extends AbstractTest {
     public void isExpiredNotExpiredConsideringThreshold() throws Exception {
         AuthorizationToken authToken = getAuthorizationToken();
 
-        Long notExpired = Clock.getTimeInMillis() - authToken.getExpiresIn() - ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT - 1L;
+        Long notExpired = Clock.getTimeInMillis() + authToken.getExpiresInMillis() - ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT;
         Clock.setFixedCalendar(notExpired);
 
         assertFalse(authToken.isExpired(ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT));
@@ -71,7 +71,7 @@ public class AuthorizationTokenTest extends AbstractTest {
     public void isExpiredActuallyExpiredConsideringThreshold() throws Exception {
         AuthorizationToken authToken = getAuthorizationToken();
 
-        Long expired = Clock.getTimeInMillis() - authToken.getExpiresIn() - ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT;
+        Long expired = Clock.getTimeInMillis() + authToken.getExpiresInMillis();
         Clock.setFixedCalendar(expired);
 
         assertTrue(authToken.isExpired(ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT));
@@ -93,5 +93,4 @@ public class AuthorizationTokenTest extends AbstractTest {
 
         return getObjectMapper().writeValueAsString(map);
     }
-
 }

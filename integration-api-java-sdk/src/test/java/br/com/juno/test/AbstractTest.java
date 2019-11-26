@@ -1,10 +1,10 @@
 package br.com.juno.test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.hateoas.hal.Jackson2HalModule;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.juno.integration.api.utils.Clock;
 
@@ -42,5 +42,4 @@ public abstract class AbstractTest {
     protected static final String CURRENT_DATE_TIME = "25/11/2019 16:12:00.000";
 
     private ObjectMapper objectMapper;
-
 }

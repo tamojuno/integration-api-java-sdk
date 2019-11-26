@@ -34,8 +34,8 @@ public final class ApiConfig {
 
     public enum Environment {
 
-        PRODUCTION("https://api.juno.com.br"),
-        SANDBOX("https://boletobancario.com.br");
+        PRODUCTION("https://api.juno.com.br"), 
+        SANDBOX("https://sandbox.boletobancario.com");
 
         private String url;
 
@@ -47,5 +47,4 @@ public final class ApiConfig {
             return url;
         }
     }
-
 }
