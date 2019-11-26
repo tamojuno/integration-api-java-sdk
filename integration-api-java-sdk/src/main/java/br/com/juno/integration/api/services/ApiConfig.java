@@ -3,6 +3,7 @@ package br.com.juno.integration.api.services;
 public final class ApiConfig {
 
     public static final Long TOKEN_VALIDITY_MIN_TIME_AMOUNT = 5000L;
+    public static final Long VALIDITY_DATA_RESOURCE = 24 * 60 * 60 * 1000L;
 
     private final Environment env;
     private final String clientId;
@@ -34,8 +35,7 @@ public final class ApiConfig {
 
     public enum Environment {
 
-        PRODUCTION("https://api.juno.com.br"), 
-        SANDBOX("https://sandbox.boletobancario.com");
+        PRODUCTION("https://api.juno.com.br"), SANDBOX("https://sandbox.boletobancario.com");
 
         private String url;
 

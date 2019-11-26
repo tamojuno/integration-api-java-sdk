@@ -1,10 +1,8 @@
 package br.com.juno.integration.api.services;
 
-import org.springframework.hateoas.hal.Jackson2HalModule;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import br.com.juno.integration.api.utils.ResponseUtils;
 import kong.unirest.ObjectMapper;
 import kong.unirest.Unirest;
 
@@ -34,28 +32,27 @@ public final class ApiManager {
 
     private final ApiConfig apiConfig;
 
+    private DataService dataService = new DataService();
     private BalanceService balanceService = new BalanceService();
     private AuthorizationService authorizationService = new AuthorizationService();
-
-    public BalanceService getBalanceService() {
-        return balanceService;
-    }
 
     private ApiManager(String clientId, String clientSecret, String resourceToken, boolean production) {
         apiConfig = new ApiConfig(clientId, clientSecret, resourceToken, production);
         configUnirest();
     }
 
-    private void configUnirest() {
-        Unirest.config().setDefaultHeader("X-API-VERSION", "2");
-        Unirest.config().setObjectMapper(new ObjectMapper() {
+    ApiConfig getApiConfig() {
+        return apiConfig;
+    }
 
-            com.fasterxml.jackson.databind.ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().modules(new Jackson2HalModule()).build();
+    private void configUnirest() {
+        Unirest.config().setDefaultHeader("X-API-Version", "2");
+        Unirest.config().setObjectMapper(new ObjectMapper() {
 
             @Override
             public String writeValue(Object value) {
                 try {
-                    return mapper.writeValueAsString(value);
+                    return ResponseUtils.getObjectMapper().writeValueAsString(value);
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
@@ -64,7 +61,7 @@ public final class ApiManager {
             @Override
             public <T> T readValue(String value, Class<T> valueType) {
                 try {
-                    return mapper.readValue(value, valueType);
+                    return ResponseUtils.getObjectMapper().readValue(value, valueType);
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
@@ -72,11 +69,15 @@ public final class ApiManager {
         });
     }
 
-    AuthorizationService getAuthorizationService() {
-        return authorizationService;
+    public DataService getDataService() {
+        return dataService;
     }
 
-    ApiConfig getApiConfig() {
-        return apiConfig;
+    public BalanceService getBalanceService() {
+        return balanceService;
+    }
+
+    AuthorizationService getAuthorizationService() {
+        return authorizationService;
     }
 }

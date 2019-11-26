@@ -9,15 +9,17 @@ import org.springframework.hateoas.Resources;
 public final class Responses<T> {
 
     private final Resources<Resource<T>> resources;
-    private final List<Response<T>> content;
 
     public Responses(Resources<Resource<T>> resources) {
         this.resources = resources;
-        this.content = resources.getContent().stream().map(Response::new).collect(Collectors.toList());
     }
 
     public List<Response<T>> getContent() {
-        return content;
+        return resources.getContent().stream().map(Response::new).collect(Collectors.toList());
+    }
+
+    public List<T> getAbsoluteContent() {
+        return resources.getContent().stream().map(Resource::getContent).collect(Collectors.toList());
     }
 
     public String getHrefSelf() {

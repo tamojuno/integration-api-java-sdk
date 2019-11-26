@@ -20,11 +20,11 @@ public abstract class AbstractTest {
     }
 
     protected final ObjectMapper getObjectMapper() {
-        if (objectMapper == null) {
-            objectMapper = Jackson2ObjectMapperBuilder.json().modules(new Jackson2HalModule()).build();
+        if (mapper == null) {
+            mapper = Jackson2ObjectMapperBuilder.json().modules(new Jackson2HalModule()).build();
         }
 
-        return objectMapper;
+        return mapper;
     }
 
     protected static final String BASE_URI = "https://sandbox.boletobancario.com/api-integration";
@@ -41,5 +41,5 @@ public abstract class AbstractTest {
 
     protected static final String CURRENT_DATE_TIME = "25/11/2019 16:12:00.000";
 
-    private ObjectMapper objectMapper;
+    private ObjectMapper mapper;
 }

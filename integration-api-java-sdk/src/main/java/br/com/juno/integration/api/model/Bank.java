@@ -22,4 +22,9 @@ public final class Bank extends BaseModel {
     protected void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Bank [number=" + number + ", name=" + name + "]";
+    }
 }

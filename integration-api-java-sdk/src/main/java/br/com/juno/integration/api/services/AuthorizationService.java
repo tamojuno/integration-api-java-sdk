@@ -17,17 +17,17 @@ public final class AuthorizationService {
     }
 
     private void refresh(ApiConfig apiConfig) {
-        HttpResponse<AuthorizationToken> response = //
+        HttpResponse<AuthorizationToken> httpResponse = //
                 Unirest.post(apiConfig.getEnv().getUrl() + "/authorization-server/oauth/token") //
                         .basicAuth(apiConfig.getClientId(), apiConfig.getClientSecret()) //
                         .header("Content-Type", "application/x-www-form-urlencoded") //
                         .field("grant_type", "client_credentials") //
                         .asObject(AuthorizationToken.class);
 
-        if (response.getStatus() / 100 != 2) {
-            throw new RuntimeException(response.getParsingError().get());
+        if (httpResponse.getStatus() / 100 != 2) {
+            throw new RuntimeException(httpResponse.getParsingError().get());
         }
 
-        authorizationToken = response.getBody();
+        authorizationToken = httpResponse.getBody();
     }
 }

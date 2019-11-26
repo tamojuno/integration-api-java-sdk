@@ -8,6 +8,7 @@ public class AuthorizationServiceTest extends AbstractTest {
 
     @Test
     public void testGetToken() {
+        // just to call
         ApiManager.initialize("8hKM1sGxo963Zego", "Yb#2(i;X<owxphN{M1Iy_BFTDc,4?1ok", "resourceToken");
         String token = ApiManager.getInstance().getAuthorizationService().getToken();
         System.out.println(token);
