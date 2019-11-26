@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.juno.integration.api.base.exception.Assert;
 import br.com.juno.integration.api.utils.Clock;
 
 public final class AuthorizationToken implements Serializable {
@@ -28,9 +29,7 @@ public final class AuthorizationToken implements Serializable {
     }
 
     public boolean isExpired(Long minTimeAmount) {
-        if (expiresIn == null) {
-            throw new IllegalStateException("expiredIn was not initialized");
-        }
+        Assert.notNull(expiresIn, "expiredIn was not initialized");
 
         System.out.println(Clock.getTimeInMillis() - timestamp);
         System.out.println(getExpiresInMillis() - minTimeAmount);

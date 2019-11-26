@@ -9,9 +9,9 @@ public class AuthorizationServiceTest extends AbstractTest {
     @Test
     public void testGetToken() {
         // just to call
-        String token = ApiManager.getInstance().getAuthorizationService().getToken();
+        String token = JunoApiManager.resources().authorization().getToken();
         System.out.println(token);
-        token = ApiManager.getInstance().getAuthorizationService().getToken();
+        token = JunoApiManager.resources().authorization().getToken();
         System.out.println(token);
     }
 }

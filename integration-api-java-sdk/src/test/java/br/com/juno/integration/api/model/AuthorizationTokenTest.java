@@ -10,7 +10,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.juno.integration.api.services.ApiConfig;
+import br.com.juno.integration.api.base.exception.JunoApiException;
+import br.com.juno.integration.api.services.JunoApiConfig;
 import br.com.juno.integration.api.utils.Clock;
 import br.com.juno.test.AbstractTest;
 
@@ -34,7 +35,7 @@ public class AuthorizationTokenTest extends AbstractTest {
         AuthorizationToken authToken = getAuthorizationToken();
         authToken.setExpiresIn(null);
 
-        assertThrows(IllegalStateException.class, () -> authToken.isExpired());
+        assertThrows(JunoApiException.class, () -> authToken.isExpired());
     }
 
     @Test
@@ -61,10 +62,10 @@ public class AuthorizationTokenTest extends AbstractTest {
     public void isExpiredNotExpiredConsideringThreshold() throws Exception {
         AuthorizationToken authToken = getAuthorizationToken();
 
-        Long notExpired = Clock.getTimeInMillis() + authToken.getExpiresInMillis() - ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT;
+        Long notExpired = Clock.getTimeInMillis() + authToken.getExpiresInMillis() - JunoApiConfig.TOKEN_TIMEOUT;
         Clock.setFixedCalendar(notExpired);
 
-        assertFalse(authToken.isExpired(ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT));
+        assertFalse(authToken.isExpired(JunoApiConfig.TOKEN_TIMEOUT));
     }
 
     @Test
@@ -74,7 +75,7 @@ public class AuthorizationTokenTest extends AbstractTest {
         Long expired = Clock.getTimeInMillis() + authToken.getExpiresInMillis();
         Clock.setFixedCalendar(expired);
 
-        assertTrue(authToken.isExpired(ApiConfig.TOKEN_VALIDITY_MIN_TIME_AMOUNT));
+        assertTrue(authToken.isExpired(JunoApiConfig.TOKEN_TIMEOUT));
     }
 
     private AuthorizationToken getAuthorizationToken() throws Exception {

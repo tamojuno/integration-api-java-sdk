@@ -1,5 +1,8 @@
 package br.com.juno.integration.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public final class Bank extends BaseModel {
 
     private static final long serialVersionUID = -3918516666752671116L;
@@ -25,6 +28,9 @@ public final class Bank extends BaseModel {
 
     @Override
     public String toString() {
-        return "Bank [number=" + number + ", name=" + name + "]";
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(number);
+        builder.append(name);
+        return builder.toString();
     }
 }

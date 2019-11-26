@@ -5,51 +5,72 @@ import java.util.List;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-
 import br.com.juno.integration.api.model.Bank;
-import br.com.juno.integration.api.utils.Clock;
-import br.com.juno.integration.api.utils.ResponseUtils;
+import br.com.juno.integration.api.model.BusinessArea;
+import br.com.juno.integration.api.model.CompanyType;
 import br.com.juno.integration.api.utils.Responses;
+import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 
-public final class DataService {
+public final class DataService extends BaseService {
 
     DataService() {
         // NTD
     }
 
-    public List<Bank> getBanks() {
-        if (timestampBanks == null || Clock.getTimeInMillis() - timestampBanks > ApiConfig.VALIDITY_DATA_RESOURCE || banks == null) {
-            refresh(ApiManager.getInstance().getApiConfig(), ApiManager.getInstance().getAuthorizationService());
+    public List<Bank> banks() {
+        if (banks.isExpired()) {
+            HttpResponse<Resources<Resource<Bank>>> httpResponse = Unirest.get(
+                    JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/banks") //
+                    .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
+                    .asObject(new GenericType<Resources<Resource<Bank>>>() {
+                        //NTD
+                    });
+
+            validateSuccess(httpResponse);
+
+            banks.setCache(new Responses<>(httpResponse.getBody()).getAbsoluteContent());
         }
 
-        return banks;
+        return banks.getCache();
     }
 
-    private void refresh(ApiConfig apiConfig, AuthorizationService authService) {
-        HttpResponse<JsonNode> httpResponse = Unirest.get(apiConfig.getEnv().getUrl() + "/api-integration/data/banks") //
-                .header("Authorization", "Bearer " + authService.getToken()) //
-                .asJson();
+    public List<CompanyType> companyTypes() {
+        if (companyTypes.isExpired()) {
+            HttpResponse<JsonNode> httpResponse = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/company-types") //
+                    .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
+                    .asJson();
 
-        if (httpResponse.getStatus() / 100 != 2) {
-            throw new RuntimeException(httpResponse.getStatusText());
+            validateSuccess(httpResponse);
+
+            companyTypes.getCache().clear();
+            httpResponse.getBody().getObject().getJSONArray("companyTypes").forEach(str -> companyTypes.getCache().add(new CompanyType((String)str)));
+            companyTypes.resetTimestamp();
         }
 
-        Responses<Bank> responses = null;
-
-        try {
-            responses = new Responses<>(ResponseUtils.getObjectMapper().readValue(httpResponse.getBody().toString(), new TypeReference<Resources<Resource<Bank>>>() {}));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        banks = responses.getAbsoluteContent();
+        return companyTypes.getCache();
     }
 
-    private Long timestampBanks;
-    private List<Bank> banks;
+    public List<BusinessArea> businessAreas() {
+        if (businessAreas.isExpired()) {
+            HttpResponse<Resources<Resource<BusinessArea>>> httpResponse = Unirest.get(
+                    JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/business-areas") //
+                    .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
+                    .asObject(new GenericType<Resources<Resource<BusinessArea>>>() {
+                        //NTD
+                    });
+
+            validateSuccess(httpResponse);
+
+            businessAreas.setCache(new Responses<>(httpResponse.getBody()).getAbsoluteContent());
+        }
+
+        return businessAreas.getCache();
+    }
+
+    private CachedResource<Bank> banks = new CachedResource<>();
+    private CachedResource<CompanyType> companyTypes = new CachedResource<>();
+    private CachedResource<BusinessArea> businessAreas = new CachedResource<>();
 }
