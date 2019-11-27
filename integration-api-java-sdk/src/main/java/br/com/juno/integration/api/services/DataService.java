@@ -20,7 +20,7 @@ public final class DataService extends BaseService {
         // NTD
     }
 
-    public List<Bank> banks() {
+    public List<Bank> getBanks() {
         if (banks.isExpired()) {
             HttpResponse<Resources<Resource<Bank>>> httpResponse = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/banks") //
@@ -37,7 +37,7 @@ public final class DataService extends BaseService {
         return banks.getCache();
     }
 
-    public List<CompanyType> companyTypes() {
+    public List<CompanyType> getCompanyTypes() {
         if (companyTypes.isExpired()) {
             HttpResponse<JsonNode> httpResponse = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/company-types") //
                     .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
@@ -53,7 +53,7 @@ public final class DataService extends BaseService {
         return companyTypes.getCache();
     }
 
-    public List<BusinessArea> businessAreas() {
+    public List<BusinessArea> getBusinessAreas() {
         if (businessAreas.isExpired()) {
             HttpResponse<Resources<Resource<BusinessArea>>> httpResponse = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/business-areas") //

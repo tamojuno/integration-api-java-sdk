@@ -14,6 +14,10 @@ public final class Response<T> {
         return resource.getContent();
     }
 
+    public Resource<T> getResource() {
+        return resource;
+    }
+
     public String getHrefSelf() {
         return ResponseUtils.getHrefLink(resource, "self");
     }

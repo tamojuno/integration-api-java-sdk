@@ -2,6 +2,9 @@ package br.com.juno.integration.api.services;
 
 public final class JunoApiManager {
 
+    public static final String X_RESOURCE_TOKEN = "X-Resource-Token";
+    public static final String X_API_VERSION = "X-API-Version";
+
     private JunoApiManager() {
         // Private Constructor
     }

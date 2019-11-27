@@ -3,12 +3,14 @@ package br.com.juno.integration.api.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.model.AuthorizationToken;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
-public final class AuthorizationService {
+public final class AuthorizationService extends BaseService {
+
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String BEARER = "Bearer";
 
     private AuthorizationToken authorizationToken;
 
@@ -22,7 +24,7 @@ public final class AuthorizationService {
 
     public Map<String, String> getAuthorizationHeader() {
         Map<String, String> authorizationHeader = new HashMap<>();
-        authorizationHeader.put("Authorization", "Bearer" + getToken());
+        authorizationHeader.put(AUTHORIZATION_HEADER, BEARER + getToken());
         return authorizationHeader;
     }
 
@@ -34,9 +36,7 @@ public final class AuthorizationService {
                         .field("grant_type", "client_credentials") //
                         .asObject(AuthorizationToken.class);
 
-        if (!httpResponse.isSuccess()) {
-            throw new JunoApiException(httpResponse.getParsingError().orElse(null));
-        }
+        validateSuccess(httpResponse);
 
         authorizationToken = httpResponse.getBody();
     }
