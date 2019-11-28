@@ -32,7 +32,7 @@ public final class AuthorizationService extends BaseService {
         HttpResponse<AuthorizationToken> httpResponse = //
                 Unirest.post(JunoApiManager.config().getEnvironmentUrl() + "/authorization-server/oauth/token") //
                         .basicAuth(JunoApiManager.config().getClientId(), JunoApiManager.config().getClientSecret()) //
-                        .header("Content-Type", "application/x-www-form-urlencoded") //
+                        .headerReplace("Content-type", "application/x-www-form-urlencoded") //
                         .field("grant_type", "client_credentials") //
                         .asObject(AuthorizationToken.class);
 

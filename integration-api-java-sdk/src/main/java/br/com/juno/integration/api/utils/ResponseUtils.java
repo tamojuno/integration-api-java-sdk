@@ -1,6 +1,10 @@
 package br.com.juno.integration.api.utils;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
@@ -15,7 +19,15 @@ public final class ResponseUtils {
 
     public static ObjectMapper getObjectMapper() {
         if (mapper == null) {
-            mapper = Jackson2ObjectMapperBuilder.json().modules(new Jackson2HalModule()).build();
+            mapper = Jackson2ObjectMapperBuilder.json() //
+                    .modules( //
+                            new ParameterNamesModule(), //
+                            new Jdk8Module(), //
+                            new JavaTimeModule(), //
+                            new Jackson2HalModule()//
+                    ) //
+                    .build(); //
+            mapper.setSerializationInclusion(Include.NON_NULL);
         }
 
         return mapper;

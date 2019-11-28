@@ -2,10 +2,20 @@ package br.com.juno.integration.api.services;
 
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.hateoas.Resource;
@@ -14,6 +24,8 @@ import org.springframework.hateoas.Resources;
 import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.model.Charge;
 import br.com.juno.integration.api.model.LabeledEnum;
+import br.com.juno.integration.api.utils.CalendarUtils;
+import br.com.juno.integration.api.utils.ResponseUtils;
 import br.com.juno.integration.api.utils.Responses;
 import kong.unirest.GenericType;
 import kong.unirest.GetRequest;
@@ -30,8 +42,318 @@ public class ChargeService extends BaseService {
         // NTD
     }
 
+    public ChargeCreateBuilder create() {
+        return new ChargeCreateBuilder();
+    }
+
     public ChargeListBuilder list() {
         return new ChargeListBuilder();
+    }
+
+    public static class ChargeCreateBuilder {
+
+        private ChargeHolder chargeHolder;
+
+        ChargeCreateBuilder() {
+            chargeHolder = new ChargeHolder(this);
+        }
+
+        public List<br.com.juno.integration.api.model.Charge> create() {
+            return create(JunoApiManager.config().getResourceToken());
+        }
+
+        public List<br.com.juno.integration.api.model.Charge> create(String resourceToken) {
+
+            String requestBody;
+            try {
+                requestBody = ResponseUtils.getObjectMapper().writeValueAsString(chargeHolder());
+            } catch (JsonProcessingException e) {
+                throw new JunoApiException(e);
+            }
+
+            System.out.println(requestBody);
+
+            HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> httpResponse = Unirest.post( //
+                    JunoApiManager.config().getEnvironmentUrl() + "/api-integration/charges") //
+                    .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
+                    .header(X_RESOURCE_TOKEN, resourceToken) //
+                    .body(requestBody) //
+                    .asObject(new GenericType<Resources<Resource<br.com.juno.integration.api.model.Charge>>>() { //
+                        // NTD
+                    });//
+
+            validateSuccess(httpResponse);
+
+            return new Responses<>(httpResponse.getBody()).getAbsoluteContent();
+        }
+
+        public Charge charge() {
+            return chargeHolder.getCharge();
+        }
+
+        public Billing billing() {
+            return chargeHolder.getBilling();
+        }
+
+        private ChargeHolder chargeHolder() {
+            return chargeHolder;
+        }
+
+        public static class ChargeHolder {
+
+            private ChargeCreateBuilder builder;
+
+            public ChargeHolder(ChargeCreateBuilder builder) {
+                this.builder = builder;
+                this.charge = new Charge(builder, this);
+                this.billing = new Billing(builder, this);
+
+                this.billing.setCharge(this.charge);
+                this.charge.setBilling(this.billing);
+            }
+
+            private Charge charge;
+            private Billing billing;
+
+            public Charge getCharge() {
+                return charge;
+            }
+
+            public Billing getBilling() {
+                return billing;
+            }
+        }
+
+        public static class Charge implements Serializable {
+
+            private static final long serialVersionUID = 209164858682596232L;
+
+            @JsonProperty
+            private String description;
+            @JsonProperty
+            private List<String> references = new LinkedList<>();
+            @JsonProperty
+            private BigDecimal totalAmount;
+            @JsonProperty
+            private BigDecimal amount;
+            @JsonProperty
+            @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
+            private LocalDate dueDate;
+            @JsonProperty
+            private Integer installments;
+            @JsonProperty
+            private Integer maxOverdueDays;
+            @JsonProperty
+            private BigDecimal fine;
+            @JsonProperty
+            private BigDecimal interest;
+            @JsonProperty
+            private BigDecimal discountAmount;
+            @JsonProperty
+            private Integer discountDays;
+            @JsonProperty
+            private Set<PaymentType> paymentTypes = new HashSet<>();
+            @JsonProperty
+            private Boolean paymentAdvance;
+
+            @JsonIgnore
+            private Billing billing;
+
+            @JsonIgnore
+            private ChargeCreateBuilder builder;
+
+            @JsonIgnore
+            private ChargeHolder holder;
+
+            public Charge(ChargeCreateBuilder builder, ChargeHolder holder) {
+                this.builder = builder;
+                this.holder = holder;
+            }
+
+            private void setBilling(Billing billing) {
+                this.billing = billing;
+            }
+
+            public Billing billing() {
+                return billing;
+            }
+
+            public List<br.com.juno.integration.api.model.Charge> create(String resourceToken) {
+                return builder.create(resourceToken);
+            }
+
+            public List<br.com.juno.integration.api.model.Charge> create() {
+                return builder.create();
+            }
+
+            public enum PaymentType {
+                BOLETO,
+                CREDIT_CARD;
+            }
+
+            public Charge description(String description) {
+                this.description = description;
+                return this;
+            }
+
+            public Charge references(List<String> references) {
+                this.references.addAll(references);
+                return this;
+            }
+
+            public Charge reference(String reference) {
+                this.references.add(reference);
+                return this;
+            }
+
+            public Charge totalAmount(BigDecimal totalAmount) {
+                this.totalAmount = totalAmount;
+                return this;
+            }
+
+            public Charge amount(BigDecimal amount) {
+                this.amount = amount;
+                return this;
+            }
+
+            public Charge dueDate(LocalDate dueDate) {
+                this.dueDate = dueDate;
+                return this;
+            }
+
+            public Charge installments(Integer installments) {
+                this.installments = installments;
+                return this;
+            }
+
+            public Charge maxOverdueDays(Integer maxOverdueDays) {
+                this.maxOverdueDays = maxOverdueDays;
+                return this;
+            }
+
+            public Charge fine(BigDecimal fine) {
+                this.fine = fine;
+                return this;
+            }
+
+            public Charge interest(BigDecimal interest) {
+                this.interest = interest;
+                return this;
+            }
+
+            public Charge discountAmount(BigDecimal discountAmount) {
+                this.discountAmount = discountAmount;
+                return this;
+            }
+
+            public Charge discountDays(Integer discountDays) {
+                this.discountDays = discountDays;
+                return this;
+            }
+
+            public Charge paymentTypes(Set<PaymentType> paymentTypes) {
+                this.paymentTypes.addAll(paymentTypes);
+                return this;
+            }
+
+            public Charge paymentType(PaymentType paymentType) {
+                this.paymentTypes.add(paymentType);
+                return this;
+            }
+
+            public Charge paymentAdvance(Boolean paymentAdvance) {
+                this.paymentAdvance = paymentAdvance;
+                return this;
+            }
+
+        }
+
+        public static class Billing implements Serializable {
+
+            private static final long serialVersionUID = -399033998073996520L;
+
+            @JsonProperty
+            private String name;
+            @JsonProperty
+            private String document;
+            @JsonProperty
+            private String email;
+            @JsonProperty
+            private String secondaryEmail;
+            @JsonProperty
+            private String phone;
+            @JsonProperty
+            @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
+            private LocalDate birthDate;
+            @JsonProperty
+            private Boolean notify;
+
+            @JsonIgnore
+            private Charge charge;
+
+            @JsonIgnore
+            private ChargeCreateBuilder builder;
+
+            @JsonIgnore
+            private ChargeHolder holder;
+
+            public Billing(ChargeCreateBuilder builder, ChargeHolder holder) {
+                this.builder = builder;
+                this.holder = holder;
+            }
+
+            public List<br.com.juno.integration.api.model.Charge> create(String resourceToken) {
+                return builder.create(resourceToken);
+            }
+
+            public List<br.com.juno.integration.api.model.Charge> create() {
+                return builder.create();
+            }
+
+            private void setCharge(Charge charge) {
+                this.charge = charge;
+            }
+
+            public Charge charge() {
+                return charge;
+            }
+
+            public Billing name(String name) {
+                this.name = name;
+                return this;
+            }
+
+            public Billing document(String document) {
+                this.document = document;
+                return this;
+            }
+
+            public Billing email(String email) {
+                this.email = email;
+                return this;
+            }
+
+            public Billing secondaryEmail(String secondaryEmail) {
+                this.secondaryEmail = secondaryEmail;
+                return this;
+            }
+
+            public Billing phone(String phone) {
+                this.phone = phone;
+                return this;
+            }
+
+            public Billing birthDate(LocalDate birthDate) {
+                this.birthDate = birthDate;
+                return this;
+            }
+
+            public Billing notify(Boolean notify) {
+                this.notify = notify;
+                return this;
+            }
+        }
+
     }
 
     public static class ChargeListBuilder {
@@ -60,11 +382,6 @@ public class ChargeService extends BaseService {
         private OrderBy orderBy;
         private Boolean orderAsc;
         private Integer pageSize;
-        private Integer page;
-        private String firstObjectId;
-        private String firstValue;
-        private String lastObjectId;
-        private String lastValue;
 
         public enum OrderBy implements LabeledEnum {
             ID("id"),
@@ -116,8 +433,6 @@ public class ChargeService extends BaseService {
         }
 
         private Responses<Charge> getPage(String resourceToken, String hateoasLink) {
-            System.out.println(hateoasLink);
-
             GetRequest httpRequest = Unirest.get(hateoasLink) //
                     .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
                     .header(X_RESOURCE_TOKEN, resourceToken);
@@ -264,31 +579,6 @@ public class ChargeService extends BaseService {
 
         public ChargeListBuilder pageSize(Integer pageSize) {
             this.pageSize = pageSize != null && pageSize > MIN_RECORDS_PER_REQUEST ? Math.abs(pageSize) : MIN_RECORDS_PER_REQUEST.intValue();
-            return this;
-        }
-
-        private ChargeListBuilder page(Integer page) {
-            this.page = page;
-            return this;
-        }
-
-        private ChargeListBuilder firstObjectId(String firstObjectId) {
-            this.firstObjectId = firstObjectId;
-            return this;
-        }
-
-        private ChargeListBuilder firstValue(String firstValue) {
-            this.firstValue = firstValue;
-            return this;
-        }
-
-        private ChargeListBuilder lastObjectId(String lastObjectId) {
-            this.lastObjectId = lastObjectId;
-            return this;
-        }
-
-        private ChargeListBuilder lastValue(String lastValue) {
-            this.lastValue = lastValue;
             return this;
         }
 

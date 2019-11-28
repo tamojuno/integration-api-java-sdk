@@ -8,6 +8,8 @@ import org.apache.commons.lang3.time.FastDateFormat;
 
 public final class CalendarUtils {
 
+    public static final String API_DATE_FORMAT = "yyyy-MM-dd";
+
     private CalendarUtils() {
         // Utility class
     }

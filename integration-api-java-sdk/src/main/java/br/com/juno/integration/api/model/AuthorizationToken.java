@@ -30,10 +30,6 @@ public final class AuthorizationToken implements Serializable {
 
     public boolean isExpired(Long minTimeAmount) {
         Assert.notNull(expiresIn, "expiredIn was not initialized");
-
-        System.out.println(Clock.getTimeInMillis() - timestamp);
-        System.out.println(getExpiresInMillis() - minTimeAmount);
-
         return Clock.getTimeInMillis() - timestamp > getExpiresInMillis() - minTimeAmount;
     }
 
