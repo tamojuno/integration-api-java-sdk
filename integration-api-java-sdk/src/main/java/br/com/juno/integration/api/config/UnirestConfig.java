@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.http.MediaType;
 
 import br.com.juno.integration.api.base.exception.JunoApiException;
-import br.com.juno.integration.api.utils.ResponseUtils;
+import br.com.juno.integration.api.utils.JacksonUtils;
 import kong.unirest.GenericType;
 import kong.unirest.ObjectMapper;
 import kong.unirest.Unirest;
@@ -23,7 +23,7 @@ public final class UnirestConfig {
             @Override
             public String writeValue(Object value) {
                 try {
-                    return ResponseUtils.getObjectMapper().writeValueAsString(value);
+                    return JacksonUtils.getObjectMapper().writeValueAsString(value);
                 } catch (JsonProcessingException e) {
                     throw new JunoApiException(e);
                 }
@@ -32,7 +32,7 @@ public final class UnirestConfig {
             @Override
             public <T> T readValue(String value, Class<T> valueType) {
                 try {
-                    return ResponseUtils.getObjectMapper().readValue(value, valueType);
+                    return JacksonUtils.getObjectMapper().readValue(value, valueType);
                 } catch (JsonProcessingException e) {
                     throw new JunoApiException(e);
                 }
@@ -41,7 +41,7 @@ public final class UnirestConfig {
             @Override
             public <T> T readValue(String value, GenericType<T> genericType) {
                 try {
-                    return ResponseUtils.getObjectMapper().readValue(value, new TypeReference<T>() {
+                    return JacksonUtils.getObjectMapper().readValue(value, new TypeReference<T>() {
 
                         @Override
                         public Type getType() {

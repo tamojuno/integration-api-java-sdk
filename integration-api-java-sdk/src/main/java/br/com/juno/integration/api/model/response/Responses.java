@@ -1,4 +1,4 @@
-package br.com.juno.integration.api.utils;
+package br.com.juno.integration.api.model.response;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -10,6 +10,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+
+import br.com.juno.integration.api.utils.ResponseUtils;
 
 public final class Responses<T> {
 

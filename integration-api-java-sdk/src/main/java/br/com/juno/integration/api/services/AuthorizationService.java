@@ -1,5 +1,7 @@
 package br.com.juno.integration.api.services;
 
+import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
+
 import java.util.HashMap;
 import java.util.Map;
 

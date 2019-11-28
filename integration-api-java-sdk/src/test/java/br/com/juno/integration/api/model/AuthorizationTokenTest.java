@@ -10,9 +10,9 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+import br.com.juno.integration.api.base.Clock;
 import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.services.JunoApiConfig;
-import br.com.juno.integration.api.utils.Clock;
 import br.com.juno.test.AbstractTest;
 
 public class AuthorizationTokenTest extends AbstractTest {

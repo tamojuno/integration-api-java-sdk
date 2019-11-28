@@ -1,6 +1,8 @@
-package br.com.juno.integration.api.utils;
+package br.com.juno.integration.api.model.response;
 
 import org.springframework.hateoas.Resource;
+
+import br.com.juno.integration.api.utils.ResponseUtils;
 
 public final class Response<T> {
 

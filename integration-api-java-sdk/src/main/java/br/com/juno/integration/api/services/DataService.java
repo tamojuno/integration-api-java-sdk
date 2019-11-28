@@ -1,5 +1,7 @@
 package br.com.juno.integration.api.services;
 
+import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
+
 import java.util.List;
 
 import org.springframework.hateoas.Resource;
@@ -8,7 +10,7 @@ import org.springframework.hateoas.Resources;
 import br.com.juno.integration.api.model.Bank;
 import br.com.juno.integration.api.model.BusinessArea;
 import br.com.juno.integration.api.model.CompanyType;
-import br.com.juno.integration.api.utils.Responses;
+import br.com.juno.integration.api.model.response.Responses;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;

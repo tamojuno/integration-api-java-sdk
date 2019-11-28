@@ -6,8 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.hateoas.hal.Jackson2HalModule;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
+import br.com.juno.integration.api.base.Clock;
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.utils.Clock;
 
 public abstract class AbstractTest {
 

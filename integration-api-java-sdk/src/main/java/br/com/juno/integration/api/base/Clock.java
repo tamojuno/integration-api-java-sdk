@@ -1,6 +1,8 @@
-package br.com.juno.integration.api.utils;
+package br.com.juno.integration.api.base;
 
 import java.util.Calendar;
+
+import br.com.juno.integration.api.utils.CalendarUtils;
 
 public final class Clock {
 

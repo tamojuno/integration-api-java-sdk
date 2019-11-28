@@ -1,6 +1,7 @@
 package br.com.juno.integration.api.services;
 
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
+import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -24,9 +25,9 @@ import org.springframework.hateoas.Resources;
 import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.model.Charge;
 import br.com.juno.integration.api.model.LabeledEnum;
+import br.com.juno.integration.api.model.response.Responses;
 import br.com.juno.integration.api.utils.CalendarUtils;
-import br.com.juno.integration.api.utils.ResponseUtils;
-import br.com.juno.integration.api.utils.Responses;
+import br.com.juno.integration.api.utils.JacksonUtils;
 import kong.unirest.GenericType;
 import kong.unirest.GetRequest;
 import kong.unirest.HttpRequest;
@@ -66,12 +67,10 @@ public class ChargeService extends BaseService {
 
             String requestBody;
             try {
-                requestBody = ResponseUtils.getObjectMapper().writeValueAsString(chargeHolder());
+                requestBody = JacksonUtils.getObjectMapper().writeValueAsString(chargeHolder());
             } catch (JsonProcessingException e) {
                 throw new JunoApiException(e);
             }
-
-            System.out.println(requestBody);
 
             HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> httpResponse = Unirest.post( //
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/charges") //

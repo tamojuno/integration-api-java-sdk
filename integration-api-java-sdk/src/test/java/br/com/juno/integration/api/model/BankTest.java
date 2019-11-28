@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 
-import br.com.juno.integration.api.utils.Response;
-import br.com.juno.integration.api.utils.Responses;
+import br.com.juno.integration.api.model.response.Response;
+import br.com.juno.integration.api.model.response.Responses;
 import br.com.juno.test.AbstractTest;
 
 public class BankTest extends AbstractTest {

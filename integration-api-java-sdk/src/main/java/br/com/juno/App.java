@@ -11,10 +11,10 @@ import br.com.juno.integration.api.model.Bank;
 import br.com.juno.integration.api.model.BusinessArea;
 import br.com.juno.integration.api.model.Charge;
 import br.com.juno.integration.api.model.CompanyType;
+import br.com.juno.integration.api.model.response.Responses;
+import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.ChargeService.ChargeCreateBuilder.Charge.PaymentType;
 import br.com.juno.integration.api.services.ChargeService.ChargeListBuilder.OrderBy;
-import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.utils.Responses;
 
 public class App {
 

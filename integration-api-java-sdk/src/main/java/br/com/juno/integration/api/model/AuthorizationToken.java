@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.juno.integration.api.base.Clock;
 import br.com.juno.integration.api.base.exception.Assert;
-import br.com.juno.integration.api.utils.Clock;
 
 public final class AuthorizationToken implements Serializable {
 

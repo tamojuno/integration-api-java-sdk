@@ -3,7 +3,8 @@ package br.com.juno.integration.api.services;
 import org.springframework.hateoas.Resource;
 
 import br.com.juno.integration.api.model.Balance;
-import br.com.juno.integration.api.utils.Response;
+import br.com.juno.integration.api.model.response.Response;
+import br.com.juno.integration.api.utils.ResponseUtils;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -26,7 +27,7 @@ public final class BalanceService extends BaseService {
                     // NTD
                 });
 
-        validateSuccess(httpResponse);
+        ResponseUtils.validateSuccess(httpResponse);
 
         return new Response<>(httpResponse.getBody()).getContent();
     }
