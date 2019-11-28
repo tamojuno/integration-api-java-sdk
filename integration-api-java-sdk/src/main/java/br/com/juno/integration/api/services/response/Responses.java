@@ -1,4 +1,4 @@
-package br.com.juno.integration.api.model.response;
+package br.com.juno.integration.api.services.response;
 
 import java.util.Arrays;
 import java.util.LinkedList;

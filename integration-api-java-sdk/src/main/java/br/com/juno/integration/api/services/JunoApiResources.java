@@ -2,19 +2,19 @@ package br.com.juno.integration.api.services;
 
 public final class JunoApiResources {
 
-    public DataService data() {
+    public DataService getDataService() {
         return dataService;
     }
 
-    public ChargeService charges() {
+    public ChargeService getChargeService() {
         return chargeService;
     }
 
-    public BalanceService balance() {
+    public BalanceService getBalanceService() {
         return balanceService;
     }
 
-    public AuthorizationService authorization() {
+    public AuthorizationService getAuthorizationService() {
         return authorizationService;
     }
 

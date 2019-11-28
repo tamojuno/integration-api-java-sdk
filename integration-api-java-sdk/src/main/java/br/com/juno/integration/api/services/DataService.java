@@ -10,7 +10,7 @@ import org.springframework.hateoas.Resources;
 import br.com.juno.integration.api.model.Bank;
 import br.com.juno.integration.api.model.BusinessArea;
 import br.com.juno.integration.api.model.CompanyType;
-import br.com.juno.integration.api.model.response.Responses;
+import br.com.juno.integration.api.services.response.Responses;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
@@ -26,7 +26,7 @@ public final class DataService extends BaseService {
         if (banks.isExpired()) {
             HttpResponse<Resources<Resource<Bank>>> httpResponse = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/banks") //
-                    .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
+                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .asObject(new GenericType<Resources<Resource<Bank>>>() {
                         //NTD
                     });
@@ -42,7 +42,7 @@ public final class DataService extends BaseService {
     public List<CompanyType> getCompanyTypes() {
         if (companyTypes.isExpired()) {
             HttpResponse<JsonNode> httpResponse = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/company-types") //
-                    .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
+                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .asJson();
 
             validateSuccess(httpResponse);
@@ -59,7 +59,7 @@ public final class DataService extends BaseService {
         if (businessAreas.isExpired()) {
             HttpResponse<Resources<Resource<BusinessArea>>> httpResponse = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/business-areas") //
-                    .headers(JunoApiManager.resources().authorization().getAuthorizationHeader()) //
+                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .asObject(new GenericType<Resources<Resource<BusinessArea>>>() {
                         //NTD
                     });

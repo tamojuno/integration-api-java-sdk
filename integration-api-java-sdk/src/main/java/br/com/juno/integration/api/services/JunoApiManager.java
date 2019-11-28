@@ -16,8 +16,20 @@ public final class JunoApiManager {
         return config;
     }
 
-    public static JunoApiResources resources() {
-        return resources;
+    public static DataService getDataService() {
+        return resources.getDataService();
+    }
+
+    public static ChargeService getChargeService() {
+        return resources.getChargeService();
+    }
+
+    public static BalanceService getBalanceService() {
+        return resources.getBalanceService();
+    }
+
+    public static AuthorizationService getAuthorizationService() {
+        return resources.getAuthorizationService();
     }
 
 }
