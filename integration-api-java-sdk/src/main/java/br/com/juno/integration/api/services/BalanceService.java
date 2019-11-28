@@ -17,16 +17,16 @@ public final class BalanceService extends BaseService {
     }
 
     public Balance getBalance(GetBalanceRequest request) {
-        HttpResponse<Resource<Balance>> httpResponse = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/balance") //
+        HttpResponse<Resource<Balance>> response = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/balance") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(JunoApiManager.X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .asObject(new GenericType<Resource<Balance>>() {
                     // NTD
                 });
 
-        ResponseUtils.validateSuccess(httpResponse);
+        ResponseUtils.validateSuccess(response);
 
-        return new Response<>(httpResponse.getBody()).getContent();
+        return new Response<>(response.getBody()).getContent();
     }
 
 }

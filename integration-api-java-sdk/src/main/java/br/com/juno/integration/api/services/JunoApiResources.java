@@ -14,6 +14,10 @@ public final class JunoApiResources {
         return balanceService;
     }
 
+    public CredentialsService getCredentialsService() {
+        return credentialsService;
+    }
+
     public AuthorizationService getAuthorizationService() {
         return authorizationService;
     }
@@ -21,5 +25,7 @@ public final class JunoApiResources {
     private DataService dataService = new DataService();
     private ChargeService chargeService = new ChargeService();
     private BalanceService balanceService = new BalanceService();
+    private CredentialsService credentialsService = new CredentialsService();
     private AuthorizationService authorizationService = new AuthorizationService();
+
 }

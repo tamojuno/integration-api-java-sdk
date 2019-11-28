@@ -28,6 +28,10 @@ public final class JunoApiManager {
         return resources.getBalanceService();
     }
 
+    public static CredentialsService getCredentialsService() {
+        return resources.getCredentialsService();
+    }
+
     public static AuthorizationService getAuthorizationService() {
         return resources.getAuthorizationService();
     }

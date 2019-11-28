@@ -13,14 +13,14 @@ public final class ResponseUtils {
         // NTD
     }
 
-    public static void validateSuccess(HttpResponse<?> httpResponse) {
-        if (!httpResponse.isSuccess()) {
-            UnirestParsingException parsingException = httpResponse.getParsingError().orElse(null);
+    public static void validateSuccess(HttpResponse<?> response) {
+        if (!response.isSuccess()) {
+            UnirestParsingException parsingException = response.getParsingError().orElse(null);
             if (parsingException != null) {
                 throw new JunoApiException(parsingException);
             }
 
-            throw new JunoApiException(httpResponse.getStatusText());
+            throw new JunoApiException(response.getStatusText());
         }
     }
 

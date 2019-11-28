@@ -26,7 +26,7 @@ import kong.unirest.HttpRequest;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
-public class ChargeService extends BaseService {
+public final class ChargeService extends BaseService {
 
     ChargeService() {
         // NTD
@@ -40,9 +40,7 @@ public class ChargeService extends BaseService {
             throw new JunoApiException(e);
         }
 
-        System.out.println(requestBody);
-
-        HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> httpResponse = Unirest.post( //
+        HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> response = Unirest.post( //
                 JunoApiManager.config().getEnvironmentUrl() + "/api-integration/charges") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
@@ -51,9 +49,9 @@ public class ChargeService extends BaseService {
                     // NTD
                 });//
 
-        validateSuccess(httpResponse);
+        validateSuccess(response);
 
-        return new Responses<>(httpResponse.getBody()).getAbsoluteContent();
+        return new Responses<>(response.getBody()).getAbsoluteContent();
     }
 
     public Responses<Charge> list(ChargeListRequest request) {
@@ -106,13 +104,13 @@ public class ChargeService extends BaseService {
     }
 
     private Responses<Charge> exchange(GetRequest httpRequest) {
-        HttpResponse<Resources<Resource<Charge>>> httpResponse = httpRequest.asObject(new GenericType<Resources<Resource<Charge>>>() {
+        HttpResponse<Resources<Resource<Charge>>> response = httpRequest.asObject(new GenericType<Resources<Resource<Charge>>>() {
             // NTD
         });
 
-        validateSuccess(httpResponse);
+        validateSuccess(response);
 
-        return new Responses<>(httpResponse.getBody(), httpRequest.getHeaders().getFirst(X_RESOURCE_TOKEN));
+        return new Responses<>(response.getBody(), httpRequest.getHeaders().getFirst(X_RESOURCE_TOKEN));
     }
 
     private void populateParameters(HttpRequest<GetRequest> httpRequest) {

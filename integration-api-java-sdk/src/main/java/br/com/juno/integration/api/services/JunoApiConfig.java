@@ -14,7 +14,7 @@ public final class JunoApiConfig {
     private String resourceToken;
     private Environment env;
 
-    protected JunoApiConfig() {
+    JunoApiConfig() {
         sandbox();
         UnirestConfig.configure();
     }

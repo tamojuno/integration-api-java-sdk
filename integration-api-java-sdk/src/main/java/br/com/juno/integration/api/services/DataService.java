@@ -24,16 +24,16 @@ public final class DataService extends BaseService {
 
     public List<Bank> getBanks() {
         if (banks.isExpired()) {
-            HttpResponse<Resources<Resource<Bank>>> httpResponse = Unirest.get(
+            HttpResponse<Resources<Resource<Bank>>> response = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/banks") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .asObject(new GenericType<Resources<Resource<Bank>>>() {
                         //NTD
                     });
 
-            validateSuccess(httpResponse);
+            validateSuccess(response);
 
-            banks.setCache(new Responses<>(httpResponse.getBody()).getAbsoluteContent());
+            banks.setCache(new Responses<>(response.getBody()).getAbsoluteContent());
         }
 
         return banks.getCache();
@@ -41,14 +41,14 @@ public final class DataService extends BaseService {
 
     public List<CompanyType> getCompanyTypes() {
         if (companyTypes.isExpired()) {
-            HttpResponse<JsonNode> httpResponse = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/company-types") //
+            HttpResponse<JsonNode> response = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/company-types") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .asJson();
 
-            validateSuccess(httpResponse);
+            validateSuccess(response);
 
             companyTypes.getCache().clear();
-            httpResponse.getBody().getObject().getJSONArray("companyTypes").forEach(str -> companyTypes.getCache().add(new CompanyType((String)str)));
+            response.getBody().getObject().getJSONArray("companyTypes").forEach(str -> companyTypes.getCache().add(new CompanyType((String)str)));
             companyTypes.resetTimestamp();
         }
 
@@ -57,16 +57,16 @@ public final class DataService extends BaseService {
 
     public List<BusinessArea> getBusinessAreas() {
         if (businessAreas.isExpired()) {
-            HttpResponse<Resources<Resource<BusinessArea>>> httpResponse = Unirest.get(
+            HttpResponse<Resources<Resource<BusinessArea>>> response = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/business-areas") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .asObject(new GenericType<Resources<Resource<BusinessArea>>>() {
                         //NTD
                     });
 
-            validateSuccess(httpResponse);
+            validateSuccess(response);
 
-            businessAreas.setCache(new Responses<>(httpResponse.getBody()).getAbsoluteContent());
+            businessAreas.setCache(new Responses<>(response.getBody()).getAbsoluteContent());
         }
 
         return businessAreas.getCache();

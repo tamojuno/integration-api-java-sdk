@@ -26,9 +26,9 @@ public class ChargeCreateRequest extends BaseRequest {
     }
 
     public ChargeCreateRequest(String resourceToken, Charge charge, Billing billing) {
-        setResourceToken(resourceToken);
         this.charge = charge;
         this.billing = billing;
+        setResourceToken(resourceToken);
     }
 
     public Charge getCharge() {

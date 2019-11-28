@@ -31,15 +31,15 @@ public final class AuthorizationService extends BaseService {
     }
 
     private void refresh() {
-        HttpResponse<AuthorizationToken> httpResponse = //
+        HttpResponse<AuthorizationToken> response = //
                 Unirest.post(JunoApiManager.config().getEnvironmentUrl() + "/authorization-server/oauth/token") //
                         .basicAuth(JunoApiManager.config().getClientId(), JunoApiManager.config().getClientSecret()) //
                         .headerReplace("Content-type", "application/x-www-form-urlencoded") //
                         .field("grant_type", "client_credentials") //
                         .asObject(AuthorizationToken.class);
 
-        validateSuccess(httpResponse);
+        validateSuccess(response);
 
-        authorizationToken = httpResponse.getBody();
+        authorizationToken = response.getBody();
     }
 }
