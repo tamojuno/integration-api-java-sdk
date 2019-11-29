@@ -37,6 +37,10 @@ public final class JunoApiManager {
         return resources.getDocumentService();
     }
 
+    public static CreditCardService getCreditCardService() {
+        return resources.getCreditCardService();
+    }
+
     public static CredentialsService getCredentialsService() {
         return resources.getCredentialsService();
     }

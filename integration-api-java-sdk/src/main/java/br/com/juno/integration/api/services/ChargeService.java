@@ -8,8 +8,6 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -35,19 +33,12 @@ public final class ChargeService extends BaseService {
     }
 
     public List<Charge> create(ChargeCreateRequest request) {
-        String requestBody;
-        try {
-            requestBody = JacksonUtils.getObjectMapper().writeValueAsString(request);
-        } catch (JsonProcessingException e) {
-            throw new JunoApiException(e);
-        }
-
         HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> response = Unirest.post( //
                 JunoApiManager.config().getResourceEndpoint() + "/charges") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
-                .body(requestBody) //
+                .body(JacksonUtils.toJson(request)) //
                 .asObject(new GenericType<Resources<Resource<br.com.juno.integration.api.model.Charge>>>() { //
                     // NTD
                 });//

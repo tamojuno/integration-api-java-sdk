@@ -5,8 +5,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.Assert;
 
+import br.com.juno.integration.api.base.exception.Assert;
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.BaseRequest;
 

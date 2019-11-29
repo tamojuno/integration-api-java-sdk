@@ -13,6 +13,10 @@ import kong.unirest.Unirest;
 
 public class CredentialsService extends BaseService {
 
+    CredentialsService() {
+        // NTD
+    }
+
     public JunoPublicKey getPublicCredentials(CredentialsRequest request) {
         HttpResponse<String> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/credentials/public-key") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //

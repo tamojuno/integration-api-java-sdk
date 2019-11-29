@@ -33,6 +33,10 @@ import kong.unirest.Unirest;
 
 public class DocumentService extends BaseService {
 
+    DocumentService() {
+        // NTD
+    }
+
     public Document getDocument(DocumentGetRequest request) {
         HttpResponse<Resource<Document>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //

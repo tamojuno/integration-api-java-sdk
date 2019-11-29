@@ -1,6 +1,9 @@
 package br.com.juno;
 
+import br.com.juno.integration.api.model.CreditCard;
+import br.com.juno.integration.api.model.TokenizedCreditCard;
 import br.com.juno.integration.api.services.JunoApiManager;
+import br.com.juno.integration.api.services.request.creditcard.CreditCardTokenizationRequest;
 
 public class App {
 
@@ -16,6 +19,7 @@ public class App {
             .clientId("X8I5PuJeD7AmgV1Q")
             .clientSecret("h|4KY73vf7ntn|:f4PAox@-^86QebA|s")
             .resourceToken("E3759A771310324A266F7B742FF0A44D48A29D7690614D8C")
+            .publicToken("CB1DA65A0AFDE882DB9AFFB598CE5DA6CF872195C2332724B22ECC8D075350C0")
             .development();
         // @formatter:on
 
@@ -96,5 +100,20 @@ public class App {
         //                Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")), "some_serious_document.pdf"));
         //        Document document = JunoApiManager.getDocumentService().uploadDocumentAsEncripted(documentRequest);
         //        System.out.println(document);
+
+        // ## Credit Cards
+
+        // Dummy data
+        //        cardNumber : '4152878923958463',
+        //        holderName : 'Christopher Campbell',
+        //        securityCode : '831',
+        //        expirationMonth : '08',
+        //        expirationYear : '2028'
+
+        CreditCard creditCard = new CreditCard("4912574485726890", "Christopher Campbell", "831", "08", "2028");
+        CreditCardTokenizationRequest request = new CreditCardTokenizationRequest(creditCard);
+
+        TokenizedCreditCard tokenizedCreditCard = JunoApiManager.getCreditCardService().tokenize(request);
+        System.out.println(tokenizedCreditCard);
     }
 }

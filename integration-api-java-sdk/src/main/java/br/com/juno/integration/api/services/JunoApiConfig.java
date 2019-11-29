@@ -12,6 +12,7 @@ public final class JunoApiConfig {
     private String clientId;
     private String clientSecret;
     private String resourceToken;
+    private String publicToken;
     private Environment env;
 
     JunoApiConfig() {
@@ -49,6 +50,11 @@ public final class JunoApiConfig {
         return this;
     }
 
+    public JunoApiConfig publicToken(String publicToken) {
+        this.publicToken = publicToken;
+        return this;
+    }
+
     public Environment getEnv() {
         return env;
     }
@@ -71,6 +77,14 @@ public final class JunoApiConfig {
 
     public String getResourceToken() {
         return resourceToken;
+    }
+
+    public String getPublicToken() {
+        return publicToken;
+    }
+
+    public boolean hasPublicTokenConfigured() {
+        return StringUtils.isNotBlank(publicToken);
     }
 
     public boolean isConfigured() {

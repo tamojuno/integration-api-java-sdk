@@ -5,11 +5,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.security.spec.MGF1ParameterSpec;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.OAEPParameterSpec;
+import javax.crypto.spec.PSource;
 
 import org.apache.commons.io.IOUtils;
 import org.jose4j.json.JsonUtil;
@@ -24,6 +35,31 @@ public final class CryptoUtils {
 
     private CryptoUtils() {
         // Utility class
+    }
+
+    public static String encryptCreditCard(PublicKey publicKey, byte[] creditCardData) {
+        try {
+            OAEPParameterSpec parameterSpec = new OAEPParameterSpec(Crypto.MD_NAME, Crypto.MG_NAME, MGF1ParameterSpec.SHA256,
+                    PSource.PSpecified.DEFAULT);
+
+            Cipher cipher = Cipher.getInstance(Crypto.CRYPTO_TRANSFORM);
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey, parameterSpec);
+
+            byte[] encryptedBytes = cipher.doFinal(creditCardData);
+
+            return Base64.getEncoder().encodeToString(encryptedBytes);
+        } catch (InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException
+                | NoSuchPaddingException e) {
+            throw new JunoApiException("Error encrypting credit card data", e);
+        }
+    }
+
+    public interface Crypto {
+
+        public static final String CRYPTO_METHOD = "RSA";
+        public static final String MD_NAME = "SHA-256";
+        public static final String MG_NAME = "MGF1";
+        public static final String CRYPTO_TRANSFORM = "RSA/ECB/OAEPPadding";
     }
 
     public static byte[] encryptFile(PublicKey publicKey, String fileName, InputStream file) {
@@ -83,5 +119,4 @@ public final class CryptoUtils {
             throw new JunoApiException("Error compressing JWE", e);
         }
     }
-
 }
