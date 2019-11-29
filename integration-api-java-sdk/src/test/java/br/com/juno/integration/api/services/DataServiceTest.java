@@ -12,7 +12,7 @@ public class DataServiceTest extends AbstractTest {
     @Test
     public void testGetBanks() {
         // just to call
-        List<Bank> banks = JunoApiManager.getDataService().getBanks();
+        List<Bank> banks = JunoApiManager.resources().data().getBanks();
         System.out.println(banks);
     }
 }
