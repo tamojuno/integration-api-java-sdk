@@ -12,7 +12,7 @@ import kong.unirest.Unirest;
 public final class AuthorizationService extends BaseService {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String BEARER = "Bearer";
+    public static final String BEARER = "Bearer ";
 
     private AuthorizationToken authorizationToken;
 
