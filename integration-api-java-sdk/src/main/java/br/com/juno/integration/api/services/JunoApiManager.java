@@ -36,4 +36,7 @@ public final class JunoApiManager {
         return resources.getAuthorizationService();
     }
 
+    public static DocumentService getDocumentService() {
+        return resources.getDocumentService();
+    }
 }
