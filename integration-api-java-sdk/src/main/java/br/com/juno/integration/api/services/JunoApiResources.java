@@ -26,11 +26,15 @@ public final class JunoApiResources {
         return authorizationService;
     }
 
+    public DocumentService getDocumentService() {
+        return documentService;
+    }
+
     private DataService dataService = new DataService();
     private ChargeService chargeService = new ChargeService();
     private BalanceService balanceService = new BalanceService();
     private DocumentService documentService = new DocumentService();
     private CredentialsService credentialsService = new CredentialsService();
     private AuthorizationService authorizationService = new AuthorizationService();
-
+    private DocumentService documentService = new DocumentService();
 }
