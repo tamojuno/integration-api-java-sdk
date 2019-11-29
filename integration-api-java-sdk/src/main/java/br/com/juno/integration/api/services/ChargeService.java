@@ -43,7 +43,7 @@ public final class ChargeService extends BaseService {
         }
 
         HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> response = Unirest.post( //
-                JunoApiManager.config().getEnvironmentUrl() + "/api-integration/charges") //
+                JunoApiManager.config().getResourceEndpoint() + "/charges") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
@@ -94,7 +94,7 @@ public final class ChargeService extends BaseService {
     }
 
     private Responses<Charge> getPage(String resourceToken) {
-        GetRequest httpRequest = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/charges") //
+        GetRequest httpRequest = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/charges") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, resourceToken) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //

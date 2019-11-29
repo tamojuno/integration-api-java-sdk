@@ -20,7 +20,7 @@ public final class BalanceService extends BaseService {
     }
 
     public Balance getBalance(GetBalanceRequest request) {
-        HttpResponse<Resource<Balance>> response = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/balance") //
+        HttpResponse<Resource<Balance>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/balance") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(JunoApiManager.X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //

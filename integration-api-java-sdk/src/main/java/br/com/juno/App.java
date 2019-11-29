@@ -1,22 +1,22 @@
 package br.com.juno;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import br.com.juno.integration.api.model.Document;
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.document.DocumentUploadRequest;
 
 public class App {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         // @formatter:off
         JunoApiManager.config()
-            .clientId("iH3Um6mPrlNNT98S")
-            .clientSecret("e!LCWcO<EAxq){:EZejRv4XATAt^hU9M")
-            .resourceToken("37013DDF21B83FFCA8AA6AF8912A9FBC91E5765DA991873CA407FA8CAFF22BB0");
+        // Sandbox
+//            .clientId("iH3Um6mPrlNNT98S")
+//            .clientSecret("e!LCWcO<EAxq){:EZejRv4XATAt^hU9M")
+//            .resourceToken("37013DDF21B83FFCA8AA6AF8912A9FBC91E5765DA991873CA407FA8CAFF22BB0")
+        // Local
+            .clientId("X8I5PuJeD7AmgV1Q")
+            .clientSecret("h|4KY73vf7ntn|:f4PAox@-^86QebA|s")
+            .resourceToken("E3759A771310324A266F7B742FF0A44D48A29D7690614D8C")
+            .development();
         // @formatter:on
 
         // @formatter:off
@@ -83,10 +83,18 @@ public class App {
         //        List<Document> documents = JunoApiManager.getDocumentService().listDocument(new DocumentListRequest());
         //        documents.forEach(System.out::println);
 
-        DocumentUploadRequest documentRequest = new DocumentUploadRequest("doc_8FBC3EA2276EB79F");
-        documentRequest.getFiles().add(Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")));
+        //        DocumentUploadRequest documentRequest = new DocumentUploadRequest("doc_8FBC3EA2276EB79F");
+        //        DocumentUploadRequest documentRequest = new DocumentUploadRequest("doc_3E281CC784AE799D");
+        //        documentRequest.getFiles().add(new JunoFile(new File("/Users/norton.gueno/Downloads/some_serious_document.pdf")));
+        //        documentRequest.getFiles().add(new JunoFile(Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")),
+        //                "some_serious_document.pdf"));
+        //
+        //        Document document = JunoApiManager.getDocumentService().uploadDocument(documentRequest);
+        //        System.out.println(document);
 
-        Document document = JunoApiManager.getDocumentService().uploadDocument(documentRequest);
-        System.out.println(document);
+        //        DocumentUploadEncryptedRequest documentRequest = new DocumentUploadEncryptedRequest("doc_3E281CC784AE799D", new JunoFile(
+        //                Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")), "some_serious_document.pdf"));
+        //        Document document = JunoApiManager.getDocumentService().uploadDocumentAsEncripted(documentRequest);
+        //        System.out.println(document);
     }
 }

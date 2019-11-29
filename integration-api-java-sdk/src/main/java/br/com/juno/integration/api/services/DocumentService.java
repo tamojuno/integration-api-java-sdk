@@ -5,15 +5,21 @@ import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_H
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
 import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.PublicKey;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
 
+import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.model.Document;
 import br.com.juno.integration.api.services.request.credentials.CredentialsRequest;
+import br.com.juno.integration.api.services.request.document.AbstractDocumentRequest.JunoFile;
 import br.com.juno.integration.api.services.request.document.DocumentGetRequest;
 import br.com.juno.integration.api.services.request.document.DocumentListRequest;
 import br.com.juno.integration.api.services.request.document.DocumentUploadEncryptedRequest;
@@ -21,7 +27,6 @@ import br.com.juno.integration.api.services.request.document.DocumentUploadReque
 import br.com.juno.integration.api.services.response.Response;
 import br.com.juno.integration.api.services.response.Responses;
 import br.com.juno.integration.api.utils.CryptoUtils;
-import kong.unirest.ContentType;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -29,7 +34,7 @@ import kong.unirest.Unirest;
 public class DocumentService extends BaseService {
 
     public Document getDocument(DocumentGetRequest request) {
-        HttpResponse<Resource<Document>> response = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/documents/{id}") //
+        HttpResponse<Resource<Document>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
@@ -45,7 +50,7 @@ public class DocumentService extends BaseService {
     }
 
     public List<Document> listDocument(DocumentListRequest request) {
-        HttpResponse<Resources<Resource<Document>>> response = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/documents") //
+        HttpResponse<Resources<Resource<Document>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/documents") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
@@ -60,14 +65,24 @@ public class DocumentService extends BaseService {
     }
 
     public Document uploadDocument(DocumentUploadRequest request) {
+        Document document = null;
+        for (JunoFile file : request.getFiles()) {
+            if (file.hasFile()) {
+                document = uploadFile(request.getResourceToken(), request.getDocumentId(), file.getFile());
+            }
+            if (file.hasStream()) {
+                document = uploadStream(request.getResourceToken(), request.getDocumentId(), file.getStream(), file.getFileName());
+            }
+        }
+        return document;
+    }
 
-        HttpResponse<Resource<Document>> response = Unirest.post(
-                JunoApiManager.config().getEnvironmentUrl() + "/api-integration/documents/{id}/files") //
+    private Document uploadFile(String resourceToken, String documentId, File file) {
+        HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}/files") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
-                .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
-                .routeParam("id", request.getDocumentId()) //
-                .multiPartContent() //
-                .field("files", request.getFiles().get(0), ContentType.MULTIPART_FORM_DATA) //
+                .header(X_RESOURCE_TOKEN, resourceToken) //
+                .routeParam("id", documentId) //
+                .field("files", file) //
                 .asObject(new GenericType<Resource<Document>>() { //
                     // NTD
                 });//
@@ -75,7 +90,28 @@ public class DocumentService extends BaseService {
         validateSuccess(response);
 
         return new Response<>(response.getBody()).getContent();
+    }
 
+    private Document uploadStream(String resourceToken, String documentId, InputStream file, String fileName) {
+        try {
+            byte[] fileContent = new byte[file.available()];
+            IOUtils.read(file, fileContent);
+
+            HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}/files") //
+                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
+                    .header(X_RESOURCE_TOKEN, resourceToken) //
+                    .routeParam("id", documentId) //
+                    .multiPartContent().field("files", fileContent, fileName) //
+                    .asObject(new GenericType<Resource<Document>>() { //
+                        // NTD
+                    });//
+
+            validateSuccess(response);
+
+            return new Response<>(response.getBody()).getContent();
+        } catch (IOException e) {
+            throw new JunoApiException("Error uploading document", e);
+        }
     }
 
     public Document uploadDocumentAsEncripted(DocumentUploadEncryptedRequest request) {
@@ -84,10 +120,9 @@ public class DocumentService extends BaseService {
                 .getPublicCredentials(new CredentialsRequest(request.getResourceToken())) //
                 .getPublicKey(); //
 
-        byte[] encryptedFile = CryptoUtils.encryptFile(publicKey, request.getFileName(), request.getFile());
+        byte[] encryptedFile = CryptoUtils.encryptFile(publicKey, request.getFile().getFileName(), request.getFile().getStream());
 
-        HttpResponse<Resource<Document>> response = Unirest.post(
-                JunoApiManager.config().getEnvironmentUrl() + "/api-integration/documents/{id}/files") //
+        HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}/files") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_ENCODING_HEADER, "gzip") //

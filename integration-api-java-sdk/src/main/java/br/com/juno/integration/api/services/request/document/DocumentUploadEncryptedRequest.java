@@ -1,32 +1,24 @@
 package br.com.juno.integration.api.services.request.document;
 
-import java.io.InputStream;
+import br.com.juno.integration.api.services.JunoApiManager;
 
 public class DocumentUploadEncryptedRequest extends AbstractDocumentRequest {
 
     private static final long serialVersionUID = 2909141109506130998L;
 
-    private final String fileName;
-    private final transient InputStream file;
+    private final transient JunoFile file;
 
-    public DocumentUploadEncryptedRequest(String resourceToken, String documentId, String fileName, InputStream file) {
+    public DocumentUploadEncryptedRequest(String documentId, JunoFile file) {
+        this(JunoApiManager.config().getResourceToken(), documentId, file);
+    }
+
+    public DocumentUploadEncryptedRequest(String resourceToken, String documentId, JunoFile file) {
         super(resourceToken, documentId);
         this.file = file;
-        this.fileName = fileName;
     }
 
-    public DocumentUploadEncryptedRequest(String documentId, String fileName, InputStream file) {
-        super(documentId);
-        this.file = file;
-        this.fileName = fileName;
-    }
-
-    public InputStream getFile() {
+    public JunoFile getFile() {
         return file;
-    }
-
-    public String getFileName() {
-        return fileName;
     }
 
 }

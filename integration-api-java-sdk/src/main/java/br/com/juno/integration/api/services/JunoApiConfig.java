@@ -20,12 +20,17 @@ public final class JunoApiConfig {
     }
 
     public JunoApiConfig production() {
-        this.env = Environment.PRODUCTION;
+        this.env = new ProductionEnviroment();
         return this;
     }
 
     public JunoApiConfig sandbox() {
-        this.env = Environment.SANDBOX;
+        this.env = new SandboxEnvironment();
+        return this;
+    }
+
+    public JunoApiConfig development() {
+        this.env = new DevelopmentEnviroment();
         return this;
     }
 
@@ -48,8 +53,12 @@ public final class JunoApiConfig {
         return env;
     }
 
-    public String getEnvironmentUrl() {
-        return env.getUrl();
+    public String getAuthorizationEndpoint() {
+        return env.getAuthorizationServerEndpoint();
+    }
+
+    public String getResourceEndpoint() {
+        return env.getResourceServerEndpoint();
     }
 
     public String getClientId() {
@@ -68,20 +77,63 @@ public final class JunoApiConfig {
         return StringUtils.isNoneBlank(clientId, clientSecret, resourceToken) && env != null;
     }
 
-    public enum Environment {
+    public interface Environment {
 
-        PRODUCTION("https://api.juno.com.br"),
-        SANDBOX("https://sandbox.boletobancario.com.br");
+        String getAuthorizationServerEndpoint();
 
-        private String url;
+        String getResourceServerEndpoint();
 
-        private Environment(String url) {
-            this.url = url;
+    }
+
+    public static class DevelopmentEnviroment implements Environment {
+
+        private static final String AUTHORIZATION_SERVER = "http://localhost:8084";
+        private static final String RESOURCE_SERVER = "http://localhost:8082";
+
+        @Override
+        public String getAuthorizationServerEndpoint() {
+            return AUTHORIZATION_SERVER;
         }
 
-        public String getUrl() {
-            return url;
+        @Override
+        public String getResourceServerEndpoint() {
+            return RESOURCE_SERVER;
         }
+
+    }
+
+    public static class SandboxEnvironment implements Environment {
+
+        private static final String AUTHORIZATION_SERVER = "https://sandbox.boletobancario.com/authorization-server";
+        private static final String RESOURCE_SERVER = "https://sandbox.boletobancario.com/api-integration";
+
+        @Override
+        public String getAuthorizationServerEndpoint() {
+            return AUTHORIZATION_SERVER;
+        }
+
+        @Override
+        public String getResourceServerEndpoint() {
+            return RESOURCE_SERVER;
+        }
+
+    }
+
+    public static class ProductionEnviroment implements Environment {
+
+        private static final String AUTHORIZATION_SERVER = "https://api.juno.com.br/authorization-server";
+        private static final String RESOURCE_SERVER = "https://api.juno.com.br";
+
+        @Override
+        public String getAuthorizationServerEndpoint() {
+            return AUTHORIZATION_SERVER;
+        }
+
+        @Override
+        public String getResourceServerEndpoint() {
+            return RESOURCE_SERVER;
+        }
+
     }
 
 }

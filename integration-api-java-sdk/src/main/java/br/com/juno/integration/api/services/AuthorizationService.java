@@ -33,7 +33,7 @@ public final class AuthorizationService extends BaseService {
 
     private void refresh() {
         HttpResponse<AuthorizationToken> response = //
-                Unirest.post(JunoApiManager.config().getEnvironmentUrl() + ":8084/oauth/token") //
+                Unirest.post(JunoApiManager.config().getAuthorizationEndpoint() + "/oauth/token") //
                         .basicAuth(JunoApiManager.config().getClientId(), JunoApiManager.config().getClientSecret()) //
                         .header(CONTENT_TYPE_HEADER, "application/x-www-form-urlencoded") //
                         .field("grant_type", "client_credentials") //

@@ -27,7 +27,7 @@ public final class DataService extends BaseService {
     public List<Bank> getBanks() {
         if (banks.isExpired()) {
             HttpResponse<Resources<Resource<Bank>>> response = Unirest.get(
-                    JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/banks") //
+                    JunoApiManager.config().getResourceEndpoint() + "/data/banks") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<Bank>>>() {
@@ -44,7 +44,7 @@ public final class DataService extends BaseService {
 
     public List<CompanyType> getCompanyTypes() {
         if (companyTypes.isExpired()) {
-            HttpResponse<JsonNode> response = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/company-types") //
+            HttpResponse<JsonNode> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/data/company-types") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asJson();
@@ -62,7 +62,7 @@ public final class DataService extends BaseService {
     public List<BusinessArea> getBusinessAreas() {
         if (businessAreas.isExpired()) {
             HttpResponse<Resources<Resource<BusinessArea>>> response = Unirest.get(
-                    JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/business-areas") //
+                    JunoApiManager.config().getResourceEndpoint() + "/data/business-areas") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<BusinessArea>>>() {
