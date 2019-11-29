@@ -3,7 +3,6 @@ package br.com.juno.integration.api.services;
 import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_ENCODING_HEADER;
 import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
-import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +38,6 @@ public class DocumentService extends BaseService {
 
     public Document getDocument(DocumentGetRequest request) {
         HttpResponse<Resource<Document>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .routeParam("id", request.getDocumentId()) //
@@ -47,22 +45,17 @@ public class DocumentService extends BaseService {
                     // NTD
                 });//
 
-        validateSuccess(response);
-
         return new Response<>(response.getBody()).getContent();
 
     }
 
     public List<Document> listDocument(DocumentListRequest request) {
         HttpResponse<Resources<Resource<Document>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/documents") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .asObject(new GenericType<Resources<Resource<Document>>>() { //
                     // NTD
                 });//
-
-        validateSuccess(response);
 
         return new Responses<>(response.getBody()).getAbsoluteContent();
 
@@ -83,15 +76,12 @@ public class DocumentService extends BaseService {
 
     private Document uploadFile(String resourceToken, String documentId, File file) {
         HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}/files") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, resourceToken) //
                 .routeParam("id", documentId) //
                 .field("files", file) //
                 .asObject(new GenericType<Resource<Document>>() { //
                     // NTD
                 });//
-
-        validateSuccess(response);
 
         return new Response<>(response.getBody()).getContent();
     }
@@ -102,15 +92,12 @@ public class DocumentService extends BaseService {
             IOUtils.read(file, fileContent);
 
             HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}/files") //
-                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .header(X_RESOURCE_TOKEN, resourceToken) //
                     .routeParam("id", documentId) //
                     .multiPartContent().field("files", fileContent, fileName) //
                     .asObject(new GenericType<Resource<Document>>() { //
                         // NTD
                     });//
-
-            validateSuccess(response);
 
             return new Response<>(response.getBody()).getContent();
         } catch (IOException e) {
@@ -127,7 +114,6 @@ public class DocumentService extends BaseService {
         byte[] encryptedFile = CryptoUtils.encryptFile(publicKey, request.getFile().getFileName(), request.getFile().getStream());
 
         HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}/files") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_ENCODING_HEADER, "gzip") //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_OCTET_STREAM_VALUE) //
@@ -136,8 +122,6 @@ public class DocumentService extends BaseService {
                 .asObject(new GenericType<Resource<Document>>() { //
                     // NTD
                 });//
-
-        validateSuccess(response);
 
         return new Response<>(response.getBody()).getContent();
     }

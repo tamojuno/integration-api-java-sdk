@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import br.com.juno.integration.api.model.Balance;
 import br.com.juno.integration.api.services.request.balance.GetBalanceRequest;
 import br.com.juno.integration.api.services.response.Response;
-import br.com.juno.integration.api.utils.ResponseUtils;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -21,14 +20,11 @@ public final class BalanceService extends BaseService {
 
     public Balance getBalance(GetBalanceRequest request) {
         HttpResponse<Resource<Balance>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/balance") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(JunoApiManager.X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .asObject(new GenericType<Resource<Balance>>() {
                     // NTD
                 });
-
-        ResponseUtils.validateSuccess(response);
 
         return new Response<>(response.getBody()).getContent();
     }

@@ -2,7 +2,6 @@ package br.com.juno.integration.api.services;
 
 import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
-import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.security.PublicKey;
 import java.util.HashMap;
@@ -53,12 +52,9 @@ public class CreditCardService extends BaseService {
 
         HttpResponse<String> response = Unirest.post( //
                 JunoApiManager.config().getResourceEndpoint() + "/credit-cards/generate-card-hash") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .body(JacksonUtils.toJson(request)) //
                 .asString();
-
-        validateSuccess(response);
 
         return response.getBody();
     }
@@ -70,15 +66,12 @@ public class CreditCardService extends BaseService {
 
         HttpResponse<Resource<TokenizedCreditCard>> response = Unirest.post( //
                 JunoApiManager.config().getResourceEndpoint() + "/credit-cards/tokenization") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, JunoApiManager.config().getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .body(jsonObject.toString()) //
                 .asObject(new GenericType<Resource<TokenizedCreditCard>>() { //
                     // NTD
                 });//
-
-        validateSuccess(response);
 
         return new Response<>(response.getBody()).getContent();
     }

@@ -6,8 +6,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import br.com.juno.integration.api.base.exception.JunoApiException;
+import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.utils.JacksonUtils;
+import br.com.juno.integration.api.utils.ResponseUtils;
+import kong.unirest.Config;
 import kong.unirest.GenericType;
+import kong.unirest.HttpRequest;
+import kong.unirest.HttpRequestSummary;
+import kong.unirest.HttpResponse;
+import kong.unirest.Interceptor;
 import kong.unirest.ObjectMapper;
 import kong.unirest.Unirest;
 
@@ -48,6 +55,22 @@ public final class UnirestConfig {
                 } catch (JsonProcessingException e) {
                     throw new JunoApiException(e);
                 }
+            }
+        });
+
+        Unirest.config().interceptor(new Interceptor() {
+
+            @Override
+            public void onRequest(HttpRequest<?> request, Config config) {
+                // TODO: Find a better way to exclude authorization call from the chain
+                if (!request.getUrl().contains("/oauth/token")) {
+                    request.headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader());
+                }
+            }
+
+            @Override
+            public void onResponse(HttpResponse<?> response, HttpRequestSummary request, Config config) {
+                ResponseUtils.validateSuccess(response);
             }
         });
     }

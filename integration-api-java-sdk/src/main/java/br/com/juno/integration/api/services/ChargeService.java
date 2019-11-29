@@ -2,7 +2,6 @@ package br.com.juno.integration.api.services;
 
 import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
-import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -35,15 +34,12 @@ public final class ChargeService extends BaseService {
     public List<Charge> create(ChargeCreateRequest request) {
         HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> response = Unirest.post( //
                 JunoApiManager.config().getResourceEndpoint() + "/charges") //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .body(JacksonUtils.toJson(request)) //
                 .asObject(new GenericType<Resources<Resource<br.com.juno.integration.api.model.Charge>>>() { //
                     // NTD
                 });//
-
-        validateSuccess(response);
 
         return new Responses<>(response.getBody()).getAbsoluteContent();
     }
@@ -103,8 +99,6 @@ public final class ChargeService extends BaseService {
         HttpResponse<Resources<Resource<Charge>>> response = httpRequest.asObject(new GenericType<Resources<Resource<Charge>>>() {
             // NTD
         });
-
-        validateSuccess(response);
 
         return new Responses<>(response.getBody(), httpRequest.getHeaders().getFirst(X_RESOURCE_TOKEN));
     }

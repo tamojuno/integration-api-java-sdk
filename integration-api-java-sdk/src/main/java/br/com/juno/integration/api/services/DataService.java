@@ -1,7 +1,6 @@
 package br.com.juno.integration.api.services;
 
 import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
-import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.util.List;
 
@@ -26,15 +25,11 @@ public final class DataService extends BaseService {
 
     public List<Bank> getBanks() {
         if (banks.isExpired()) {
-            HttpResponse<Resources<Resource<Bank>>> response = Unirest.get(
-                    JunoApiManager.config().getResourceEndpoint() + "/data/banks") //
-                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
+            HttpResponse<Resources<Resource<Bank>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/data/banks") //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<Bank>>>() {
                         //NTD
                     });
-
-            validateSuccess(response);
 
             banks.setCache(new Responses<>(response.getBody()).getAbsoluteContent());
         }
@@ -45,11 +40,8 @@ public final class DataService extends BaseService {
     public List<CompanyType> getCompanyTypes() {
         if (companyTypes.isExpired()) {
             HttpResponse<JsonNode> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/data/company-types") //
-                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asJson();
-
-            validateSuccess(response);
 
             companyTypes.getCache().clear();
             response.getBody().getObject().getJSONArray("companyTypes").forEach(str -> companyTypes.getCache().add(new CompanyType((String)str)));
@@ -63,13 +55,10 @@ public final class DataService extends BaseService {
         if (businessAreas.isExpired()) {
             HttpResponse<Resources<Resource<BusinessArea>>> response = Unirest.get(
                     JunoApiManager.config().getResourceEndpoint() + "/data/business-areas") //
-                    .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<BusinessArea>>>() {
                         //NTD
                     });
-
-            validateSuccess(response);
 
             businessAreas.setCache(new Responses<>(response.getBody()).getAbsoluteContent());
         }

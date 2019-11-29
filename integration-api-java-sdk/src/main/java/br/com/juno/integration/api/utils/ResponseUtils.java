@@ -4,6 +4,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
 import br.com.juno.integration.api.base.exception.JunoApiException;
+import br.com.juno.integration.api.model.ErrorDetail;
 import kong.unirest.HttpResponse;
 import kong.unirest.UnirestParsingException;
 
@@ -20,7 +21,7 @@ public final class ResponseUtils {
                 throw new JunoApiException(parsingException);
             }
 
-            throw new JunoApiException(response.getStatusText());
+            throw new JunoApiException(response.mapError(ErrorDetail.class));
         }
     }
 
