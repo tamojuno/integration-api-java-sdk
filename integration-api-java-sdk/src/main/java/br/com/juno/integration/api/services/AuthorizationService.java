@@ -1,5 +1,6 @@
 package br.com.juno.integration.api.services;
 
+import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
 import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.util.HashMap;
@@ -32,9 +33,9 @@ public final class AuthorizationService extends BaseService {
 
     private void refresh() {
         HttpResponse<AuthorizationToken> response = //
-                Unirest.post(JunoApiManager.config().getEnvironmentUrl() + "/authorization-server/oauth/token") //
+                Unirest.post(JunoApiManager.config().getEnvironmentUrl() + ":8084/oauth/token") //
                         .basicAuth(JunoApiManager.config().getClientId(), JunoApiManager.config().getClientSecret()) //
-                        .headerReplace("Content-type", "application/x-www-form-urlencoded") //
+                        .header(CONTENT_TYPE_HEADER, "application/x-www-form-urlencoded") //
                         .field("grant_type", "client_credentials") //
                         .asObject(AuthorizationToken.class);
 

@@ -1,11 +1,13 @@
 package br.com.juno.integration.api.services;
 
+import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
 import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.util.List;
 
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.MediaType;
 
 import br.com.juno.integration.api.model.Bank;
 import br.com.juno.integration.api.model.BusinessArea;
@@ -27,6 +29,7 @@ public final class DataService extends BaseService {
             HttpResponse<Resources<Resource<Bank>>> response = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/banks") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
+                    .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<Bank>>>() {
                         //NTD
                     });
@@ -43,6 +46,7 @@ public final class DataService extends BaseService {
         if (companyTypes.isExpired()) {
             HttpResponse<JsonNode> response = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/company-types") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
+                    .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asJson();
 
             validateSuccess(response);
@@ -60,6 +64,7 @@ public final class DataService extends BaseService {
             HttpResponse<Resources<Resource<BusinessArea>>> response = Unirest.get(
                     JunoApiManager.config().getEnvironmentUrl() + "/api-integration/data/business-areas") //
                     .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
+                    .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<BusinessArea>>>() {
                         //NTD
                     });

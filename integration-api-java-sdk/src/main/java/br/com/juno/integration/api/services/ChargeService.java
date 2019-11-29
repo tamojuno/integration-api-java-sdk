@@ -1,5 +1,6 @@
 package br.com.juno.integration.api.services;
 
+import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
 import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.MediaType;
 
 import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.model.Charge;
@@ -44,6 +46,7 @@ public final class ChargeService extends BaseService {
                 JunoApiManager.config().getEnvironmentUrl() + "/api-integration/charges") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
+                .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .body(requestBody) //
                 .asObject(new GenericType<Resources<Resource<br.com.juno.integration.api.model.Charge>>>() { //
                     // NTD
@@ -84,7 +87,8 @@ public final class ChargeService extends BaseService {
     private Responses<Charge> getPage(String resourceToken, String hateoasLink) {
         GetRequest httpRequest = Unirest.get(hateoasLink) //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
-                .header(X_RESOURCE_TOKEN, resourceToken);
+                .header(X_RESOURCE_TOKEN, resourceToken)//
+                .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //
 
         return exchange(httpRequest);
     }
@@ -92,7 +96,8 @@ public final class ChargeService extends BaseService {
     private Responses<Charge> getPage(String resourceToken) {
         GetRequest httpRequest = Unirest.get(JunoApiManager.config().getEnvironmentUrl() + "/api-integration/charges") //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
-                .header(X_RESOURCE_TOKEN, resourceToken);
+                .header(X_RESOURCE_TOKEN, resourceToken) //
+                .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //
 
         populateParameters(httpRequest);
 

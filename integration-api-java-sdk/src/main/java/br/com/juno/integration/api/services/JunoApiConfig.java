@@ -71,7 +71,7 @@ public final class JunoApiConfig {
     public enum Environment {
 
         PRODUCTION("https://api.juno.com.br"),
-        SANDBOX("https://sandbox.boletobancario.com");
+        SANDBOX("https://sandbox.boletobancario.com.br");
 
         private String url;
 

@@ -5,8 +5,6 @@ import java.lang.reflect.Type;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import org.springframework.http.MediaType;
-
 import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.utils.JacksonUtils;
 import kong.unirest.GenericType;
@@ -17,7 +15,6 @@ public final class UnirestConfig {
 
     public static void configure() {
         Unirest.config().setDefaultHeader("X-API-Version", "2");
-        Unirest.config().setDefaultHeader("Content-type", MediaType.APPLICATION_JSON_VALUE);
         Unirest.config().setObjectMapper(new ObjectMapper() {
 
             @Override
