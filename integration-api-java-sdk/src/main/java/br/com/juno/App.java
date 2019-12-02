@@ -1,6 +1,5 @@
 package br.com.juno;
 
-import br.com.juno.integration.api.model.CreditCard;
 import br.com.juno.integration.api.model.TokenizedCreditCard;
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.creditcard.CreditCardTokenizationRequest;
@@ -102,17 +101,7 @@ public class App {
         //        System.out.println(document);
 
         // ## Credit Cards
-
-        // Dummy data
-        //        cardNumber : '4152878923958463',
-        //        holderName : 'Christopher Campbell',
-        //        securityCode : '831',
-        //        expirationMonth : '08',
-        //        expirationYear : '2028'
-
-        CreditCard creditCard = new CreditCard("4912574485726890", "Christopher Campbell", "831", "08", "2028");
-        CreditCardTokenizationRequest request = new CreditCardTokenizationRequest(creditCard);
-
+        CreditCardTokenizationRequest request = new CreditCardTokenizationRequest("7fc59d5cca80b7f4a8a3442dfe18c8b764366e95");
         TokenizedCreditCard tokenizedCreditCard = JunoApiManager.getCreditCardService().tokenize(request);
         System.out.println(tokenizedCreditCard);
     }
