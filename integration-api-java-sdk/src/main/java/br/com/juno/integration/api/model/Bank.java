@@ -10,6 +10,10 @@ public final class Bank extends BaseModel {
     private String number;
     private String name;
 
+    protected Bank() {
+        // NTD
+    }
+
     public String getNumber() {
         return number;
     }

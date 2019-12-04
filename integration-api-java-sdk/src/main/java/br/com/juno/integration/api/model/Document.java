@@ -13,6 +13,10 @@ public class Document extends BaseModel {
     private String rejectionReason;
     private String details;
 
+    protected Document() {
+        // NTD
+    }
+
     public String getType() {
         return type;
     }

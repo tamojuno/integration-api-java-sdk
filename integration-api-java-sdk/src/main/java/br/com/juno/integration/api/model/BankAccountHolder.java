@@ -7,7 +7,7 @@ public final class BankAccountHolder extends BaseModel {
     private String name;
     private String document;
 
-    public BankAccountHolder() {
+    protected BankAccountHolder() {
         // NTD
     }
 

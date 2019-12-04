@@ -1,8 +1,6 @@
 package br.com.juno;
 
-import br.com.juno.integration.api.model.TokenizedCreditCard;
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.creditcard.CreditCardTokenizationRequest;
 
 public class App {
 
@@ -22,9 +20,9 @@ public class App {
             .development();
         // @formatter:on
 
-        // @formatter:off
+        // // @formatter:off
         //
-        // ## Charges
+        //// ## Charges
         //        ChargeCreateRequest.Billing billing = new ChargeCreateRequest.Billing();
         //        ChargeCreateRequest.Charge charge = new ChargeCreateRequest.Charge("First Charge using SDK :)");
         //
@@ -59,11 +57,11 @@ public class App {
         //        // @formatter:on
         //
 
-        // ## Balance
+        //// ## Balance
         //        Balance balance = JunoApiManager.getBalanceService().getBalance(new GetBalanceRequest());
         //        System.out.println(balance);
 
-        // ## Data
+        //// ## Data
         //        List<Bank> banks = JunoApiManager.getDataService().getBanks();
         //        System.out.println(banks);
         //
@@ -73,36 +71,52 @@ public class App {
         //        List<BusinessArea> businessArea = JunoApiManager.getDataService().getBusinessAreas();
         //        System.out.println(businessArea);
 
-        // ## Credentials
+        //// ## Credentials
         //        JunoPublicKey junoPublicKey = JunoApiManager.getCredentialsService().getPublicCredentials(new CredentialsRequest());
         //
         //        System.out.println(junoPublicKey.getKey());
         //        System.out.println(junoPublicKey.getPublicKey());
 
-        // ## Documents
-        //        Document document = JunoApiManager.getDocumentService().getDocument(new DocumentGetRequest("doc_8FBC3EA2276EB79F"));
-        //        System.out.println(document);
+        //// ## Documents
+        //                Document findDocumentResponse = JunoApiManager.getDocumentService().getDocument(new DocumentGetRequest("doc_8FBC3EA2276EB79F"));
+        //                System.out.println(findDocumentResponse);
 
-        //        List<Document> documents = JunoApiManager.getDocumentService().listDocument(new DocumentListRequest());
-        //        documents.forEach(System.out::println);
+        //                List<Document> listDocumentsResponse = JunoApiManager.getDocumentService().listDocument(new DocumentListRequest());
+        //                listDocumentsResponse.forEach(System.out::println);
 
-        //        DocumentUploadRequest documentRequest = new DocumentUploadRequest("doc_8FBC3EA2276EB79F");
-        //        DocumentUploadRequest documentRequest = new DocumentUploadRequest("doc_3E281CC784AE799D");
-        //        documentRequest.getFiles().add(new JunoFile(new File("/Users/norton.gueno/Downloads/some_serious_document.pdf")));
-        //        documentRequest.getFiles().add(new JunoFile(Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")),
-        //                "some_serious_document.pdf"));
+        //                DocumentUploadRequest documentUploadUsingFileRequest = new DocumentUploadRequest("doc_8FBC3EA2276EB79F");
+        //                documentUploadUsingFileRequest.getFiles().add(new JunoFile(new File("/Users/norton.gueno/Downloads/some_serious_document.pdf")));
         //
-        //        Document document = JunoApiManager.getDocumentService().uploadDocument(documentRequest);
-        //        System.out.println(document);
+        //                Document documentUploadUsingFileResponse = JunoApiManager.getDocumentService().uploadDocument(documentUploadUsingFileRequest);
+        //                System.out.println(documentUploadUsingFileResponse);
+        //
+        //                DocumentUploadRequest documentUploadUsingStreamsRequest = new DocumentUploadRequest("doc_3E281CC784AE799D");
+        //                documentUploadUsingStreamsRequest.getFiles().add(new JunoFile(Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")),
+        //                        "some_serious_document.pdf"));
+        //
+        //                Document documentUploadUsingStreamsResponse = JunoApiManager.getDocumentService().uploadDocument(documentUploadUsingStreamsRequest);
+        //                System.out.println(documentUploadUsingStreamsResponse);
 
-        //        DocumentUploadEncryptedRequest documentRequest = new DocumentUploadEncryptedRequest("doc_3E281CC784AE799D", new JunoFile(
-        //                Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")), "some_serious_document.pdf"));
-        //        Document document = JunoApiManager.getDocumentService().uploadDocumentAsEncripted(documentRequest);
-        //        System.out.println(document);
+        //                DocumentUploadEncryptedRequest documentUploadEncryptedRequest = new DocumentUploadEncryptedRequest("doc_3E281CC784AE799D", new JunoFile(
+        //                        Files.newInputStream(Paths.get("/Users/norton.gueno/Downloads/some_serious_document.pdf")), "some_serious_document.pdf"));
+        //                Document documentUploadEncryptedResponse = JunoApiManager.getDocumentService().uploadDocumentAsEncripted(documentUploadEncryptedRequest);
+        //                System.out.println(documentUploadEncryptedResponse);
 
-        // ## Credit Cards
-        CreditCardTokenizationRequest request = new CreditCardTokenizationRequest("7fc59d5cca80b7f4a8a3442dfe18c8b764366e95");
-        TokenizedCreditCard tokenizedCreditCard = JunoApiManager.getCreditCardService().tokenize(request);
-        System.out.println(tokenizedCreditCard);
+        //// ## Credit Cards
+        //                CreditCardTokenizationRequest cardTokenizationRequest = new CreditCardTokenizationRequest("7fc59d5cca80b7f4a8a3442dfe18c8b764366e95");
+        //                TokenizedCreditCard tokenizedCreditCard = JunoApiManager.getCreditCardService().tokenize(cardTokenizationRequest);
+        //                System.out.println(tokenizedCreditCard);
+
+        // ## Bill Payments
+        //        RegisterBillPaymentRequest billPaymentRequest = new RegisterBillPaymentRequest("96645892098", //
+        //                BigDecimal.valueOf(134.73D), //
+        //                LocalDate.of(2019, 12, 25), //
+        //                "23793381286001335752494000063308880630000005000", //
+        //                BigDecimal.valueOf(134.73D), //
+        //                LocalDate.now()); //
+        //
+        //        BillPayment billPayment = JunoApiManager.getBillPaymentService().registerBillPayment(billPaymentRequest);
+        //        System.out.println(billPayment);
+
     }
 }

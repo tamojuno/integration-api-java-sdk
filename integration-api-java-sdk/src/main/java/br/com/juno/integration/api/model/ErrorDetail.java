@@ -3,19 +3,17 @@ package br.com.juno.integration.api.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class ErrorDetail {
+public class ErrorDetail extends Error {
 
-    private String timestamp;
-    private String status;
-    private String error;
-    private String details;
-    private String path;
+    private static final long serialVersionUID = 6629135241307840566L;
 
-    protected ErrorDetail() {
-        // NTD
-    }
+    private final String timestamp;
+    private final String status;
+    private final String error;
+    private final String details;
+    private final String path;
 
-    public ErrorDetail(String timestamp, String status, String error, String details, String path) {
+    protected ErrorDetail(String timestamp, String status, String error, String details, String path) {
         this.timestamp = timestamp;
         this.status = status;
         this.error = error;

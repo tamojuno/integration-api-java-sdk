@@ -6,9 +6,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import br.com.juno.integration.api.base.exception.JunoApiException;
+import br.com.juno.integration.api.model.ErrorDetail;
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.utils.JacksonUtils;
-import br.com.juno.integration.api.utils.ResponseUtils;
 import kong.unirest.Config;
 import kong.unirest.GenericType;
 import kong.unirest.HttpRequest;
@@ -17,6 +17,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Interceptor;
 import kong.unirest.ObjectMapper;
 import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 
 public final class UnirestConfig {
 
@@ -70,9 +71,17 @@ public final class UnirestConfig {
 
             @Override
             public void onResponse(HttpResponse<?> response, HttpRequestSummary request, Config config) {
-                ResponseUtils.validateSuccess(response);
+                response.ifFailure(ErrorDetail.class, r -> {
+                    ErrorDetail errorDetail = r.getBody();
+                    throw new JunoApiException(errorDetail);
+                });
             }
+
+            @Override
+            public HttpResponse<?> onFail(Exception e, HttpRequestSummary request, Config config) throws UnirestException {
+                throw new JunoApiException(e);
+            }
+
         });
     }
-
 }

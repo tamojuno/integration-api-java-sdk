@@ -9,6 +9,10 @@ public final class BusinessArea {
     private String activity;
     private String category;
 
+    protected BusinessArea() {
+        // NTD
+    }
+
     public Long getCode() {
         return code;
     }

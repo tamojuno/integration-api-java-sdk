@@ -41,6 +41,10 @@ public final class JunoApiManager {
         return resources.getCreditCardService();
     }
 
+    public static BillPaymentService getBillPaymentService() {
+        return resources.getBillPaymentService();
+    }
+
     public static CredentialsService getCredentialsService() {
         return resources.getCredentialsService();
     }

@@ -20,6 +20,10 @@ public class Payment extends BaseModel {
     private String transactionId;
     private String creditCardId;
 
+    protected Payment() {
+        // NTD
+    }
+
     public Calendar getDate() {
         return date;
     }

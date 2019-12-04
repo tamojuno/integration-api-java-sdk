@@ -20,7 +20,7 @@ public final class AuthorizationToken implements Serializable {
     private String userName;
     private String jti;
 
-    public AuthorizationToken() {
+    protected AuthorizationToken() {
         timestamp = Clock.getTimeInMillis();
     }
 

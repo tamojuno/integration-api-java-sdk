@@ -28,8 +28,9 @@ public final class JacksonUtils {
                             new JavaTimeModule(),
                             new Jackson2HalModule()
                     )
+                    .failOnUnknownProperties(true)
+                    .serializationInclusion(Include.NON_NULL)
                     .build();
-            mapper.setSerializationInclusion(Include.NON_NULL);
             // @formatter:on
         }
 

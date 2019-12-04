@@ -1,7 +1,6 @@
 package br.com.juno.integration.api.services;
 
 import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_HEADER;
-import static br.com.juno.integration.api.utils.ResponseUtils.validateSuccess;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +37,6 @@ public final class AuthorizationService extends BaseService {
                         .header(CONTENT_TYPE_HEADER, "application/x-www-form-urlencoded") //
                         .field("grant_type", "client_credentials") //
                         .asObject(AuthorizationToken.class);
-
-        validateSuccess(response);
 
         authorizationToken = response.getBody();
     }

@@ -11,11 +11,12 @@ public final class BankAccount extends BaseModel {
     private BankAccountType accountType;
     private BankAccountHolder accountHolder;
 
-    public BankAccount() {
+    protected BankAccount() {
         // NTD
     }
 
-    public BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType, BankAccountHolder accountHolder) {
+    protected BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType,
+            BankAccountHolder accountHolder) {
         this.bankNumber = bankNumber;
         this.agencyNumber = agencyNumber;
         this.accountNumber = accountNumber;

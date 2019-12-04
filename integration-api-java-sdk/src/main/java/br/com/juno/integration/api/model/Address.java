@@ -12,11 +12,11 @@ public final class Address extends BaseModel {
     private String state;
     private String postCode;
 
-    public Address() {
+    protected Address() {
         // NTD
     }
 
-    public Address(String street, String number, String complement, String neighborhood, String city, String state, String postCode) {
+    protected Address(String street, String number, String complement, String neighborhood, String city, String state, String postCode) {
         this.street = street;
         this.number = number;
         this.complement = complement;

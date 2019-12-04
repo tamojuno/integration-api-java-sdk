@@ -23,6 +23,10 @@ public class Charge extends BaseModel {
     private BilletDetails billetDetails;
     private List<Payment> payments;
 
+    protected Charge() {
+        // NTD
+    }
+
     public static class BilletDetails implements Serializable {
 
         private static final long serialVersionUID = -7529098091565545942L;
@@ -31,6 +35,10 @@ public class Charge extends BaseModel {
         private String ourNumber;
         private String barcodeNumber;
         private String portfolio;
+
+        protected BilletDetails() {
+            // NTD
+        }
 
         public String getBankAccount() {
             return bankAccount;
