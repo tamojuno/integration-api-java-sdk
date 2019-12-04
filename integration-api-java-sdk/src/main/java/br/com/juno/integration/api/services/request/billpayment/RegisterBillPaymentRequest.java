@@ -9,10 +9,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.BaseRequest;
+import br.com.juno.integration.api.services.request.BaseResourceRequest;
 import br.com.juno.integration.api.utils.CalendarUtils;
 
-public class RegisterBillPaymentRequest extends BaseRequest {
+public final class RegisterBillPaymentRequest extends BaseResourceRequest {
 
     private static final long serialVersionUID = -8913714640641753259L;
 
@@ -35,13 +35,13 @@ public class RegisterBillPaymentRequest extends BaseRequest {
 
     public RegisterBillPaymentRequest(String beneficiaryDocument, BigDecimal billAmount, LocalDate dueDate, String numericalBarCode,
             BigDecimal paidAmount, LocalDate paymentDate, String resourceToken) {
+        super(resourceToken);
         this.beneficiaryDocument = beneficiaryDocument;
         this.billAmount = billAmount;
         this.dueDate = dueDate;
         this.numericalBarCode = numericalBarCode;
         this.paidAmount = paidAmount;
         this.paymentDate = paymentDate;
-        setResourceToken(resourceToken);
     }
 
     public String getBeneficiaryDocument() {

@@ -1,4 +1,4 @@
-package br.com.juno.integration.api.model;
+package br.com.juno.integration.api.base.exception;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

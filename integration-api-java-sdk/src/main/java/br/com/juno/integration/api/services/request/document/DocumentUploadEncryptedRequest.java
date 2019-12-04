@@ -2,7 +2,7 @@ package br.com.juno.integration.api.services.request.document;
 
 import br.com.juno.integration.api.services.JunoApiManager;
 
-public class DocumentUploadEncryptedRequest extends AbstractDocumentRequest {
+public final class DocumentUploadEncryptedRequest extends AbstractDocumentRequest {
 
     private static final long serialVersionUID = 2909141109506130998L;
 

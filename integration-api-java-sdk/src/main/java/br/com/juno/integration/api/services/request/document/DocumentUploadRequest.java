@@ -3,7 +3,7 @@ package br.com.juno.integration.api.services.request.document;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DocumentUploadRequest extends AbstractDocumentRequest {
+public final class DocumentUploadRequest extends AbstractDocumentRequest {
 
     private static final long serialVersionUID = 2909141109506130998L;
 

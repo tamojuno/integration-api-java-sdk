@@ -7,26 +7,18 @@ import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.juno.integration.api.base.exception.Assert;
-import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.BaseRequest;
+import br.com.juno.integration.api.services.request.BaseTemplatedRequest;
 
-public abstract class AbstractDocumentRequest extends BaseRequest {
+public abstract class AbstractDocumentRequest extends BaseTemplatedRequest<String> {
 
     private static final long serialVersionUID = -8458153295313257412L;
 
-    protected final String documentId;
-
-    public AbstractDocumentRequest(String documentId) {
-        this(JunoApiManager.config().getResourceToken(), documentId);
+    public AbstractDocumentRequest(String id) {
+        super(id);
     }
 
-    public AbstractDocumentRequest(String resourceToken, String documentId) {
-        this.documentId = documentId;
-        setResourceToken(resourceToken);
-    }
-
-    public String getDocumentId() {
-        return documentId;
+    public AbstractDocumentRequest(String resourceToken, String id) {
+        super(resourceToken, id);
     }
 
     public static class JunoFile implements Serializable {

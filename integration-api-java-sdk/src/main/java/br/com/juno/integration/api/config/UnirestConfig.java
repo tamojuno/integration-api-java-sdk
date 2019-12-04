@@ -5,8 +5,8 @@ import java.lang.reflect.Type;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import br.com.juno.integration.api.base.exception.ErrorDetail;
 import br.com.juno.integration.api.base.exception.JunoApiException;
-import br.com.juno.integration.api.model.ErrorDetail;
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.utils.JacksonUtils;
 import kong.unirest.Config;

@@ -8,14 +8,12 @@ public final class JunoApiManager {
     public static final String X_RESOURCE_TOKEN = "X-Resource-Token";
     public static final String X_API_VERSION = "X-API-Version";
 
+    private static final JunoApiConfig config = new JunoApiConfig();
+    private static final JunoApiResources resources = new JunoApiResources();
+
     private JunoApiManager() {
         // Private Constructor
     }
-
-    private static final JunoApiConfig config = new JunoApiConfig();
-
-    // TODO: Check if we move forward with this resource wrapper
-    private static final JunoApiResources resources = new JunoApiResources();
 
     public static JunoApiConfig config() {
         return config;
@@ -33,8 +31,16 @@ public final class JunoApiManager {
         return resources.getBalanceService();
     }
 
+    public static PaymentService getPaymentService() {
+        return resources.getPaymentService();
+    }
+
     public static DocumentService getDocumentService() {
         return resources.getDocumentService();
+    }
+
+    public static TransferService getTransferService() {
+        return resources.getTransferService();
     }
 
     public static CreditCardService getCreditCardService() {
@@ -49,7 +55,15 @@ public final class JunoApiManager {
         return resources.getCredentialsService();
     }
 
+    public static NotificationService getNotificationService() {
+        return resources.getNotificationService();
+    }
+
     public static AuthorizationService getAuthorizationService() {
         return resources.getAuthorizationService();
+    }
+
+    public static DigitalAccountService getDigitalAccountService() {
+        return resources.getDigitalAccountService();
     }
 }

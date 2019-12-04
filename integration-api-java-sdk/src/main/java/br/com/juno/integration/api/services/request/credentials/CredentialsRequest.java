@@ -1,18 +1,17 @@
 package br.com.juno.integration.api.services.request.credentials;
 
-import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.BaseRequest;
+import br.com.juno.integration.api.services.request.BaseResourceRequest;
 
-public class CredentialsRequest extends BaseRequest {
+public final class CredentialsRequest extends BaseResourceRequest {
 
     private static final long serialVersionUID = 9131125917965515040L;
 
     public CredentialsRequest() {
-        this(JunoApiManager.config().getResourceToken());
+        super();
     }
 
     public CredentialsRequest(String resourceToken) {
-        setResourceToken(resourceToken);
+        super(resourceToken);
     }
 
 }

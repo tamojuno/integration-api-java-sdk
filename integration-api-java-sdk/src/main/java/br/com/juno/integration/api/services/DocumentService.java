@@ -40,7 +40,7 @@ public class DocumentService extends BaseService {
         HttpResponse<Resource<Document>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/documents/{id}") //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
-                .routeParam("id", request.getDocumentId()) //
+                .routeParam("id", request.getId()) //
                 .asObject(new GenericType<Resource<Document>>() { //
                     // NTD
                 });//
@@ -65,10 +65,10 @@ public class DocumentService extends BaseService {
         Document document = null;
         for (JunoFile file : request.getFiles()) {
             if (file.hasFile()) {
-                document = uploadFile(request.getResourceToken(), request.getDocumentId(), file.getFile());
+                document = uploadFile(request.getResourceToken(), request.getId(), file.getFile());
             }
             if (file.hasStream()) {
-                document = uploadStream(request.getResourceToken(), request.getDocumentId(), file.getStream(), file.getFileName());
+                document = uploadStream(request.getResourceToken(), request.getId(), file.getStream(), file.getFileName());
             }
         }
         return document;
@@ -117,7 +117,7 @@ public class DocumentService extends BaseService {
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_ENCODING_HEADER, "gzip") //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_OCTET_STREAM_VALUE) //
-                .routeParam("id", request.getDocumentId()) //
+                .routeParam("id", request.getId()) //
                 .body(encryptedFile) //
                 .asObject(new GenericType<Resource<Document>>() { //
                     // NTD

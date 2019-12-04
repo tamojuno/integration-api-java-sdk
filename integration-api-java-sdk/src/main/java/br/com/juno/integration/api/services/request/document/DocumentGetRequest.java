@@ -1,6 +1,6 @@
 package br.com.juno.integration.api.services.request.document;
 
-public class DocumentGetRequest extends AbstractDocumentRequest {
+public final class DocumentGetRequest extends AbstractDocumentRequest {
 
     private static final long serialVersionUID = 928711404709080291L;
 

@@ -3,10 +3,9 @@ package br.com.juno.integration.api.services.request.charge;
 import java.util.Calendar;
 
 import br.com.juno.integration.api.model.LabeledEnum;
-import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.BaseRequest;
+import br.com.juno.integration.api.services.request.BaseResourceRequest;
 
-public class ChargeListRequest extends BaseRequest {
+public final class ChargeListRequest extends BaseResourceRequest {
 
     private static final long serialVersionUID = -9217822108257430472L;
 
@@ -50,14 +49,6 @@ public class ChargeListRequest extends BaseRequest {
         public String getLabel() {
             return label;
         }
-    }
-
-    public ChargeListRequest() {
-        this(JunoApiManager.config().getResourceToken());
-    }
-
-    public ChargeListRequest(String resourceToken) {
-        setResourceToken(resourceToken);
     }
 
     public void setPageSize(Integer pageSize) {

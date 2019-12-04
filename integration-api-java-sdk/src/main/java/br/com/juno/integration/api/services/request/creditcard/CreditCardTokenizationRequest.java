@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import br.com.juno.integration.api.services.request.BaseRequest;
 
-public class CreditCardTokenizationRequest extends BaseRequest {
+public final class CreditCardTokenizationRequest extends BaseRequest {
 
     private static final long serialVersionUID = -2600515235790901969L;
 

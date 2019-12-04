@@ -11,10 +11,10 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.BaseRequest;
+import br.com.juno.integration.api.services.request.BaseResourceRequest;
 import br.com.juno.integration.api.utils.CalendarUtils;
 
-public class ChargeCreateRequest extends BaseRequest {
+public final class ChargeCreateRequest extends BaseResourceRequest {
 
     private static final long serialVersionUID = 7287757661166353769L;
 
@@ -26,9 +26,9 @@ public class ChargeCreateRequest extends BaseRequest {
     }
 
     public ChargeCreateRequest(String resourceToken, Charge charge, Billing billing) {
+        super(resourceToken);
         this.charge = charge;
         this.billing = billing;
-        setResourceToken(resourceToken);
     }
 
     public Charge getCharge() {
