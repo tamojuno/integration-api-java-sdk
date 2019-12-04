@@ -20,6 +20,8 @@ import kong.unirest.json.JSONObject;
 
 public class CreditCardService extends BaseService {
 
+    private static final String CREDIT_CARDS_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/credit-cards/tokenization";
+
     CreditCardService() {
         // NTD
     }
@@ -33,7 +35,7 @@ public class CreditCardService extends BaseService {
         JSONObject jsonObject = new JSONObject(requestBody);
 
         HttpResponse<Resource<TokenizedCreditCard>> response = Unirest.post( //
-                JunoApiManager.config().getResourceEndpoint() + "/credit-cards/tokenization") //
+                CREDIT_CARDS_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, JunoApiManager.config().getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .body(jsonObject.toString()) //

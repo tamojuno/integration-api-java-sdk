@@ -27,13 +27,15 @@ import kong.unirest.Unirest;
 
 public final class ChargeService extends BaseService {
 
+    private static final String CHARGES_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/charges";
+
     ChargeService() {
         // NTD
     }
 
     public List<Charge> create(ChargeCreateRequest request) {
         HttpResponse<Resources<Resource<br.com.juno.integration.api.model.Charge>>> response = Unirest.post( //
-                JunoApiManager.config().getResourceEndpoint() + "/charges") //
+                CHARGES_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .body(JacksonUtils.toJson(request)) //
@@ -81,7 +83,7 @@ public final class ChargeService extends BaseService {
     }
 
     private Responses<Charge> getPage(String resourceToken) {
-        GetRequest httpRequest = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/charges") //
+        GetRequest httpRequest = Unirest.get(CHARGES_ENDPOINT) //
                 .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, resourceToken) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //

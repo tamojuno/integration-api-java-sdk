@@ -19,12 +19,14 @@ import kong.unirest.Unirest;
 
 public class CredentialsService extends BaseService {
 
+    private static final String CREDENTIALS_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/credentials/public-key";
+
     CredentialsService() {
         // NTD
     }
 
     public JunoPublicKey getPublicCredentials(CredentialsRequest request) {
-        HttpResponse<String> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/credentials/public-key") //
+        HttpResponse<String> response = Unirest.get(CREDENTIALS_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.TEXT_PLAIN_VALUE) //
                 .asString(); //

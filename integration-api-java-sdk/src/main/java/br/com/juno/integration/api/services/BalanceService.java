@@ -14,12 +14,14 @@ import kong.unirest.Unirest;
 
 public final class BalanceService extends BaseService {
 
+    public static final String BALANCE_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/balance";
+
     BalanceService() {
         // NTD
     }
 
     public Balance getBalance(GetBalanceRequest request) {
-        HttpResponse<Resource<Balance>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + "/balance") //
+        HttpResponse<Resource<Balance>> response = Unirest.get(BALANCE_ENDPOINT) //
                 .header(JunoApiManager.X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .asObject(new GenericType<Resource<Balance>>() {

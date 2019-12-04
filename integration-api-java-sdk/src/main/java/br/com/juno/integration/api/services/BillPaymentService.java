@@ -15,12 +15,14 @@ import kong.unirest.Unirest;
 
 public final class BillPaymentService extends BaseService {
 
+    public static final String BILL_PAYMENT_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/bill-payments";
+
     BillPaymentService() {
         // NTD
     }
 
     public BillPayment registerBillPayment(RegisterBillPaymentRequest request) {
-        HttpResponse<Resource<BillPayment>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + "/bill-payments") //
+        HttpResponse<Resource<BillPayment>> response = Unirest.post(BILL_PAYMENT_ENDPOINT) //
                 .header(JunoApiManager.X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .body(JacksonUtils.toJson(request)) //

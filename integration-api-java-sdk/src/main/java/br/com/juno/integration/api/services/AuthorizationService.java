@@ -14,6 +14,8 @@ public final class AuthorizationService extends BaseService {
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String BEARER = "Bearer ";
 
+    public static final String OAUTH_TOKEN_ENDPOINT = JunoApiManager.config().getAuthorizationEndpoint() + "/oauth/token";
+
     private AuthorizationToken authorizationToken;
 
     public synchronized String getToken() {
@@ -32,7 +34,7 @@ public final class AuthorizationService extends BaseService {
 
     private void refresh() {
         HttpResponse<AuthorizationToken> response = //
-                Unirest.post(JunoApiManager.config().getAuthorizationEndpoint() + "/oauth/token") //
+                Unirest.post(OAUTH_TOKEN_ENDPOINT) //
                         .basicAuth(JunoApiManager.config().getClientId(), JunoApiManager.config().getClientSecret()) //
                         .header(CONTENT_TYPE_HEADER, "application/x-www-form-urlencoded") //
                         .field("grant_type", "client_credentials") //
