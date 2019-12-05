@@ -18,7 +18,7 @@ public class ErrorDetail implements Serializable {
     private String timestamp;
     private String status;
     private String error;
-    private List<Details> details;
+    private transient List<Details> details;
     private String message;
     private String path;
 
@@ -90,6 +90,16 @@ public class ErrorDetail implements Serializable {
 
         public HttpStatus getHttpStatus() {
             return httpStatus;
+        }
+
+        @Override
+        public String toString() {
+            ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+            builder.append(field);
+            builder.append(message);
+            builder.append(errorCode);
+            builder.append(httpStatus);
+            return builder.toString();
         }
 
     }

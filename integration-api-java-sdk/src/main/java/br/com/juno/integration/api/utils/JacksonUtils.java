@@ -1,5 +1,6 @@
 package br.com.juno.integration.api.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,6 +8,8 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.hal.Jackson2HalModule;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
@@ -28,6 +31,7 @@ public final class JacksonUtils {
                             new JavaTimeModule(),
                             new Jackson2HalModule()
                     )
+                    .mixIn(ResourceSupport.class, ResourceMixIn.class)
                     .failOnUnknownProperties(true)
                     .serializationInclusion(Include.NON_NULL)
                     .build();
@@ -54,4 +58,11 @@ public final class JacksonUtils {
     }
 
     private static ObjectMapper mapper;
+
+    private abstract static class ResourceMixIn extends ResourceSupport {
+
+        @Override
+        @JsonIgnore(false)
+        public abstract Link getId();
+    }
 }
