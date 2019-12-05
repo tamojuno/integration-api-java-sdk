@@ -19,7 +19,7 @@ import kong.unirest.Unirest;
 
 public final class DataService extends BaseService {
 
-    private static final String DATA_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/data";
+    private static final String DATA_ENDPOINT = "/data";
     private static final String BANKS_ENDPOINT = DATA_ENDPOINT + "/banks";
     private static final String COMPANY_TYPES_ENDPOINT = DATA_ENDPOINT + "/company-types";
     private static final String BUSINESS_AREAS_ENDPOINT = DATA_ENDPOINT + "/business-areas";
@@ -30,7 +30,7 @@ public final class DataService extends BaseService {
 
     public List<Bank> getBanks() {
         if (banks.isExpired()) {
-            HttpResponse<Resources<Resource<Bank>>> response = Unirest.get(BANKS_ENDPOINT) //
+            HttpResponse<Resources<Resource<Bank>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + BANKS_ENDPOINT) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<Bank>>>() {
                         //NTD
@@ -44,7 +44,7 @@ public final class DataService extends BaseService {
 
     public List<CompanyType> getCompanyTypes() {
         if (companyTypes.isExpired()) {
-            HttpResponse<JsonNode> response = Unirest.get(COMPANY_TYPES_ENDPOINT) //
+            HttpResponse<JsonNode> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + COMPANY_TYPES_ENDPOINT) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asJson();
 
@@ -58,7 +58,8 @@ public final class DataService extends BaseService {
 
     public List<BusinessArea> getBusinessAreas() {
         if (businessAreas.isExpired()) {
-            HttpResponse<Resources<Resource<BusinessArea>>> response = Unirest.get(BUSINESS_AREAS_ENDPOINT) //
+            HttpResponse<Resources<Resource<BusinessArea>>> response = Unirest.get(
+                    JunoApiManager.config().getResourceEndpoint() + BUSINESS_AREAS_ENDPOINT) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<BusinessArea>>>() {
                         //NTD

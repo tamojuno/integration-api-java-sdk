@@ -1,24 +1,29 @@
 package br.com.juno.integration.api.base.exception;
 
+import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.http.HttpStatus;
 
-public class ErrorDetail extends Error {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ErrorDetail implements Serializable {
 
     private static final long serialVersionUID = 6629135241307840566L;
 
-    private final String timestamp;
-    private final String status;
-    private final String error;
-    private final String details;
-    private final String path;
+    private String timestamp;
+    private String status;
+    private String error;
+    private List<Details> details;
+    private String message;
+    private String path;
 
-    protected ErrorDetail(String timestamp, String status, String error, String details, String path) {
-        this.timestamp = timestamp;
-        this.status = status;
-        this.error = error;
-        this.details = details;
-        this.path = path;
+    protected ErrorDetail() {
+        // NTD
     }
 
     public String getTimestamp() {
@@ -33,8 +38,12 @@ public class ErrorDetail extends Error {
         return error;
     }
 
-    public String getDetails() {
+    public List<Details> getDetails() {
         return details;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public String getPath() {
@@ -50,6 +59,39 @@ public class ErrorDetail extends Error {
         builder.append(details);
         builder.append(path);
         return builder.toString();
+    }
+
+    public static class Details {
+
+        private String field;
+        private String message;
+        private String errorCode;
+        private HttpStatus httpStatus;
+
+        protected Details() {
+            // NTD
+        }
+
+        public boolean isValidationFieldError() {
+            return StringUtils.isNotBlank(field);
+        }
+
+        public String getField() {
+            return field;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public String getErrorCode() {
+            return errorCode;
+        }
+
+        public HttpStatus getHttpStatus() {
+            return httpStatus;
+        }
+
     }
 
 }

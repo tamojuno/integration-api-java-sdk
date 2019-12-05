@@ -1,12 +1,34 @@
 package br.com.juno.integration.api.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
+
+import br.com.juno.integration.api.base.exception.ErrorDetail;
+import br.com.juno.integration.api.base.exception.JunoApiException;
+import kong.unirest.HttpResponse;
+import kong.unirest.UnirestParsingException;
 
 public final class ResponseUtils {
 
     private ResponseUtils() {
         // NTD
+    }
+
+    public static void validateSuccess(HttpResponse<?> response) {
+        if (!response.isSuccess()) {
+            UnirestParsingException parsingException = response.getParsingError().orElse(null);
+            if (parsingException != null) {
+                ErrorDetail errorDetail;
+                try {
+                    errorDetail = JacksonUtils.getObjectMapper().readValue(parsingException.getOriginalBody(), ErrorDetail.class);
+                } catch (JsonProcessingException e) {
+                    throw new JunoApiException("Failed to read error response from Juno. Please contact the support team.", e);
+                }
+                throw new JunoApiException(errorDetail);
+            }
+        }
     }
 
     public static Link getLink(ResourceSupport resource, String rel) {

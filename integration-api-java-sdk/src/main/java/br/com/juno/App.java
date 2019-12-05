@@ -1,6 +1,15 @@
 package br.com.juno;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+import br.com.juno.integration.api.model.Charge;
 import br.com.juno.integration.api.services.JunoApiManager;
+import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest;
+import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest.Charge.PaymentType;
 
 public class App {
 
@@ -21,25 +30,25 @@ public class App {
         // @formatter:on
 
         // ## Charges
-        //        ChargeCreateRequest.Billing billing = new ChargeCreateRequest.Billing();
-        //        ChargeCreateRequest.Charge charge = new ChargeCreateRequest.Charge("First Charge using SDK :)");
-        //
-        //        charge.setAmount(BigDecimal.valueOf(50D));
-        //        charge.setDueDate(LocalDate.now().plusDays(5));
-        //        charge.setInstallments(3);
-        //        charge.getReferences().addAll(Arrays.asList("ref1", "ref2", "ref3"));
-        //        charge.getPaymentTypes().addAll(new HashSet<>(Arrays.asList(PaymentType.BOLETO, PaymentType.CREDIT_CARD)));
-        //
-        //        billing.setName("Norton");
-        //        billing.setDocument("25238016042");
-        //        billing.setEmail("norton@juno.com.br");
-        //        billing.setPhone("41999999999");
-        //
-        //        ChargeCreateRequest createChargeRequest = new ChargeCreateRequest(charge, billing);
-        //
-        //        List<Charge> createdCharges = JunoApiManager.getChargeService().create(createChargeRequest);
-        //
-        //        createdCharges.forEach(System.out::println);
+        ChargeCreateRequest.Billing billing = new ChargeCreateRequest.Billing();
+        ChargeCreateRequest.Charge charge = new ChargeCreateRequest.Charge("First Charge using SDK :)");
+
+        charge.setAmount(BigDecimal.valueOf(50D));
+        charge.setDueDate(LocalDate.now().plusDays(5));
+        charge.setInstallments(3);
+        charge.getReferences().addAll(Arrays.asList("ref1", "ref2", "ref3"));
+        charge.getPaymentTypes().addAll(new HashSet<>(Arrays.asList(PaymentType.BOLETO, PaymentType.CREDIT_CARD)));
+
+        billing.setName("Norton");
+        billing.setDocument("25238016042");
+        billing.setEmail("norton@juno.com.br");
+        billing.setPhone("41999999999");
+
+        ChargeCreateRequest createChargeRequest = new ChargeCreateRequest(charge, billing);
+
+        List<Charge> createdCharges = JunoApiManager.getChargeService().create(createChargeRequest);
+
+        createdCharges.forEach(System.out::println);
         //
         //        ChargeListRequest chargeListRequest = new ChargeListRequest();
         //        Responses<Charge> listCharges = JunoApiManager.getChargeService().list(chargeListRequest);
@@ -135,6 +144,12 @@ public class App {
         //
         //        WebhookDeleteRequest webhookDeleteRequest = new WebhookDeleteRequest("wbh_C5F07F3F835CDAF6");
         //        JunoApiManager.getNotificationService().deleteWebhook(webhookDeleteRequest);
+        //
+        // ## Payments
+
+        //        new PaymentCreateRequest("", billing, creditCardDetails)
+        //
+        //        JunoApiManager.getPaymentService().createPayment(request);
 
     }
 }

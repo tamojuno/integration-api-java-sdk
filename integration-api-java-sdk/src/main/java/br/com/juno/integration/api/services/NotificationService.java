@@ -25,14 +25,14 @@ import kong.unirest.Unirest;
 
 public class NotificationService extends BaseService {
 
-    private static final String NOTIFICATIONS_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/notifications";
+    private static final String NOTIFICATIONS_ENDPOINT = "/notifications";
     private static final String EVENT_TYPES_ENDPOINT = NOTIFICATIONS_ENDPOINT + "/event-types";
     private static final String WEBHOOKS_ENDPOINT = NOTIFICATIONS_ENDPOINT + "/webhooks";
     private static final String WEBHOOKS_TEMPLATED_ENDPOINT = WEBHOOKS_ENDPOINT + "/{id}";
 
     public List<EventType> listEventTypes() {
         if (eventTypes.isExpired()) {
-            HttpResponse<Resources<Resource<EventType>>> response = Unirest.get(EVENT_TYPES_ENDPOINT) //
+            HttpResponse<Resources<Resource<EventType>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + EVENT_TYPES_ENDPOINT) //
                     .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                     .asObject(new GenericType<Resources<Resource<EventType>>>() {
                         //NTD
@@ -45,7 +45,7 @@ public class NotificationService extends BaseService {
     }
 
     public List<Webhook> listWebhooks(WebhookListRequest request) {
-        HttpResponse<Resources<Resource<Webhook>>> response = Unirest.get(WEBHOOKS_ENDPOINT) //
+        HttpResponse<Resources<Resource<Webhook>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()).asObject(new GenericType<Resources<Resource<Webhook>>>() {
                     //NTD
@@ -55,7 +55,7 @@ public class NotificationService extends BaseService {
     }
 
     public Webhook createWebhook(WebhookCreateRequest request) {
-        HttpResponse<Resource<Webhook>> response = Unirest.post(WEBHOOKS_ENDPOINT) //
+        HttpResponse<Resource<Webhook>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()).body(JacksonUtils.toJson(request)).asObject(
                         new GenericType<Resource<Webhook>>() {
@@ -66,7 +66,7 @@ public class NotificationService extends BaseService {
     }
 
     public Webhook findWebhook(WebhookFindRequest request) {
-        HttpResponse<Resource<Webhook>> response = Unirest.get(WEBHOOKS_TEMPLATED_ENDPOINT) //
+        HttpResponse<Resource<Webhook>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_TEMPLATED_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .routeParam("id", request.getId()) //
                 .asObject(new GenericType<Resource<Webhook>>() {
@@ -77,14 +77,14 @@ public class NotificationService extends BaseService {
     }
 
     public void deleteWebhook(WebhookDeleteRequest request) {
-        Unirest.delete(WEBHOOKS_TEMPLATED_ENDPOINT) //
+        Unirest.delete(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_TEMPLATED_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .routeParam("id", request.getId()) //
                 .asEmpty(); //
     }
 
     public Webhook updateWebhook(WebhookUpdateRequest request) {
-        HttpResponse<Resource<Webhook>> response = Unirest.patch(WEBHOOKS_TEMPLATED_ENDPOINT) //
+        HttpResponse<Resource<Webhook>> response = Unirest.patch(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_TEMPLATED_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .routeParam("id", request.getId()) //
                 .asObject(new GenericType<Resource<Webhook>>() {

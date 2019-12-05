@@ -32,7 +32,7 @@ import kong.unirest.Unirest;
 
 public class DocumentService extends BaseService {
 
-    private static final String DOCUMENTS_ENDPOINT = JunoApiManager.config().getResourceEndpoint() + "/documents";
+    private static final String DOCUMENTS_ENDPOINT = "/documents";
     private static final String DOCUMENTS_TEMPLATED_ENDPOINT = DOCUMENTS_ENDPOINT + "/{id}";
     private static final String DOCUMENTS_UPLOAD_ENDPOINT = DOCUMENTS_TEMPLATED_ENDPOINT + "/files";
 
@@ -41,7 +41,7 @@ public class DocumentService extends BaseService {
     }
 
     public Document getDocument(DocumentGetRequest request) {
-        HttpResponse<Resource<Document>> response = Unirest.get(DOCUMENTS_TEMPLATED_ENDPOINT) //
+        HttpResponse<Resource<Document>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + DOCUMENTS_TEMPLATED_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .routeParam("id", request.getId()) //
@@ -54,7 +54,7 @@ public class DocumentService extends BaseService {
     }
 
     public List<Document> listDocument(DocumentListRequest request) {
-        HttpResponse<Resources<Resource<Document>>> response = Unirest.get(DOCUMENTS_ENDPOINT) //
+        HttpResponse<Resources<Resource<Document>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + DOCUMENTS_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .asObject(new GenericType<Resources<Resource<Document>>>() { //
@@ -79,7 +79,7 @@ public class DocumentService extends BaseService {
     }
 
     private Document uploadFile(String resourceToken, String documentId, File file) {
-        HttpResponse<Resource<Document>> response = Unirest.post(DOCUMENTS_UPLOAD_ENDPOINT) //
+        HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + DOCUMENTS_UPLOAD_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, resourceToken) //
                 .routeParam("id", documentId) //
                 .field("files", file) //
@@ -95,7 +95,7 @@ public class DocumentService extends BaseService {
             byte[] fileContent = new byte[file.available()];
             IOUtils.read(file, fileContent);
 
-            HttpResponse<Resource<Document>> response = Unirest.post(DOCUMENTS_UPLOAD_ENDPOINT) //
+            HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + DOCUMENTS_UPLOAD_ENDPOINT) //
                     .header(X_RESOURCE_TOKEN, resourceToken) //
                     .routeParam("id", documentId) //
                     .multiPartContent().field("files", fileContent, fileName) //
@@ -117,7 +117,7 @@ public class DocumentService extends BaseService {
 
         byte[] encryptedFile = CryptoUtils.encryptFile(publicKey, request.getFile().getFileName(), request.getFile().getStream());
 
-        HttpResponse<Resource<Document>> response = Unirest.post(DOCUMENTS_UPLOAD_ENDPOINT) //
+        HttpResponse<Resource<Document>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + DOCUMENTS_UPLOAD_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_ENCODING_HEADER, "gzip") //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_OCTET_STREAM_VALUE) //
