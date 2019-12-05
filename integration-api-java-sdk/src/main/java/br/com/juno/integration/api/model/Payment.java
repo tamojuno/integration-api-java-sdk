@@ -17,6 +17,7 @@ public class Payment extends BaseModel {
 
     private String type;
     private String status;
+    private String chargeId;
     private String transactionId;
     private String creditCardId;
 
@@ -60,6 +61,7 @@ public class Payment extends BaseModel {
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
         builder.append(getId());
+        builder.append(chargeId);
         builder.append(date);
         builder.append(releaseDate);
         builder.append(amount);
@@ -69,5 +71,9 @@ public class Payment extends BaseModel {
         builder.append(transactionId);
         builder.append(creditCardId);
         return builder.toString();
+    }
+
+    public String getChargeId() {
+        return chargeId;
     }
 }

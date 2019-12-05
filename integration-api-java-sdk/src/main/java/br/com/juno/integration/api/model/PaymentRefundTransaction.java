@@ -6,9 +6,12 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class PaymentRefundTransaction extends AbstractPaymentTransaction {
+public class PaymentRefundTransaction extends BaseModel {
 
-    private static final long serialVersionUID = 3232693680524612838L;
+    private static final long serialVersionUID = 2744803271932442751L;
+
+    protected String transactionId;
+    protected int installments;
 
     private final List<PaymentRefund> refunds = new ArrayList<>();
 
@@ -18,6 +21,14 @@ public class PaymentRefundTransaction extends AbstractPaymentTransaction {
 
     public List<PaymentRefund> getRefunds() {
         return refunds;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public int getInstallments() {
+        return installments;
     }
 
     @Override

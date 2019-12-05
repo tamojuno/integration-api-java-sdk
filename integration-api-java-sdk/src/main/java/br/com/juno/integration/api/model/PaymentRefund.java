@@ -21,8 +21,8 @@ public class PaymentRefund extends BaseModel {
     private Calendar paybackDate;
 
     private BigDecimal paybackAmount;
-
     private String status;
+    private String chargeId;
 
     protected PaymentRefund() {
         // NTD
@@ -44,10 +44,15 @@ public class PaymentRefund extends BaseModel {
         return status;
     }
 
+    public String getChargeId() {
+        return chargeId;
+    }
+
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
         builder.append(getId());
+        builder.append(chargeId);
         builder.append(releaseDate);
         builder.append(paybackDate);
         builder.append(paybackAmount);

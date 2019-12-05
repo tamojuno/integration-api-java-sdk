@@ -25,7 +25,6 @@ public class PaymentService extends BaseService {
         HttpResponse<Resource<PaymentTransaction>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + PAYMENTS_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
-                .routeParam("id", request.getId()) //
                 .body(JacksonUtils.toJson(request))//
                 .asObject(new GenericType<Resource<PaymentTransaction>>() {
                     // NTD
@@ -41,7 +40,6 @@ public class PaymentService extends BaseService {
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .routeParam("id", request.getId()) //
-                .body(JacksonUtils.toJson(request))//
                 .asObject(new GenericType<Resource<PaymentRefundTransaction>>() {
                     // NTD
                 });

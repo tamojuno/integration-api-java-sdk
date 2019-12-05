@@ -3,12 +3,13 @@ package br.com.juno.integration.api.services.request.payment;
 import java.io.Serializable;
 
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.BaseTemplatedRequest;
+import br.com.juno.integration.api.services.request.BaseResourceRequest;
 
-public class PaymentCreateRequest extends BaseTemplatedRequest<String> {
+public class PaymentCreateRequest extends BaseResourceRequest {
 
     private static final long serialVersionUID = 2955775000707665606L;
 
+    private final String chargeId;
     private final Billing billing;
     private final CreditCardDetails creditCardDetails;
 
@@ -16,8 +17,9 @@ public class PaymentCreateRequest extends BaseTemplatedRequest<String> {
         this(JunoApiManager.config().getResourceToken(), id, billing, creditCardDetails);
     }
 
-    public PaymentCreateRequest(String resourceToken, String id, Billing billing, CreditCardDetails creditCardDetails) {
-        super(resourceToken, id);
+    public PaymentCreateRequest(String resourceToken, String chargeId, Billing billing, CreditCardDetails creditCardDetails) {
+        super(resourceToken);
+        this.chargeId = chargeId;
         this.billing = billing;
         this.creditCardDetails = creditCardDetails;
     }
@@ -140,6 +142,10 @@ public class PaymentCreateRequest extends BaseTemplatedRequest<String> {
 
     public CreditCardDetails getCreditCardDetails() {
         return creditCardDetails;
+    }
+
+    public String getChargeId() {
+        return chargeId;
     }
 
 }

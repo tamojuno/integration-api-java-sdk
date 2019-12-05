@@ -1,6 +1,8 @@
 package br.com.juno;
 
+import br.com.juno.integration.api.model.PaymentRefundTransaction;
 import br.com.juno.integration.api.services.JunoApiManager;
+import br.com.juno.integration.api.services.request.payment.PaymentRefundRequest;
 
 public class App {
 
@@ -137,10 +139,17 @@ public class App {
         //        JunoApiManager.getNotificationService().deleteWebhook(webhookDeleteRequest);
         //
         // ## Payments
-
-        //        new PaymentCreateRequest("", billing, creditCardDetails)
+        //        Address address = new PaymentCreateRequest.Billing.Address("R. Mariano Torres", "729", "Curitiba", "PR", "80060120");
+        //        Billing billing = new PaymentCreateRequest.Billing("norton@juno.com.br", address);
+        //        CreditCardDetails creditCardDetails = new PaymentCreateRequest.CreditCardDetails("623b7652-4fb4-4ee9-984b-e5a18f2806c0");
         //
-        //        JunoApiManager.getPaymentService().createPayment(request);
+        //        PaymentCreateRequest paymentCreateRequest = new PaymentCreateRequest("chr_D470D0CF33BB40B5", billing, creditCardDetails);
+        //        PaymentTransaction paymentTransaction = JunoApiManager.getPaymentService().createPayment(paymentCreateRequest);
+        //        System.out.println(paymentTransaction);
+
+        PaymentRefundRequest paymentRefundRequest = new PaymentRefundRequest("pay_199DAA2FC4017E3D");
+        PaymentRefundTransaction refundTransaction = JunoApiManager.getPaymentService().refundPayment(paymentRefundRequest);
+        System.out.println(refundTransaction);
 
     }
 }
