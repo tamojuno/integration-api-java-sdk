@@ -73,6 +73,7 @@ public class BillPayment extends BaseModel {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
         builder.append(beneficiaryDocument);
         builder.append(billAmount);
         builder.append(billType);

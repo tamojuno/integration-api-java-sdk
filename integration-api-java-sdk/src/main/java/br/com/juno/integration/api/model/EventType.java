@@ -35,6 +35,7 @@ public class EventType extends BaseModel {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
         builder.append(name);
         builder.append(label);
         builder.append(status);

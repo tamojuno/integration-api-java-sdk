@@ -43,6 +43,7 @@ public class Webhook extends BaseModel {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
         builder.append(url);
         builder.append(secret);
         builder.append(status);

@@ -40,6 +40,7 @@ public class Document extends BaseModel {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
         builder.append(type);
         builder.append(description);
         builder.append(approvalStatus);

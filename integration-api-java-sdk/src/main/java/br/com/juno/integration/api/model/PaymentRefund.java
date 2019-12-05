@@ -5,6 +5,9 @@ import java.util.Calendar;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import br.com.juno.integration.api.utils.CalendarUtils;
 
 public class PaymentRefund extends BaseModel {
@@ -39,6 +42,17 @@ public class PaymentRefund extends BaseModel {
 
     public String getStatus() {
         return status;
+    }
+
+    @Override
+    public String toString() {
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
+        builder.append(releaseDate);
+        builder.append(paybackDate);
+        builder.append(paybackAmount);
+        builder.append(status);
+        return builder.toString();
     }
 
 }

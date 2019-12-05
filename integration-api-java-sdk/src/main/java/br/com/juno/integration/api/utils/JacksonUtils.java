@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.hal.Jackson2HalModule;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -31,7 +32,7 @@ public final class JacksonUtils {
                             new JavaTimeModule(),
                             new Jackson2HalModule()
                     )
-                    .mixIn(ResourceSupport.class, ResourceMixIn.class)
+                    .mixIn(Resource.class, ResourceMixIn.class)
                     .failOnUnknownProperties(true)
                     .serializationInclusion(Include.NON_NULL)
                     .build();

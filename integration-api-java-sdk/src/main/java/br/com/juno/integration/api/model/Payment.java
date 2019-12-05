@@ -59,6 +59,7 @@ public class Payment extends BaseModel {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
         builder.append(date);
         builder.append(releaseDate);
         builder.append(amount);

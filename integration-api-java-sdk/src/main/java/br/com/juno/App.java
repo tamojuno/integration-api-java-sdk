@@ -1,15 +1,6 @@
 package br.com.juno;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
-import br.com.juno.integration.api.model.Charge;
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest;
-import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest.Charge.PaymentType;
 
 public class App {
 
@@ -30,25 +21,25 @@ public class App {
         // @formatter:on
 
         // ## Charges
-        ChargeCreateRequest.Billing billing = new ChargeCreateRequest.Billing();
-        ChargeCreateRequest.Charge charge = new ChargeCreateRequest.Charge("First Charge using SDK :)");
-
-        charge.setAmount(BigDecimal.valueOf(50D));
-        charge.setDueDate(LocalDate.now().plusDays(5));
-        charge.setInstallments(3);
-        charge.getReferences().addAll(Arrays.asList("ref1", "ref2", "ref3"));
-        charge.getPaymentTypes().addAll(new HashSet<>(Arrays.asList(PaymentType.BOLETO, PaymentType.CREDIT_CARD)));
-
-        billing.setName("Norton");
-        billing.setDocument("25238016042");
-        billing.setEmail("norton@juno.com.br");
-        billing.setPhone("41999999999");
-
-        ChargeCreateRequest createChargeRequest = new ChargeCreateRequest(charge, billing);
-
-        List<Charge> createdCharges = JunoApiManager.getChargeService().create(createChargeRequest);
-
-        createdCharges.forEach(System.out::println);
+        //        ChargeCreateRequest.Billing billing = new ChargeCreateRequest.Billing();
+        //        ChargeCreateRequest.Charge charge = new ChargeCreateRequest.Charge("First Charge using SDK :)");
+        //
+        //        charge.setAmount(BigDecimal.valueOf(50D));
+        //        charge.setDueDate(LocalDate.now().plusDays(5));
+        //        charge.setInstallments(3);
+        //        charge.getReferences().addAll(Arrays.asList("ref1", "ref2", "ref3"));
+        //        charge.getPaymentTypes().addAll(new HashSet<>(Arrays.asList(PaymentType.BOLETO, PaymentType.CREDIT_CARD)));
+        //
+        //        billing.setName("Norton");
+        //        billing.setDocument("25238016042");
+        //        billing.setEmail("norton@juno.com.br");
+        //        billing.setPhone("41999999999");
+        //
+        //        ChargeCreateRequest createChargeRequest = new ChargeCreateRequest(charge, billing);
+        //
+        //        List<Charge> createdCharges = JunoApiManager.getChargeService().create(createChargeRequest);
+        //
+        //        createdCharges.forEach(System.out::println);
         //
         //        ChargeListRequest chargeListRequest = new ChargeListRequest();
         //        Responses<Charge> listCharges = JunoApiManager.getChargeService().list(chargeListRequest);
@@ -126,23 +117,23 @@ public class App {
         //        List<EventType> listEventTypes = JunoApiManager.getNotificationService().listEventTypes();
         //        listEventTypes.forEach(System.out::println);
         //
-        //        WebhookCreateRequest webhookCreateRequest = new WebhookCreateRequest("https://myendpoint.juno.com.br");
-        //        webhookCreateRequest.getEventTypes().addAll(Arrays.asList("PAYMENT_NOTIFICATION", "CHARGE_STATUS_CHANGED", "BILL_PAYMENT_STATUS_CHANGED"));
+        //        WebhookCreateRequest webhookCreateRequest = new WebhookCreateRequest("https://myendposssint.juno.com.br");
+        //        webhookCreateRequest.getEventTypes().addAll(listEventTypes.stream().map(EventType::getName).collect(Collectors.toList()));
         //        Webhook createdWebhook = JunoApiManager.getNotificationService().createWebhook(webhookCreateRequest);
         //        System.out.println(createdWebhook);
         //
-        //        WebhookUpdateRequest webhookUpdateRequest = new WebhookUpdateRequest("wbh_C5F07F3F835CDAF6");
+        //        WebhookUpdateRequest webhookUpdateRequest = new WebhookUpdateRequest(createdWebhook.getId());
         //        Webhook updatedWebhook = JunoApiManager.getNotificationService().updateWebhook(webhookUpdateRequest);
         //        System.out.println(updatedWebhook);
         //
-        //        WebhookFindRequest webhookFindRequest = new WebhookFindRequest("wbh_C5F07F3F835CDAF6");
+        //        WebhookFindRequest webhookFindRequest = new WebhookFindRequest(createdWebhook.getId());
         //        Webhook foundWebhook = JunoApiManager.getNotificationService().findWebhook(webhookFindRequest);
         //        System.out.println(foundWebhook);
         //
         //        List<Webhook> listWebhooks = JunoApiManager.getNotificationService().listWebhooks(new WebhookListRequest());
         //        listWebhooks.forEach(System.out::println);
         //
-        //        WebhookDeleteRequest webhookDeleteRequest = new WebhookDeleteRequest("wbh_C5F07F3F835CDAF6");
+        //        WebhookDeleteRequest webhookDeleteRequest = new WebhookDeleteRequest(createdWebhook.getId());
         //        JunoApiManager.getNotificationService().deleteWebhook(webhookDeleteRequest);
         //
         // ## Payments

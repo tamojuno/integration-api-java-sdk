@@ -1,5 +1,8 @@
 package br.com.juno.integration.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public final class Address extends BaseModel {
 
     private static final long serialVersionUID = 1652266417418815121L;
@@ -80,5 +83,18 @@ public final class Address extends BaseModel {
 
     public void setPostCode(String postCode) {
         this.postCode = postCode;
+    }
+
+    @Override
+    public String toString() {
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(street);
+        builder.append(number);
+        builder.append(complement);
+        builder.append(neighborhood);
+        builder.append(city);
+        builder.append(state);
+        builder.append(postCode);
+        return builder.toString();
     }
 }

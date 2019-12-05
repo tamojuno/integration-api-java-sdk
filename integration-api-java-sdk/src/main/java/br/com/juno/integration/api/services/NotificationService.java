@@ -47,7 +47,8 @@ public class NotificationService extends BaseService {
     public List<Webhook> listWebhooks(WebhookListRequest request) {
         HttpResponse<Resources<Resource<Webhook>>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
-                .header(X_RESOURCE_TOKEN, request.getResourceToken()).asObject(new GenericType<Resources<Resource<Webhook>>>() {
+                .header(X_RESOURCE_TOKEN, request.getResourceToken())//
+                .asObject(new GenericType<Resources<Resource<Webhook>>>() {
                     //NTD
                 });
 
@@ -57,10 +58,11 @@ public class NotificationService extends BaseService {
     public Webhook createWebhook(WebhookCreateRequest request) {
         HttpResponse<Resource<Webhook>> response = Unirest.post(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
-                .header(X_RESOURCE_TOKEN, request.getResourceToken()).body(JacksonUtils.toJson(request)).asObject(
-                        new GenericType<Resource<Webhook>>() {
-                            //NTD
-                        });
+                .header(X_RESOURCE_TOKEN, request.getResourceToken())//
+                .body(JacksonUtils.toJson(request)) //
+                .asObject(new GenericType<Resource<Webhook>>() { //
+                    //NTD
+                }); //
 
         return new Response<>(response.getBody()).getContent();
     }
@@ -68,6 +70,7 @@ public class NotificationService extends BaseService {
     public Webhook findWebhook(WebhookFindRequest request) {
         HttpResponse<Resource<Webhook>> response = Unirest.get(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_TEMPLATED_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
+                .header(X_RESOURCE_TOKEN, request.getResourceToken())//
                 .routeParam("id", request.getId()) //
                 .asObject(new GenericType<Resource<Webhook>>() {
                     //NTD
@@ -79,6 +82,7 @@ public class NotificationService extends BaseService {
     public void deleteWebhook(WebhookDeleteRequest request) {
         Unirest.delete(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_TEMPLATED_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
+                .header(X_RESOURCE_TOKEN, request.getResourceToken())//
                 .routeParam("id", request.getId()) //
                 .asEmpty(); //
     }
@@ -86,7 +90,9 @@ public class NotificationService extends BaseService {
     public Webhook updateWebhook(WebhookUpdateRequest request) {
         HttpResponse<Resource<Webhook>> response = Unirest.patch(JunoApiManager.config().getResourceEndpoint() + WEBHOOKS_TEMPLATED_ENDPOINT) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
+                .header(X_RESOURCE_TOKEN, request.getResourceToken())//
                 .routeParam("id", request.getId()) //
+                .body(JacksonUtils.toJson(request)) //
                 .asObject(new GenericType<Resource<Webhook>>() {
                     //NTD
                 });

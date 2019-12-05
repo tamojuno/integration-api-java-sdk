@@ -5,10 +5,10 @@ import java.lang.reflect.Type;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import br.com.juno.integration.api.base.exception.ErrorDetail;
 import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.utils.JacksonUtils;
-import br.com.juno.integration.api.utils.ResponseUtils;
 import kong.unirest.Config;
 import kong.unirest.GenericType;
 import kong.unirest.HttpRequest;
@@ -17,6 +17,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Interceptor;
 import kong.unirest.ObjectMapper;
 import kong.unirest.Unirest;
+import kong.unirest.UnirestParsingException;
 
 public final class UnirestConfig {
 
@@ -70,7 +71,20 @@ public final class UnirestConfig {
 
             @Override
             public void onResponse(HttpResponse<?> response, HttpRequestSummary request, Config config) {
-                ResponseUtils.validateSuccess(response);
+
+                if (!response.isSuccess()) {
+                    UnirestParsingException parsingException = response.getParsingError().orElse(null);
+                    if (parsingException != null) {
+                        ErrorDetail errorDetail;
+                        try {
+                            errorDetail = JacksonUtils.getObjectMapper().readValue(parsingException.getOriginalBody(), ErrorDetail.class);
+                        } catch (JsonProcessingException e) {
+                            throw new JunoApiException("Failed to read error response from Juno. Please contact the support team.", e);
+                        }
+                        throw new JunoApiException(errorDetail);
+                    }
+                }
+
             }
 
             @Override

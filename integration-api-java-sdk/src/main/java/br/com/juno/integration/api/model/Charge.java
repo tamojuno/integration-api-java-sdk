@@ -110,6 +110,7 @@ public class Charge extends BaseModel {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
         builder.append(code);
         builder.append(reference);
         builder.append(dueDate);
