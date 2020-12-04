@@ -26,6 +26,10 @@ public final class JunoApiManager {
     public static ChargeService getChargeService() {
         return resources.getChargeService();
     }
+    
+    public static PicpayService getPicpayService() {
+    	return resources.getPicpayService();
+    }
 
     public static BalanceService getBalanceService() {
         return resources.getBalanceService();
