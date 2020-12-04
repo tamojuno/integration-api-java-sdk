@@ -9,6 +9,10 @@ public final class JunoApiResources {
     public ChargeService getChargeService() {
         return chargeService;
     }
+    
+    public PicpayService getPicpayService() {
+    	return picpayService;
+    }
 
     public BalanceService getBalanceService() {
         return balanceService;
@@ -52,6 +56,7 @@ public final class JunoApiResources {
 
     private DataService dataService = new DataService();
     private ChargeService chargeService = new ChargeService();
+    private PicpayService picpayService = new PicpayService();
     private BalanceService balanceService = new BalanceService();
     private PaymentService paymentService = new PaymentService();
     private DocumentService documentService = new DocumentService();
