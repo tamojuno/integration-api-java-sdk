@@ -12,9 +12,9 @@ public class PicpayCreateRequest extends BaseResourceRequest {
 
 	private static final long serialVersionUID = 3019337702390433511L;
 
-		private String type;
-        private Long chargeCode;
-        private LocalDate expiresAt;
+		private final String type;
+        private final Long chargeCode;
+        private final LocalDate expiresAt;
         
         public PicpayCreateRequest(String type, Long chargeCode, LocalDate expiresAt) {
         	this(JunoApiManager.config().getResourceToken(), type, chargeCode, expiresAt);

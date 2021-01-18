@@ -1,5 +1,9 @@
 package br.com.juno.integration.api.model;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public final class BankAccount extends BaseModel {
 
     private static final long serialVersionUID = 1087792530478512362L;
@@ -9,20 +13,24 @@ public final class BankAccount extends BaseModel {
     private String accountNumber;
     private String accountComplementNumber;
     private BankAccountType accountType;
-    private BankAccountHolder accountHolder;
 
     protected BankAccount() {
         // NTD
     }
+    
+    protected BankAccount(String accountNumber) {
+    	this.accountNumber = accountNumber;
+    }
 
-    protected BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType,
-            BankAccountHolder accountHolder) {
+    protected BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType) {
         this.bankNumber = bankNumber;
         this.agencyNumber = agencyNumber;
         this.accountNumber = accountNumber;
-        this.accountComplementNumber = accountComplementNumber;
+        if (StringUtils.isNotBlank(accountComplementNumber)) {
+        	this.accountComplementNumber = accountComplementNumber;
+        }
         this.accountType = accountType;
-        this.accountHolder = accountHolder;
+    
     }
 
     public String getBankNumber() {
@@ -64,12 +72,16 @@ public final class BankAccount extends BaseModel {
     public void setAccountType(BankAccountType accountType) {
         this.accountType = accountType;
     }
-
-    public BankAccountHolder getAccountHolder() {
-        return accountHolder;
+    
+    @Override
+    public String toString() {
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+        builder.append("bankNumber", bankNumber);
+        builder.append("agencyNumber", agencyNumber);
+        builder.append("accountNumber", accountNumber);
+        builder.append("accountComplementNumber", accountComplementNumber);
+        builder.append("accountType", accountType);
+        return builder.toString();
     }
 
-    public void setAccountHolder(BankAccountHolder accountHolder) {
-        this.accountHolder = accountHolder;
-    }
 }
