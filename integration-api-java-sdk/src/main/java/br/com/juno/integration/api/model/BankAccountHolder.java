@@ -11,7 +11,7 @@ public final class BankAccountHolder extends BaseModel {
         // NTD
     }
 
-    public BankAccountHolder(String name, String document) {
+	public BankAccountHolder(String name, String document) {
         this.name = name;
         this.document = document;
     }
