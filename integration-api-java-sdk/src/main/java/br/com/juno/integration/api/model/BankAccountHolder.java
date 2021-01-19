@@ -1,5 +1,8 @@
 package br.com.juno.integration.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public final class BankAccountHolder extends BaseModel {
 
     private static final long serialVersionUID = -433960489721775059L;
@@ -20,15 +23,16 @@ public final class BankAccountHolder extends BaseModel {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDocument() {
         return document;
     }
-
-    public void setDocument(String document) {
-        this.document = document;
+    
+    @Override
+    public String toString() {
+    	ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+    	builder.append(getName());
+    	builder.append(getDocument());
+    	return builder.toString();
     }
+
 }

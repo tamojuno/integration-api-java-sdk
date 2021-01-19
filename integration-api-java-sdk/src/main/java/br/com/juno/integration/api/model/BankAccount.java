@@ -1,5 +1,6 @@
 package br.com.juno.integration.api.model;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -37,50 +38,47 @@ public final class BankAccount extends BaseModel {
         return bankNumber;
     }
 
-    public void setBankNumber(String bankNumber) {
-        this.bankNumber = bankNumber;
-    }
-
     public String getAgencyNumber() {
         return agencyNumber;
-    }
-
-    public void setAgencyNumber(String agencyNumber) {
-        this.agencyNumber = agencyNumber;
     }
 
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
     public String getAccountComplementNumber() {
         return accountComplementNumber;
-    }
-
-    public void setAccountComplementNumber(String accountComplementNumber) {
-        this.accountComplementNumber = accountComplementNumber;
     }
 
     public BankAccountType getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(BankAccountType accountType) {
-        this.accountType = accountType;
+    public boolean isCaixa() {
+    	return !StringUtils.isBlank(accountComplementNumber);
+    }
+    
+    public boolean isP2P() {
+    	return StringUtils.isAllBlank(bankNumber, agencyNumber, accountComplementNumber);
     }
     
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-        builder.append("bankNumber", bankNumber);
-        builder.append("agencyNumber", agencyNumber);
-        builder.append("accountNumber", accountNumber);
-        builder.append("accountComplementNumber", accountComplementNumber);
-        builder.append("accountType", accountType);
+        
+        if (BooleanUtils.isTrue(isP2P())) {
+        	builder.append("accountNumber", accountNumber);
+        } else {
+		    builder.append("bankNumber", bankNumber);
+		    builder.append("agencyNumber", agencyNumber);
+		    builder.append("accountNumber", accountNumber);
+		    
+		    if (BooleanUtils.isTrue(isCaixa())) {
+		    	builder.append("accountComplementNumber", accountComplementNumber);
+		    } 
+		    
+		    builder.append("accountType", accountType);
+        }
         return builder.toString();
     }
 
