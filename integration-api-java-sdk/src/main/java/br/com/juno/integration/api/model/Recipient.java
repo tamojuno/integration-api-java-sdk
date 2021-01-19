@@ -1,6 +1,5 @@
 package br.com.juno.integration.api.model;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -19,10 +18,7 @@ public class Recipient extends BaseModel {
 	protected Recipient(String name, String document, String accountNumber, String bankNumber, String agencyNumber, String accountComplementNumber, String accountType) {
 		this.name = name;
 		this.document = document;
-		if (!StringUtils.isBlank(accountComplementNumber)) {
-			this.bankAccount = new BankAccount(bankNumber, agencyNumber, accountNumber, accountComplementNumber, BankAccountType.valueOf(accountType));
-		}
-			this.bankAccount = new BankAccount(accountNumber);
+		this.bankAccount = new BankAccount(accountNumber);
 	}
 	
 	public String getName() {
