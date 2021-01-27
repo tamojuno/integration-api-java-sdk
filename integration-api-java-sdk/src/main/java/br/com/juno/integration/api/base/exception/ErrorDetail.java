@@ -52,12 +52,12 @@ public class ErrorDetail implements Serializable {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        builder.append(timestamp);
-        builder.append(status);
-        builder.append(error);
-        builder.append(details);
-        builder.append(path);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+        builder.append("timestamp", timestamp);
+        builder.append("status",status);
+        builder.append("error", error);
+        builder.append("details", details);
+        builder.append("path", path);
         return builder.toString();
     }
 
@@ -94,11 +94,11 @@ public class ErrorDetail implements Serializable {
 
         @Override
         public String toString() {
-            ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-            builder.append(field);
-            builder.append(message);
-            builder.append(errorCode);
-            builder.append(httpStatus);
+            ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+            builder.append("field", field);
+            builder.append("message", message);
+            builder.append("errorCode", errorCode);
+            builder.append("httpStatus", httpStatus);
             return builder.toString();
         }
 
