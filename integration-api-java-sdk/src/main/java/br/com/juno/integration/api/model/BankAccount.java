@@ -14,7 +14,8 @@ public final class BankAccount extends BaseModel {
     private String accountNumber;
     private String accountComplementNumber;
     private BankAccountType accountType;
-
+    private BankAccountHolder accountHolder;
+    
     protected BankAccount() {
         // NTD
     }
@@ -27,11 +28,17 @@ public final class BankAccount extends BaseModel {
         this.bankNumber = bankNumber;
         this.agencyNumber = agencyNumber;
         this.accountNumber = accountNumber;
-        if (StringUtils.isNotBlank(accountComplementNumber)) {
-        	this.accountComplementNumber = accountComplementNumber;
-        }
+    	this.accountComplementNumber = accountComplementNumber;
         this.accountType = accountType;
+    }
     
+    protected BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType, BankAccountHolder accountHolder) {
+        this.bankNumber = bankNumber;
+        this.agencyNumber = agencyNumber;
+        this.accountNumber = accountNumber;
+    	this.accountComplementNumber = accountComplementNumber;
+        this.accountType = accountType;
+        this.accountHolder = accountHolder;
     }
 
     public String getBankNumber() {
@@ -52,6 +59,14 @@ public final class BankAccount extends BaseModel {
 
     public BankAccountType getAccountType() {
         return accountType;
+    }
+    
+    public BankAccountHolder getAccountHolder() {
+    	return accountHolder;
+    }
+    
+    public void setBankAccountHolder(BankAccountHolder accountHolder) {
+    	this.accountHolder = accountHolder;
     }
 
     public boolean isCaixa() {

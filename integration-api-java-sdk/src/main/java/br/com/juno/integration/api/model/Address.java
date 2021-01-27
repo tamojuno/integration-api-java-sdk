@@ -87,14 +87,14 @@ public final class Address extends BaseModel {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        builder.append(street);
-        builder.append(number);
-        builder.append(complement);
-        builder.append(neighborhood);
-        builder.append(city);
-        builder.append(state);
-        builder.append(postCode);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+        builder.append("street", street);
+        builder.append("number", number);
+        builder.append("complement", complement);
+        builder.append("neighborhood", neighborhood);
+        builder.append("city", city);
+        builder.append("state", state);
+        builder.append("postCode", postCode);
         return builder.toString();
     }
 }
