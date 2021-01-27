@@ -5,7 +5,9 @@ import java.util.Calendar;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class LegalRepresentative {
+public final class LegalRepresentative extends BaseModel {
+
+	private static final long serialVersionUID = 1740806097555664158L;
 
 	private String name;
 	private String document;

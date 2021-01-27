@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-
 public class Transfer extends BaseModel {
 
 	private static final long serialVersionUID = -2887521733291703660L;

@@ -32,9 +32,9 @@ public final class Bank extends BaseModel {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        builder.append(number);
-        builder.append(name);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+        builder.append("number", number);
+        builder.append("name", name);
         return builder.toString();
     }
 }

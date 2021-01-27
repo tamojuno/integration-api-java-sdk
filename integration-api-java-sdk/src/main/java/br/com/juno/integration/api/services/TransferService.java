@@ -31,6 +31,7 @@ public class TransferService extends BaseService {
         			.asObject(new GenericType<Resource<Transfer>>() {
         				// NTD
         			});
+		
     	return new Response<>(response.getBody()).getContent();
     }
     

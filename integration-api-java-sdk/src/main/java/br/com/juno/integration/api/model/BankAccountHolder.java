@@ -27,7 +27,15 @@ public final class BankAccountHolder extends BaseModel {
         return document;
     }
     
-    @Override
+    public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDocument(String document) {
+		this.document = document;
+	}
+
+	@Override
     public String toString() {
     	ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
     	builder.append(getName());
