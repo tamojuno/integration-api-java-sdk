@@ -22,6 +22,14 @@ public final class JunoApiManager {
     public static DataService getDataService() {
         return resources.getDataService();
     }
+    
+    public static SubscriptionService getSubscriptionService() {
+    	return resources.getSubscriptionService();
+    }
+
+    public static PlanService getPlanService() {
+    	return resources.getPlanService();
+    }
 
     public static ChargeService getChargeService() {
         return resources.getChargeService();
