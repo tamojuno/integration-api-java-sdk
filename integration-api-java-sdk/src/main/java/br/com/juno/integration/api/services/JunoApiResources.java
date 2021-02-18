@@ -5,6 +5,14 @@ public final class JunoApiResources {
     public DataService getDataService() {
         return dataService;
     }
+    
+    public SubscriptionService getSubscriptionService() {
+    	return subscriptionService;
+    }
+    
+    public PlanService getPlanService() {
+    	return planService;
+    }
 
     public ChargeService getChargeService() {
         return chargeService;
@@ -55,6 +63,8 @@ public final class JunoApiResources {
     }
 
     private DataService dataService = new DataService();
+    private SubscriptionService subscriptionService = new SubscriptionService();
+    private PlanService planService = new PlanService();
     private ChargeService chargeService = new ChargeService();
     private PicpayService picpayService = new PicpayService();
     private BalanceService balanceService = new BalanceService();
@@ -67,4 +77,5 @@ public final class JunoApiResources {
     private NotificationService notificationService = new NotificationService();
     private AuthorizationService authorizationService = new AuthorizationService();
     private DigitalAccountService digitalAccountService = new DigitalAccountService();
+    
 }
