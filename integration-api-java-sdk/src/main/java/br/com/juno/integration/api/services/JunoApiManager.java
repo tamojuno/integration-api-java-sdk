@@ -7,6 +7,7 @@ public final class JunoApiManager {
 
     public static final String X_RESOURCE_TOKEN = "X-Resource-Token";
     public static final String X_API_VERSION = "X-API-Version";
+    public static final String X_IDEMPOTENCY_KEY = "X-Idempotency-Key";
 
     private static final JunoApiConfig config = new JunoApiConfig();
     private static final JunoApiResources resources = new JunoApiResources();
@@ -19,6 +20,10 @@ public final class JunoApiManager {
         return config;
     }
 
+    public static PixService getPixService() {
+    	return resources.getPixService();
+    }
+    
     public static DataService getDataService() {
         return resources.getDataService();
     }
