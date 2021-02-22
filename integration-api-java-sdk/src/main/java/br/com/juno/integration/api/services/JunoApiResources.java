@@ -1,6 +1,10 @@
 package br.com.juno.integration.api.services;
 
 public final class JunoApiResources {
+	
+	public PixService getPixService() {
+		return pixService;
+	}
 
     public DataService getDataService() {
         return dataService;
@@ -62,6 +66,7 @@ public final class JunoApiResources {
         return digitalAccountService;
     }
 
+    private PixService pixService = new PixService();
     private DataService dataService = new DataService();
     private SubscriptionService subscriptionService = new SubscriptionService();
     private PlanService planService = new PlanService();
