@@ -10,7 +10,6 @@ import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
 
 import br.com.juno.integration.api.model.Plan;
-import br.com.juno.integration.api.model.Webhook;
 import br.com.juno.integration.api.services.request.plans.PlanCreateRequest;
 import br.com.juno.integration.api.services.request.plans.PlanListRequest;
 import br.com.juno.integration.api.services.request.plans.PlanRequest;

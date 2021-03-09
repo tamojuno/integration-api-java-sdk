@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.BaseResourceRequest;
-import br.com.juno.integration.api.services.request.payment.PaymentCreateRequest.Billing.Address;
 
 public class SubscriptionCreateRequest extends BaseResourceRequest {
 	
@@ -82,7 +81,7 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
         }
 
         public String getName() {
-        	return email;
+        	return name;
         }
         
         public String getEmail() {

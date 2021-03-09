@@ -1,12 +1,10 @@
 package br.com.juno.integration.api.services.request;
 
-import java.io.Serializable;
-
 import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public abstract class BaseRequestForPix extends BaseRequest implements Serializable {
+public abstract class BaseRequestForPix extends BaseRequest {
 
 	private static final long serialVersionUID = -3671014345041619558L;
 	

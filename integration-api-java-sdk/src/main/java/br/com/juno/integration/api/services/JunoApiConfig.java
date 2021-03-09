@@ -13,7 +13,6 @@ public final class JunoApiConfig {
     private String clientSecret;
     private String resourceToken;
     private String publicToken;
-    private String idempotencyKey;
     private Environment env;
 
     JunoApiConfig() {
@@ -36,29 +35,24 @@ public final class JunoApiConfig {
         return this;
     }
 
-    public JunoApiConfig clientId(String clientId) {
+    public JunoApiConfig setClientId(String clientId) {
         this.clientId = clientId;
         return this;
     }
 
-    public JunoApiConfig clientSecret(String clientSecret) {
+    public JunoApiConfig setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
         return this;
     }
 
-    public JunoApiConfig resourceToken(String resourceToken) {
+    public JunoApiConfig setResourceToken(String resourceToken) {
         this.resourceToken = resourceToken;
         return this;
     }
 
-    public JunoApiConfig publicToken(String publicToken) {
+    public JunoApiConfig setPublicToken(String publicToken) {
         this.publicToken = publicToken;
         return this;
-    }
-    
-    public JunoApiConfig idempotencyKey(String idempotencyKey) {
-    	this.idempotencyKey = idempotencyKey;
-    	return this;
     }
 
     public Environment getEnv() {
@@ -88,10 +82,6 @@ public final class JunoApiConfig {
     public String getPublicToken() {
         return publicToken;
     }
-    
-    public String getIdempotencyKey() {
-    	return idempotencyKey;
-    }
 
     public boolean hasPublicTokenConfigured() {
         return StringUtils.isNotBlank(publicToken);
@@ -102,8 +92,7 @@ public final class JunoApiConfig {
     }
     
     public boolean isConfigured() {
-        return isCredentialsComplete() && env != null || 
-        	   isCredentialsComplete() && StringUtils.isNoneBlank(idempotencyKey) && env != null;
+        return isCredentialsComplete() && env != null;
     }
 
     public interface Environment {

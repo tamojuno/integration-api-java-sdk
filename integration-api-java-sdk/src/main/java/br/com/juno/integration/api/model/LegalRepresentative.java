@@ -19,7 +19,7 @@ public final class LegalRepresentative extends BaseModel {
 	
 	public LegalRepresentative(String name, String document, Calendar birthDate) {
 		this.name = name;
-		this.document = name;
+		this.document = document;
 		this.birthDate = birthDate;
 	}
 	

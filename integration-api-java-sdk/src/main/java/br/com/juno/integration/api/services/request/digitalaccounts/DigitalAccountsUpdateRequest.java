@@ -2,10 +2,7 @@ package br.com.juno.integration.api.services.request.digitalaccounts;
 
 import java.io.Serializable;
 
-import br.com.juno.integration.api.model.Address;
-import br.com.juno.integration.api.model.BankAccount;
 import br.com.juno.integration.api.model.BankAccountHolder;
-import br.com.juno.integration.api.model.LegalRepresentative;
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.BaseResourceRequest;
 
@@ -42,6 +39,8 @@ public class DigitalAccountsUpdateRequest extends BaseResourceRequest {
 		this.bankAccount = bankAccount;
 	}
 	
+	
+	/**TODO: colocar estas 3 classes em arquivos separados **/
 	public static class LegalRepresentative implements Serializable {
 		
 		private static final long serialVersionUID = 2866955003064976592L;

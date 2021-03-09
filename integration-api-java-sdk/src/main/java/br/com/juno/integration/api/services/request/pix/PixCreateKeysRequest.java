@@ -13,9 +13,10 @@ public class PixCreateKeysRequest extends BaseRequestForPix {
 	private String type;
 	private String key;
 	
-	public PixCreateKeysRequest(String type, String key) {
-		this(JunoApiManager.config().getIdempotencyKey(), JunoApiManager.config().getResourceToken(), type, key);
+	public PixCreateKeysRequest(String idempotencyKey, String type, String key) {
+		this(idempotencyKey, JunoApiManager.config().getResourceToken(), type, key);
 	}
+	
 	
 	public PixCreateKeysRequest(String idempotencyKey, String resourceToken, String type, String key) {
 		this.type = type;

@@ -3,14 +3,14 @@ package br.com.juno.integration.api.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class PIXStaticQRCode extends BaseModel {
+public class PixStaticQRCode extends BaseModel {
 
 	private static final long serialVersionUID = 3939562220737401185L;
 
 	private String qrcodeInBase64;
 	private String imageInBase64; 
 	
-	protected PIXStaticQRCode() {
+	protected PixStaticQRCode() {
 		// NTD
 	}
 	

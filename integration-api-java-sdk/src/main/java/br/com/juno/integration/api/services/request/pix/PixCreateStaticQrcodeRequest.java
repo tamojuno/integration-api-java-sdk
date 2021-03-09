@@ -3,7 +3,6 @@ package br.com.juno.integration.api.services.request.pix;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.BaseRequestForPix;
 
 public class PixCreateStaticQrcodeRequest extends BaseRequestForPix {
@@ -16,9 +15,11 @@ public class PixCreateStaticQrcodeRequest extends BaseRequestForPix {
 	private String reference;
 	private String additionalData;
 	
-	public PixCreateStaticQrcodeRequest(boolean includeImage, String key, String amount, String reference, String additionalData) {
+	
+	//TODO: Revisar este construtor (o resourceToken pode ficar dentro do config manager?
+	/*public PixCreateStaticQrcodeRequest(boolean includeImage, String key, String amount, String reference, String additionalData) {
 		this(JunoApiManager.config().getIdempotencyKey(), JunoApiManager.config().getResourceToken(), includeImage, key, amount, reference, additionalData);
-	}
+	}*/
 	
 	public PixCreateStaticQrcodeRequest(String idempotencyKey, String resourceToken, boolean includeImage, String key, String amount, String reference, String additionalData) {
 		this.includeImage = includeImage;

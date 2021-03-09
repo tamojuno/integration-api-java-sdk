@@ -14,7 +14,7 @@ public abstract class AbstractTest {
     @BeforeEach
     public void initialize() {
         if (!JunoApiManager.config().isConfigured()) {
-            JunoApiManager.config().clientId("8hKM1sGxo963Zego").clientSecret("Yb#2(i;X<owxphN{M1Iy_BFTDc,4?1ok").resourceToken("resourceToken");
+            JunoApiManager.config().setClientId("8hKM1sGxo963Zego").setClientSecret("Yb#2(i;X<owxphN{M1Iy_BFTDc,4?1ok").setResourceToken("resourceToken");
         }
 
         setDate(CURRENT_DATE_TIME);
