@@ -55,7 +55,6 @@ public class DigitalAccountsUpdateRequest extends BaseResourceRequest {
         this.bankAccount = bankAccount;
     }
 
-    /**TODO: colocar estas 3 classes em arquivos separados **/
     public static class LegalRepresentative implements Serializable {
 
         private static final long serialVersionUID = 2866955003064976592L;
