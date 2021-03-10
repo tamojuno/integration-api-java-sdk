@@ -3,7 +3,7 @@ package br.com.juno.integration.api.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class PIXRandomKeys extends BaseModel {
+public class PixRandomKeys extends BaseModel {
 
 	private static final long serialVersionUID = 7060693572283711869L;
 
@@ -12,7 +12,7 @@ public class PIXRandomKeys extends BaseModel {
 	private String ownershipDateTime;
 	private String claimRequestDateTime;
 	
-	protected PIXRandomKeys() {
+	protected PixRandomKeys() {
 		// NTD	
 	}
 	

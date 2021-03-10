@@ -82,10 +82,8 @@ public final class UnirestConfig {
                             throw new JunoApiException("Failed to read error response from Juno. Please contact the support team.", e);
                         }
                         throw new JunoApiException(errorDetail);
-                    } 
-                    else {
-                    	throw new JunoApiException(response.mapError(ErrorDetail.class)); 
                     }
+                    throw new JunoApiException(response.mapError(ErrorDetail.class));
                 }
 
             }

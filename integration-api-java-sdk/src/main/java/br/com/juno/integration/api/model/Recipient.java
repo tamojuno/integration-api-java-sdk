@@ -11,6 +11,7 @@ public class Recipient extends BaseModel {
 	private String document; 
 	private BankAccount bankAccount;
 	
+	
 	protected Recipient() {
 		// NTD
 	}
@@ -18,7 +19,7 @@ public class Recipient extends BaseModel {
 	protected Recipient(String name, String document, String accountNumber, String bankNumber, String agencyNumber, String accountComplementNumber, String accountType) {
 		this.name = name;
 		this.document = document;
-		this.bankAccount = new BankAccount(accountNumber);
+		this.bankAccount = new BankAccount(bankNumber, agencyNumber, accountNumber, accountComplementNumber, BankAccountType.valueOf(accountType));
 	}
 	
 	public String getName() {

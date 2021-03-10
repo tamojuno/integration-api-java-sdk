@@ -9,9 +9,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
 
-import br.com.juno.integration.api.model.Plan;
 import br.com.juno.integration.api.model.Subscription;
-import br.com.juno.integration.api.services.request.plans.PlanListRequest;
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionCreateRequest;
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionListRequest;
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionRequest;

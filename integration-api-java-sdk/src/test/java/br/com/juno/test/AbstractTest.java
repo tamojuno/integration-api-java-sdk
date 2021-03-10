@@ -14,7 +14,8 @@ public abstract class AbstractTest {
     @BeforeEach
     public void initialize() {
         if (!JunoApiManager.config().isConfigured()) {
-            JunoApiManager.config().clientId("8hKM1sGxo963Zego").clientSecret("Yb#2(i;X<owxphN{M1Iy_BFTDc,4?1ok").resourceToken("resourceToken");
+            JunoApiManager.config().setClientId("8hKM1sGxo963Zego").setClientSecret("Yb#2(i;X<owxphN{M1Iy_BFTDc,4?1ok").setResourceToken(
+                    "resourceToken");
         }
 
         setDate(CURRENT_DATE_TIME);
@@ -43,6 +44,10 @@ public abstract class AbstractTest {
 
     protected static final String BANK_NUMBER = "104";
     protected static final String BANK_NAME = "Caixa Econômica Federal";
+    protected static final String AGENCY_NUMBER = "4252";
+    protected static final String ACCOUNT_NUMBER = "00244343298-6";
+    protected static final String ACCOUNT_COMPLEMENT_NUMBER = "013";
+    protected static final String ACCOUNT_TYPE = "CHECKING";
 
     protected static final String CURRENT_DATE_TIME = "25/11/2019 16:12:00.000";
 

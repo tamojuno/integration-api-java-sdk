@@ -1,17 +1,7 @@
 package br.com.juno.integration.api.services.request.digitalaccounts;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Optional;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.juno.integration.api.model.Address;
-import br.com.juno.integration.api.model.BankAccount;
 import br.com.juno.integration.api.model.BankAccountHolder;
-import br.com.juno.integration.api.model.BankAccountType;
-import br.com.juno.integration.api.model.LegalRepresentative;
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.BaseResourceRequest;
 

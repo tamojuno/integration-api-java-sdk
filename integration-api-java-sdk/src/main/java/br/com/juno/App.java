@@ -15,10 +15,10 @@ public class App {
 //            .clientSecret("e!LCWcO<EAxq){:EZejRv4XATAt^hU9M")
 //            .resourceToken("37013DDF21B83FFCA8AA6AF8912A9FBC91E5765DA991873CA407FA8CAFF22BB0")
         // Local
-            .clientId("X8I5PuJeD7AmgV1Q")
-            .clientSecret("h|4KY73vf7ntn|:f4PAox@-^86QebA|s")
-            .resourceToken("E3759A771310324A266F7B742FF0A44D48A29D7690614D8C")
-            .publicToken("CB1DA65A0AFDE882DB9AFFB598CE5DA6CF872195C2332724B22ECC8D075350C0")
+            .setClientId("X8I5PuJeD7AmgV1Q")
+            .setClientSecret("h|4KY73vf7ntn|:f4PAox@-^86QebA|s")
+            .setResourceToken("E3759A771310324A266F7B742FF0A44D48A29D7690614D8C")
+            .setPublicToken("CB1DA65A0AFDE882DB9AFFB598CE5DA6CF872195C2332724B22ECC8D075350C0")
             .development();
         // @formatter:on
 

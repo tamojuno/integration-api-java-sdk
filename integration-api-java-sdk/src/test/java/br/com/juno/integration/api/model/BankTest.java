@@ -36,11 +36,13 @@ public class BankTest extends AbstractTest {
             // NTD
         }));
 
-        assertEquals("https://sandbox.boletobancario.com/api-integration/data/banks", res.getHrefSelf());
+        assertEquals(BASE_URI + "/data/banks", res.getHrefSelf());
         assertEquals(null, res.getHrefNext());
         assertEquals(null, res.getHrefPrevious());
 
         List<Response<Bank>> list = res.getContent();
+
+        System.out.print("Resultado: " + list);
 
         assertEquals(null, list.get(0).getHrefSelf());
         assertEquals("001", list.get(0).getContent().getNumber());
