@@ -1,7 +1,7 @@
 package br.com.juno.integration.api.model;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -15,48 +15,90 @@ public class PaymentRefund extends BaseModel {
     private static final long serialVersionUID = 1539599625216489779L;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
-    private Calendar releaseDate;
+    private LocalDate releaseDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
-    private Calendar paybackDate;
+    private LocalDate paybackDate;
 
-    private BigDecimal paybackAmount;
+    private BigDecimal amount;
+    private BigDecimal fee;
+
     private String status;
     private String chargeId;
+
+    private String transactionId;
 
     protected PaymentRefund() {
         // NTD
     }
 
-    public Calendar getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public Calendar getPaybackDate() {
+    public LocalDate getPaybackDate() {
         return paybackDate;
     }
 
-    public BigDecimal getPaybackAmount() {
-        return paybackAmount;
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public BigDecimal getFee() {
+        return fee;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setPaybackDate(LocalDate paybackDate) {
+        this.paybackDate = paybackDate;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getChargeId() {
         return chargeId;
     }
 
+    public void setChargeId(String chargeId) {
+        this.chargeId = chargeId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        builder.append(getId());
-        builder.append(chargeId);
-        builder.append(releaseDate);
-        builder.append(paybackDate);
-        builder.append(paybackAmount);
-        builder.append(status);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+        builder.append("id", getId());
+        builder.append("chargeId", chargeId);
+        builder.append("releaseDate", releaseDate);
+        builder.append("paybackDate", paybackDate);
+        builder.append("amount", amount);
+        builder.append("fee", fee);
+        builder.append("status", status);
+        builder.append("transactionId", transactionId);
         return builder.toString();
     }
 

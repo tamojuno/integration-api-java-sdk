@@ -7,6 +7,7 @@ import org.springframework.hateoas.hal.Jackson2HalModule;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import br.com.juno.integration.api.base.Clock;
+import br.com.juno.integration.api.model.BankAccountType;
 import br.com.juno.integration.api.services.JunoApiManager;
 
 public abstract class AbstractTest {
@@ -42,12 +43,16 @@ public abstract class AbstractTest {
     protected static final String AUTH_TOKEN_USER_NAME = "email@domain.com";
     protected static final String AUTH_TOKEN_JTI = "973a0f5b-570f-4993-bebf-b56fdd22804d";
 
+    // BankAccount
     protected static final String BANK_NUMBER = "104";
     protected static final String BANK_NAME = "Caixa Econômica Federal";
     protected static final String AGENCY_NUMBER = "4252";
     protected static final String ACCOUNT_NUMBER = "00244343298-6";
     protected static final String ACCOUNT_COMPLEMENT_NUMBER = "013";
-    protected static final String ACCOUNT_TYPE = "CHECKING";
+    protected static final BankAccountType ACCOUNT_TYPE = BankAccountType.CHECKING;
+
+    protected static final String HOLDER_NAME = "John Doe";
+    protected static final String HOLDER_CPF = "06085371950";
 
     protected static final String CURRENT_DATE_TIME = "25/11/2019 16:12:00.000";
 

@@ -111,15 +111,8 @@ public class PaymentCreateRequest extends BaseResourceRequest {
         private String creditCardId;
         private String creditCardHash;
 
-        private boolean storeCreditCardData;
-
         public CreditCardDetails(String creditCardId) {
             this.creditCardId = creditCardId;
-        }
-
-        public CreditCardDetails(String creditCardHash, boolean storeCreditCardData) {
-            this.creditCardHash = creditCardHash;
-            this.storeCreditCardData = storeCreditCardData;
         }
 
         public String getCreditCardId() {
@@ -128,10 +121,6 @@ public class PaymentCreateRequest extends BaseResourceRequest {
 
         public String getCreditCardHash() {
             return creditCardHash;
-        }
-
-        public boolean isStoreCreditCardData() {
-            return storeCreditCardData;
         }
 
     }

@@ -27,6 +27,18 @@ public final class Balance {
         return transferableBalance;
     }
 
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public void setWithheldBalance(BigDecimal withheldBalance) {
+        this.withheldBalance = withheldBalance;
+    }
+
+    public void setTransferableBalance(BigDecimal transferableBalance) {
+        this.transferableBalance = transferableBalance;
+    }
+
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
