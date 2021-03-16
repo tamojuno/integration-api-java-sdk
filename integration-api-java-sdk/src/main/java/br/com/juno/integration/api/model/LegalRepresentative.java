@@ -1,13 +1,7 @@
 package br.com.juno.integration.api.model;
 
-import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import br.com.juno.integration.api.utils.CalendarUtils;
 
 public final class LegalRepresentative extends BaseModel {
 
@@ -15,23 +9,12 @@ public final class LegalRepresentative extends BaseModel {
 
     private String name;
     private String document;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
-    private LocalDate birthDate;
-
+    private String birthDate;
     private String motherName;
     private String type;
 
     protected LegalRepresentative() {
         // NTD
-    }
-
-    public LegalRepresentative(String name, String document, LocalDate birthDate, String motherName, String type) {
-        this.name = name;
-        this.document = document;
-        this.birthDate = birthDate;
-        this.motherName = motherName;
-        this.type = type;
     }
 
     public String getName() {
@@ -42,7 +25,7 @@ public final class LegalRepresentative extends BaseModel {
         return document;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
@@ -54,14 +37,34 @@ public final class LegalRepresentative extends BaseModel {
         return type;
     }
 
+    protected void setName(String name) {
+        this.name = name;
+    }
+
+    protected void setDocument(String document) {
+        this.document = document;
+    }
+
+    protected void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    protected void setMotherName(String motherName) {
+        this.motherName = motherName;
+    }
+
+    protected void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-        builder.append("name", getName());
-        builder.append("document", getDocument());
-        builder.append("birthDate", getBirthDate());
-        builder.append("motherName", getMotherName());
-        builder.append("type", getType());
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getName());
+        builder.append(getDocument());
+        builder.append(getBirthDate());
+        builder.append(getMotherName());
+        builder.append(getType());
         return builder.toString();
     }
 }

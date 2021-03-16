@@ -19,16 +19,6 @@ public final class Address extends BaseModel {
         // NTD
     }
 
-    protected Address(String street, String number, String complement, String neighborhood, String city, String state, String postCode) {
-        this.street = street;
-        this.number = number;
-        this.complement = complement;
-        this.neighborhood = neighborhood;
-        this.city = city;
-        this.state = state;
-        this.postCode = postCode;
-    }
-
     public String getStreet() {
         return street;
     }
@@ -87,14 +77,14 @@ public final class Address extends BaseModel {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-        builder.append("street", street);
-        builder.append("number", number);
-        builder.append("complement", complement);
-        builder.append("neighborhood", neighborhood);
-        builder.append("city", city);
-        builder.append("state", state);
-        builder.append("postCode", postCode);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(street);
+        builder.append(number);
+        builder.append(complement);
+        builder.append(neighborhood);
+        builder.append(city);
+        builder.append(state);
+        builder.append(postCode);
         return builder.toString();
     }
 }

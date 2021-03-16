@@ -11,7 +11,7 @@ import org.springframework.hateoas.Resource;
 import br.com.juno.integration.api.services.response.Response;
 import br.com.juno.test.AbstractTest;
 
-public class BankAccountHolderTest extends AbstractTest {
+public class RecipientTest extends AbstractTest {
 
     @Test
     public void constructors() {
@@ -46,21 +46,22 @@ public class BankAccountHolderTest extends AbstractTest {
 
     @Test
     public void jsonToObject() throws Exception {
-        Response<BankAccountHolder> res = new Response<>(getObjectMapper().readValue(findOne(), new TypeReference<Resource<BankAccountHolder>>() {
+        Response<Recipient> res = new Response<>(getObjectMapper().readValue(findOne(), new TypeReference<Resource<Recipient>>() {
             // NTD
         }));
 
         assertEquals(null, res.getHrefSelf());
 
-        BankAccountHolder bankAccountHolder = res.getContent();
+        Recipient recipient = res.getContent();
         System.out.println(res.getContent());
 
-        assertEquals(HOLDER_NAME, bankAccountHolder.getName());
-        assertEquals(HOLDER_DOCUMENT, bankAccountHolder.getDocument());
+        assertEquals(HOLDER_NAME, recipient.getName());
+        assertEquals(HOLDER_DOCUMENT, recipient.getDocument());
+        //        assertEquals(BANK_ACCOUNT, recipient.getBankAccount());
 
     }
 
     private String findOne() {
-        return "{\"name\":\"John Doe\",\"document\":\"06085371950\"}";
+        return "\"recipient\":{\"name\":\"John Doe\",\"document\":\"06085371950\",\"bankAccount\":{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"0065696-8\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}}";
     }
 }

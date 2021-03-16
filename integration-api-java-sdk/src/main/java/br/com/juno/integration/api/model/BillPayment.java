@@ -1,7 +1,6 @@
 package br.com.juno.integration.api.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -16,8 +15,8 @@ public class BillPayment extends BaseModel {
 
     private String createdOn;
 
-    private LocalDate dueDate;
-    private LocalDate paymentDate;
+    private String dueDate;
+    private String paymentDate;
 
     private String numericalBarCode;
     private BigDecimal paidAmount;
@@ -45,7 +44,7 @@ public class BillPayment extends BaseModel {
         return createdOn;
     }
 
-    public LocalDate getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
@@ -61,7 +60,7 @@ public class BillPayment extends BaseModel {
         return digitalAccountId;
     }
 
-    public LocalDate getPaymentDate() {
+    public String getPaymentDate() {
         return paymentDate;
     }
 
@@ -89,7 +88,7 @@ public class BillPayment extends BaseModel {
         this.createdOn = createdOn;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -105,7 +104,7 @@ public class BillPayment extends BaseModel {
         this.digitalAccountId = digitalAccountId;
     }
 
-    public void setPaymentDate(LocalDate paymentDate) {
+    public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -119,19 +118,19 @@ public class BillPayment extends BaseModel {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-        builder.append("id", getId());
-        builder.append("numericalBarCode", numericalBarCode);
-        builder.append("billAmount", billAmount);
-        builder.append("dueDate", dueDate);
-        builder.append("billType", billType);
-        builder.append("digitalAccountId", digitalAccountId);
-        builder.append("paidAmount", paidAmount);
-        builder.append("paymentDate", paymentDate);
-        builder.append("paymentDescription", paymentDescription);
-        builder.append("beneficiaryDocument", beneficiaryDocument);
-        builder.append("status", status);
-        builder.append("createdOn", createdOn);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
+        builder.append(numericalBarCode);
+        builder.append(billAmount);
+        builder.append(dueDate);
+        builder.append(billType);
+        builder.append(digitalAccountId);
+        builder.append(paidAmount);
+        builder.append(paymentDate);
+        builder.append(paymentDescription);
+        builder.append(beneficiaryDocument);
+        builder.append(status);
+        builder.append(createdOn);
         return builder.toString();
     }
 }

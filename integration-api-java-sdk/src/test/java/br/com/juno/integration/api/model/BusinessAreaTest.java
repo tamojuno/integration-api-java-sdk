@@ -1,6 +1,7 @@
 package br.com.juno.integration.api.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
@@ -15,6 +16,41 @@ import br.com.juno.integration.api.services.response.Responses;
 import br.com.juno.test.AbstractTest;
 
 public class BusinessAreaTest extends AbstractTest {
+
+    private static final Long BUSINESS_CODE = 1000L;
+    private static final String BUSINESS_ACTIVITY = "Produtos";
+    private static final String BUSINESS_CATEGORY = "Acessorios automotivos";
+
+    public void constructors() {
+        BusinessArea businessArea = new BusinessArea();
+        assertNull(businessArea.getCode());
+        assertNull(businessArea.getActivity());
+        assertNull(businessArea.getCategory());
+
+        businessArea = new BusinessArea();
+        businessArea.setCode(BUSINESS_CODE);
+        businessArea.setActivity(BUSINESS_ACTIVITY);
+        businessArea.setCategory(BUSINESS_CATEGORY);
+
+        assertEquals(BUSINESS_CODE, businessArea.getCode());
+        assertEquals(BUSINESS_ACTIVITY, businessArea.getActivity());
+        assertEquals(BUSINESS_CATEGORY, businessArea.getCategory());
+    }
+
+    @Test
+    public void toStringComplete() {
+        BusinessArea businessArea = new BusinessArea();
+        businessArea.setCode(BUSINESS_CODE);
+        businessArea.setActivity(BUSINESS_ACTIVITY);
+        businessArea.setCategory(BUSINESS_CATEGORY);
+        assertEquals("BusinessArea[1000,Produtos,Acessorios automotivos]", businessArea.toString());
+    }
+
+    @Test
+    public void toStringEmpty() {
+        BusinessArea businessArea = new BusinessArea();
+        assertEquals("BusinessArea[<null>,<null>,<null>]", businessArea.toString());
+    }
 
     @Test
     public void jsonToObject() throws Exception {

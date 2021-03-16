@@ -32,6 +32,22 @@ public class TokenizedCreditCard extends BaseModel {
         return expirationYear;
     }
 
+    protected void setCreditCardId(String creditCardId) {
+        this.creditCardId = creditCardId;
+    }
+
+    protected void setLast4CardNumber(String last4CardNumber) {
+        this.last4CardNumber = last4CardNumber;
+    }
+
+    protected void setExpirationMonth(String expirationMonth) {
+        this.expirationMonth = expirationMonth;
+    }
+
+    protected void setExpirationYear(String expirationYear) {
+        this.expirationYear = expirationYear;
+    }
+
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);

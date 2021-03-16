@@ -22,22 +22,20 @@ public class PixStaticQRCode extends BaseModel {
         return imageInBase64;
     }
 
-    public void setQrcodeInBase64(String qrcodeInBase64) {
+    protected void setQrcodeInBase64(String qrcodeInBase64) {
         this.qrcodeInBase64 = qrcodeInBase64;
     }
 
-    public void setImageInBase64(String imageInBase64) {
+    protected void setImageInBase64(String imageInBase64) {
         this.imageInBase64 = imageInBase64;
     }
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-
-        builder.append("id", getId());
-        builder.append("qrcodeInBase64", getQrcodeInBase64());
-        builder.append("imageInBase64", getImageInBase64());
-
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
+        builder.append(getQrcodeInBase64());
+        builder.append(getImageInBase64());
         return builder.toString();
     }
 }

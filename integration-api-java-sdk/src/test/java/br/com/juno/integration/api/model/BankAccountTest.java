@@ -1,12 +1,14 @@
 package br.com.juno.integration.api.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.hateoas.Resource;
 
+import br.com.juno.integration.api.services.response.Response;
 import br.com.juno.test.AbstractTest;
 
 public class BankAccountTest extends AbstractTest {
@@ -20,26 +22,13 @@ public class BankAccountTest extends AbstractTest {
         assertNull(bankAccount.getAccountComplementNumber());
         assertNull(bankAccount.getAccountType());
 
-        bankAccount = new BankAccount(null, null, ACCOUNT_NUMBER, null, null);
-        assertEquals(null, bankAccount.getBankNumber());
-        assertEquals(null, bankAccount.getAgencyNumber());
-        assertEquals(ACCOUNT_NUMBER, bankAccount.getAccountNumber());
-        assertEquals(null, bankAccount.getAccountComplementNumber());
-        assertEquals(null, bankAccount.getAccountType());
+        bankAccount = new BankAccount();
+        bankAccount.setBankNumber(BANK_NUMBER);
+        bankAccount.setAgencyNumber(AGENCY_NUMBER);
+        bankAccount.setAccountNumber(ACCOUNT_NUMBER);
+        bankAccount.setAccountComplementNumber(ACCOUNT_COMPLEMENT_NUMBER);
+        bankAccount.setAccountType(ACCOUNT_TYPE);
 
-    }
-
-    @Test
-    public void p2pConstructor() {
-        BankAccount bankAccount = new BankAccount();
-        assertNull(bankAccount.getAccountNumber());
-        bankAccount = new BankAccount(null, null, ACCOUNT_NUMBER, null, null);
-        assertEquals(ACCOUNT_NUMBER, bankAccount.getAccountNumber());
-    }
-
-    @Test
-    public void hasNotBankHolderConstructor() {
-        BankAccount bankAccount = new BankAccount(BANK_NUMBER, AGENCY_NUMBER, ACCOUNT_NUMBER, ACCOUNT_COMPLEMENT_NUMBER, ACCOUNT_TYPE);
         assertEquals(BANK_NUMBER, bankAccount.getBankNumber());
         assertEquals(AGENCY_NUMBER, bankAccount.getAgencyNumber());
         assertEquals(ACCOUNT_NUMBER, bankAccount.getAccountNumber());
@@ -48,28 +37,44 @@ public class BankAccountTest extends AbstractTest {
     }
 
     @Test
-    public void isBankAccountCaixa() {
-        BankAccount bankAccount = new BankAccount(BANK_NUMBER, AGENCY_NUMBER, ACCOUNT_NUMBER, ACCOUNT_COMPLEMENT_NUMBER, ACCOUNT_TYPE);
-        assertTrue(bankAccount.isCaixa());
-        assertFalse(!bankAccount.isCaixa());
+    public void toStringComplete() {
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setBankNumber(BANK_NUMBER);
+        bankAccount.setAgencyNumber(AGENCY_NUMBER);
+        bankAccount.setAccountNumber(ACCOUNT_NUMBER);
+        bankAccount.setAccountComplementNumber(ACCOUNT_COMPLEMENT_NUMBER);
+        bankAccount.setAccountType(ACCOUNT_TYPE);
+        assertEquals("BankAccount[104,4252,0065696-8,013,CHECKING]", bankAccount.toString());
     }
 
-    @Test
-    public void isBankAccountP2P() {
-        BankAccount bankAccount = new BankAccount(null, null, ACCOUNT_NUMBER, null, ACCOUNT_TYPE);
-        assertTrue(bankAccount.isP2P());
-        assertFalse(!bankAccount.isP2P());
-    }
-
-    //TODO: Refactor this hole test
     @Test
     public void toStringEmpty() {
         BankAccount bankAccount = new BankAccount();
-        assertEquals(getOneBankAccount(), bankAccount.toString());
+        assertEquals("BankAccount[<null>,<null>,<null>,<null>,<null>]", bankAccount.toString());
     }
 
-    private String getOneBankAccount() {
-        return "{\"bankNumber\": \"104\",\"agencyNumber\": \"4562\",\"accountNumber\": \"0065696-8\",\"accountType\": \"CHECKING\",\"accountComplementNumber\":\"013\"}";
+    //TODO: create equality test
+
+    @Test
+    public void jsonToObject() throws Exception {
+        Response<BankAccount> res = new Response<>(getObjectMapper().readValue(findOne(), new TypeReference<Resource<BankAccount>>() {
+            // NTD
+        }));
+
+        assertEquals(null, res.getHrefSelf());
+
+        BankAccount bankAccount = res.getContent();
+        System.out.println(res.getContent());
+
+        assertEquals(BANK_NUMBER, bankAccount.getBankNumber());
+        assertEquals(AGENCY_NUMBER, bankAccount.getAgencyNumber());
+        assertEquals(ACCOUNT_NUMBER, bankAccount.getAccountNumber());
+        assertEquals(ACCOUNT_COMPLEMENT_NUMBER, bankAccount.getAccountComplementNumber());
+        assertEquals(ACCOUNT_TYPE, bankAccount.getAccountType());
+    }
+
+    private String findOne() {
+        return "{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"0065696-8\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}";
     }
 
 }

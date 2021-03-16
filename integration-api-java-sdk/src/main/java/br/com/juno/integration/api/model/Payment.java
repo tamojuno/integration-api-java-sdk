@@ -1,22 +1,16 @@
 package br.com.juno.integration.api.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import br.com.juno.integration.api.utils.CalendarUtils;
 
 public class Payment extends BaseModel {
 
     private static final long serialVersionUID = 1378601766705618751L;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
-    private LocalDate date;
-    private LocalDate releaseDate;
+    private String date;
+    private String releaseDate;
 
     private BigDecimal amount;
     private BigDecimal fee;
@@ -31,11 +25,11 @@ public class Payment extends BaseModel {
         // NTD
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public LocalDate getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
@@ -63,11 +57,11 @@ public class Payment extends BaseModel {
         return failReason;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -101,22 +95,21 @@ public class Payment extends BaseModel {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-        builder.append("id", getId());
-        builder.append("chargeId", chargeId);
-        builder.append("date", date);
-        builder.append("releaseDate", releaseDate);
-        builder.append("amount", amount);
-        builder.append("fee", fee);
-        builder.append("type", type);
-        builder.append("status", status);
-        builder.append("transactionId", transactionId);
-        builder.append("failReason", failReason);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
+        builder.append(chargeId);
+        builder.append(date);
+        builder.append(releaseDate);
+        builder.append(amount);
+        builder.append(fee);
+        builder.append(type);
+        builder.append(status);
+        builder.append(transactionId);
+        builder.append(failReason);
         return builder.toString();
     }
 
     public String getChargeId() {
         return chargeId;
     }
-
 }

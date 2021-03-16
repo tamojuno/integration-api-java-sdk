@@ -27,15 +27,15 @@ public final class Balance {
         return transferableBalance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    protected void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
-    public void setWithheldBalance(BigDecimal withheldBalance) {
+    protected void setWithheldBalance(BigDecimal withheldBalance) {
         this.withheldBalance = withheldBalance;
     }
 
-    public void setTransferableBalance(BigDecimal transferableBalance) {
+    protected void setTransferableBalance(BigDecimal transferableBalance) {
         this.transferableBalance = transferableBalance;
     }
 

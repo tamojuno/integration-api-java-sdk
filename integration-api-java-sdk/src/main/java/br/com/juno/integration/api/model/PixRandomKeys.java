@@ -13,7 +13,7 @@ public class PixRandomKeys extends BaseModel {
     private String claimRequestDateTime;
 
     protected PixRandomKeys() {
-        // NTD	
+        // NTD
     }
 
     public String getKey() {
@@ -50,13 +50,13 @@ public class PixRandomKeys extends BaseModel {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
 
-        builder.append("id", getId());
-        builder.append("key", getKey());
-        builder.append("creationDateTime", getCreationDateTime());
-        builder.append("ownershipDateTime", getOwnershipDateTime());
-        builder.append("claimRequestDateTime", getClaimRequestDateTime());
+        builder.append(getId());
+        builder.append(getKey());
+        builder.append(getCreationDateTime());
+        builder.append(getOwnershipDateTime());
+        builder.append(getClaimRequestDateTime());
 
         return builder.toString();
     }

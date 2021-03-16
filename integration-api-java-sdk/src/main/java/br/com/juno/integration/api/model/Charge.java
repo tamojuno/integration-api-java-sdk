@@ -20,8 +20,10 @@ public class Charge extends BaseModel {
     private String installmentLink;
     private String payNumber;
     private BigDecimal amount;
+    private String status;
     private BilletDetails billetDetails;
     private List<Payment> payments;
+    private List<PixStaticQRCode> pix;
 
     protected Charge() {
         // NTD
@@ -99,12 +101,20 @@ public class Charge extends BaseModel {
         return amount;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public BilletDetails getBilletDetails() {
         return billetDetails;
     }
 
     public List<Payment> getPayments() {
         return payments;
+    }
+
+    public List<PixStaticQRCode> getPix() {
+        return pix;
     }
 
     @Override
@@ -119,8 +129,10 @@ public class Charge extends BaseModel {
         builder.append(installmentLink);
         builder.append(payNumber);
         builder.append(amount);
+        builder.append(status);
         builder.append(billetDetails);
         builder.append(payments);
+        builder.append(pix);
         return builder.toString();
     }
 }

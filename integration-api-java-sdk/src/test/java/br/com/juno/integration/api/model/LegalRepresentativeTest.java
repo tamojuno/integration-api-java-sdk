@@ -1,49 +1,84 @@
 package br.com.juno.integration.api.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.hateoas.Resource;
 
+import br.com.juno.integration.api.services.response.Response;
 import br.com.juno.test.AbstractTest;
 
 public class LegalRepresentativeTest extends AbstractTest {
 
+    private static final String MOTHER_NAME = "Alfredina";
+    private static final String TYPE = "INDIVIDUAL";
+    private static final String BIRTH_DATE = "1994-12-12";
+
     @Test
     public void constructors() {
-        assertEquals(findOneNull(), findIncompleteObject());
+        LegalRepresentative legalRepresentative = new LegalRepresentative();
+        assertNull(legalRepresentative.getName());
+        assertNull(legalRepresentative.getDocument());
+        assertNull(legalRepresentative.getBirthDate());
+        assertNull(legalRepresentative.getMotherName());
+        assertNull(legalRepresentative.getType());
+
+        legalRepresentative = new LegalRepresentative();
+        legalRepresentative.setName(HOLDER_NAME);
+        legalRepresentative.setDocument(HOLDER_DOCUMENT);
+        legalRepresentative.setBirthDate(BIRTH_DATE);
+        legalRepresentative.setMotherName(MOTHER_NAME);
+        legalRepresentative.setType(TYPE);
+
+        assertEquals(HOLDER_NAME, legalRepresentative.getName());
+        assertEquals(HOLDER_DOCUMENT, legalRepresentative.getDocument());
+        assertEquals(BIRTH_DATE, legalRepresentative.getBirthDate());
+        assertEquals(MOTHER_NAME, legalRepresentative.getMotherName());
+        assertEquals(TYPE, legalRepresentative.getType());
+    }
+
+    @Test
+    public void toStringComplete() {
+        LegalRepresentative legalRepresentative = new LegalRepresentative();
+        legalRepresentative.setName(HOLDER_NAME);
+        legalRepresentative.setDocument(HOLDER_DOCUMENT);
+        legalRepresentative.setBirthDate(BIRTH_DATE);
+        legalRepresentative.setMotherName(MOTHER_NAME);
+        legalRepresentative.setType(TYPE);
+        assertEquals("LegalRepresentative[John Doe,06085371950,1994-12-12,Alfredina,INDIVIDUAL]", legalRepresentative.toString());
     }
 
     @Test
     public void toStringEmpty() {
-        assertEquals(findOneNull(), findIncompleteObject());
+        LegalRepresentative legalRepresentative = new LegalRepresentative();
+        assertEquals("LegalRepresentative[<null>,<null>,<null>,<null>,<null>]", legalRepresentative.toString());
     }
+
+    //TODO: create equality test
 
     @Test
-    public void toStringFull() {
-        assertEquals(findOneComplete(), findCompleteObject());
+    public void jsonToObject() throws Exception {
+        Response<LegalRepresentative> res = new Response<>(getObjectMapper().readValue(findOne(), new TypeReference<Resource<LegalRepresentative>>() {
+            // NTD
+        }));
+
+        assertEquals(null, res.getHrefSelf());
+
+        LegalRepresentative legalRepresentative = res.getContent();
+        System.out.println(res.getContent());
+
+        assertEquals(HOLDER_NAME, legalRepresentative.getName());
+        assertEquals(HOLDER_DOCUMENT, legalRepresentative.getDocument());
+        assertEquals(BIRTH_DATE, legalRepresentative.getBirthDate());
+        assertEquals(MOTHER_NAME, legalRepresentative.getMotherName());
+        assertEquals(TYPE, legalRepresentative.getType());
+
     }
 
-    public String findOneNull() {
-        return "{\"name\":null,\"document\":null,\"birthDate\":null,\"motherName\":null,\"type\":null}";
-    }
-
-    public String findOneComplete() {
+    private String findOne() {
         return "{\"name\":\"John Doe\",\"document\":\"06085371950\",\"birthDate\":\"1994-12-12\",\"motherName\":\"Alfredina\",\"type\":\"INDIVIDUAL\"}";
-    }
-
-    public String findCompleteObject() {
-        LegalRepresentative legalRepresentative = new LegalRepresentative(HOLDER_NAME, HOLDER_CPF, LocalDate.of(1994, 12, 12), "Alfredina",
-                "INDIVIDUAL");
-        return legalRepresentative.toString();
-    }
-
-    public String findIncompleteObject() {
-        LegalRepresentative legalRepresentative = new LegalRepresentative();
-        legalRepresentative.getName();
-        legalRepresentative.getDocument();
-        legalRepresentative.getBirthDate();
-        return legalRepresentative.toString();
     }
 }

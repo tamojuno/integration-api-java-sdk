@@ -80,10 +80,6 @@ public class SubscriptionTest extends AbstractTest {
         assertEquals("2021-04-01", subscription.getNextBillingDate());
     }
 
-    public String findOne() {
-        return "{\"createdOn\":\"2021-03-15 14:57:11\",\"dueDay\":\"1\",\"status\":\"ACTIVE\",\"startsOn\":\"2021-04-01\",\"lastBillingDate\":null,\"nextBillingDate\":\"2021-04-01\"}";
-    }
-
     public Subscription findCompleteObject() {
         return new Subscription("2021-03-15 14:57:11", "1", "ACTIVE", "2021-04-01", null, "2021-04-01");
     }
@@ -96,4 +92,7 @@ public class SubscriptionTest extends AbstractTest {
         return new Subscription();
     }
 
+    private String findOne() {
+        return "{\"createdOn\":\"2021-03-15 14:57:11\",\"dueDay\":\"1\",\"status\":\"ACTIVE\",\"startsOn\":\"2021-04-01\",\"lastBillingDate\":null,\"nextBillingDate\":\"2021-04-01\"}";
+    }
 }
