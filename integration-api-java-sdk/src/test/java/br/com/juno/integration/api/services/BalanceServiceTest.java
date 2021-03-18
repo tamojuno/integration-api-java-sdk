@@ -9,9 +9,7 @@ import br.com.juno.test.AbstractTest;
 public class BalanceServiceTest extends AbstractTest {
 
     @Test
-    public void testGetBalance() {
-
-        initialize();
+    public void getBalance() {
         Balance balance = JunoApiManager.getBalanceService().getBalance(new GetBalanceRequest());
         System.out.println(balance);
     }

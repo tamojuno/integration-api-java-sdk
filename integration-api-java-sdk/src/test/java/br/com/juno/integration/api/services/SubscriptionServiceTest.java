@@ -12,15 +12,16 @@ import br.com.juno.integration.api.services.request.subscriptions.SubscriptionCr
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionListRequest;
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionRequest;
 import br.com.juno.test.AbstractTest;
+import br.com.juno.test.FixtureHelper;
 
 public class SubscriptionServiceTest extends AbstractTest {
 
     @Test
-    public void testCreateSubscription() {
+    public void createSubscription() {
         SubscriptionCreateRequest.Billing billing = new Billing();
-        billing.setName(HOLDER_NAME);
-        billing.setDocument(HOLDER_DOCUMENT);
-        billing.setEmail(PAYER_EMAIL);
+        billing.setName(FixtureHelper.HOLDER_NAME);
+        billing.setDocument(FixtureHelper.HOLDER_DOCUMENT);
+        billing.setEmail(FixtureHelper.PAYER_EMAIL);
         SubscriptionCreateRequest.Billing.Address address = new Address();
         address.setStreet("R. Mariano Torres");
         address.setNumber("729");
@@ -38,41 +39,41 @@ public class SubscriptionServiceTest extends AbstractTest {
     }
 
     @Test
-    public void testListSubscriptions() {
+    public void listSubscriptions() {
         List<Subscription> subscriptions = JunoApiManager.getSubscriptionService().listSubscriptions(new SubscriptionListRequest());
         subscriptions.forEach(System.out::println);
     }
 
     @Test
-    public void testFindSubscription() {
+    public void findSubscription() {
         SubscriptionRequest listById = new SubscriptionRequest("sub_282CF614F0E3B04B");
         Subscription foundSubscription = JunoApiManager.getSubscriptionService().findSubscription(listById);
         System.out.println(foundSubscription);
     }
 
     @Test
-    public void testDeactiveSubscription() {
+    public void deactiveSubscription() {
         SubscriptionRequest deactiveById = new SubscriptionRequest("sub_9C8F069813B15F08");
         Subscription deactivedSubscription = JunoApiManager.getSubscriptionService().deactiveSubscription(deactiveById);
         System.out.println(deactivedSubscription);
     }
 
     @Test
-    public void testActiveSubscription() {
+    public void activeSubscription() {
         SubscriptionRequest activeById = new SubscriptionRequest("sub_9C8F069813B15F08");
         Subscription activedSubscription = JunoApiManager.getSubscriptionService().activeSubscription(activeById);
         System.out.println(activedSubscription);
     }
 
     @Test
-    public void testCancelSubscription() {
+    public void cancelSubscription() {
         SubscriptionRequest cancelById = new SubscriptionRequest("sub_C52AEECDF63BB342");
         Subscription canceledSubscription = JunoApiManager.getSubscriptionService().cancelSubscription(cancelById);
         System.out.println(canceledSubscription);
     }
 
     @Test
-    public void testCompleteSubscription() {
+    public void completeSubscription() {
         SubscriptionRequest completeById = new SubscriptionRequest("sub_514C4262E3CCF39C");
         Subscription completedSubscription = JunoApiManager.getSubscriptionService().completeSubscription(completeById);
         System.out.println(completedSubscription);

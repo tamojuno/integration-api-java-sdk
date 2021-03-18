@@ -1,5 +1,12 @@
 package br.com.juno.integration.api.model;
 
+import static br.com.juno.test.FixtureHelper.ACCOUNT_COMPLEMENT_NUMBER;
+import static br.com.juno.test.FixtureHelper.ACCOUNT_NUMBER;
+import static br.com.juno.test.FixtureHelper.ACCOUNT_TYPE;
+import static br.com.juno.test.FixtureHelper.AGENCY_NUMBER;
+import static br.com.juno.test.FixtureHelper.BANK_NUMBER;
+import static br.com.juno.test.FixtureHelper.HOLDER_DOCUMENT;
+import static br.com.juno.test.FixtureHelper.HOLDER_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 

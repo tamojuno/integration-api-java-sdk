@@ -1,17 +1,18 @@
 package br.com.juno.integration.api.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 
 import br.com.juno.test.AbstractTest;
+import br.com.juno.test.FixtureHelper;
 
 public class AuthorizationServiceTest extends AbstractTest {
 
     @Test
-    public void testGetToken() {
-        initialize();
-        String token1 = JunoApiManager.getAuthorizationService().getToken();
-        String token2 = JunoApiManager.getAuthorizationService().getToken();
-        Assert.isTrue(token1 == token2, "The tokens are not the same.");
+    public void getToken() {
+        String accessToken = JunoApiManager.getAuthorizationService().getToken();
+
+        assertEquals(FixtureHelper.DUMMY_BEARER_AUTHORIZATION, accessToken);
     }
 }

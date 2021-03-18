@@ -7,6 +7,7 @@ public final class JunoApiManager {
 
     public static final String X_RESOURCE_TOKEN = "X-Resource-Token";
     public static final String X_API_VERSION = "X-API-Version";
+    public static final String X_API_VERSION_VALUE = "2";
     public static final String X_IDEMPOTENCY_KEY = "X-Idempotency-Key";
 
     private static final JunoApiConfig config = new JunoApiConfig();
@@ -21,27 +22,27 @@ public final class JunoApiManager {
     }
 
     public static PixService getPixService() {
-    	return resources.getPixService();
+        return resources.getPixService();
     }
-    
+
     public static DataService getDataService() {
         return resources.getDataService();
     }
-    
+
     public static SubscriptionService getSubscriptionService() {
-    	return resources.getSubscriptionService();
+        return resources.getSubscriptionService();
     }
 
     public static PlanService getPlanService() {
-    	return resources.getPlanService();
+        return resources.getPlanService();
     }
 
     public static ChargeService getChargeService() {
         return resources.getChargeService();
     }
-    
+
     public static PicpayService getPicpayService() {
-    	return resources.getPicpayService();
+        return resources.getPicpayService();
     }
 
     public static BalanceService getBalanceService() {

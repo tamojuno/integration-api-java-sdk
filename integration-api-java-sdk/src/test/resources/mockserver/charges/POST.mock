@@ -1,0 +1,20 @@
+{
+    "_embedded": {
+        "charges": [
+            {
+                "id": "chr_94DAB08CC02C6E061EE70DF3AEA9BECC",
+                "code": 188852014,
+                "reference": "",
+                "dueDate": "2021-04-27",
+                "checkoutUrl": "https://unit-test/checkout/EA1D4E9B6F937704C92E67A70D8BA893830FCC80803563AC",
+                "amount": 1000.00,
+                "status": "ACTIVE",
+                "_links": {
+                    "self": {
+                        "href": "https://unit-test/api-integration/charges/chr_94DAB08CC02C6E061EE70DF3AEA9BECC"
+                    }
+                }
+            }
+        ]
+    }
+}

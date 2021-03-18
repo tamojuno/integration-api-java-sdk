@@ -12,19 +12,19 @@ import br.com.juno.test.AbstractTest;
 public class DataServiceTest extends AbstractTest {
 
     @Test
-    public void testGetBanks() {
+    public void getBanks() {
         List<Bank> banks = JunoApiManager.getDataService().getBanks();
         System.out.println(banks);
     }
 
     @Test
-    public void testCompanyTypes() {
+    public void companyTypes() {
         List<CompanyType> companyType = JunoApiManager.getDataService().getCompanyTypes();
         System.out.println(companyType);
     }
 
     @Test
-    public void testBusinessArea() {
+    public void businessArea() {
         List<BusinessArea> businessArea = JunoApiManager.getDataService().getBusinessAreas();
         System.out.println(businessArea);
     }

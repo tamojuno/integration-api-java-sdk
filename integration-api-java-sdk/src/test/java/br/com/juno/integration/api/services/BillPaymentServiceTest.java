@@ -12,10 +12,7 @@ import br.com.juno.test.AbstractTest;
 public class BillPaymentServiceTest extends AbstractTest {
 
     @Test
-    public void testRegisterBillPayment() {
-
-        initialize();
-
+    public void registerBillPayment() {
         RegisterBillPaymentRequest billPaymentRequest = new RegisterBillPaymentRequest("96645892098", //
                 BigDecimal.valueOf(134.73D), //
                 LocalDate.of(2021, 03, 28), //

@@ -1,5 +1,6 @@
 package br.com.juno.integration.api.model;
 
+import static br.com.juno.test.FixtureHelper.HOLDER_DOCUMENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 

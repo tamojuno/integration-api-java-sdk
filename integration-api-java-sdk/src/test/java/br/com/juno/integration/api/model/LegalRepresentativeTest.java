@@ -1,5 +1,7 @@
 package br.com.juno.integration.api.model;
 
+import static br.com.juno.test.FixtureHelper.HOLDER_DOCUMENT;
+import static br.com.juno.test.FixtureHelper.HOLDER_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -12,6 +14,7 @@ import org.springframework.hateoas.Resource;
 
 import br.com.juno.integration.api.services.response.Response;
 import br.com.juno.test.AbstractTest;
+import br.com.juno.test.FixtureHelper;
 
 public class LegalRepresentativeTest extends AbstractTest {
 
@@ -45,8 +48,8 @@ public class LegalRepresentativeTest extends AbstractTest {
     @Test
     public void toStringComplete() {
         LegalRepresentative legalRepresentative = new LegalRepresentative();
-        legalRepresentative.setName(HOLDER_NAME);
-        legalRepresentative.setDocument(HOLDER_DOCUMENT);
+        legalRepresentative.setName(FixtureHelper.HOLDER_NAME);
+        legalRepresentative.setDocument(FixtureHelper.HOLDER_DOCUMENT);
         legalRepresentative.setBirthDate(BIRTH_DATE);
         legalRepresentative.setMotherName(MOTHER_NAME);
         legalRepresentative.setType(TYPE);

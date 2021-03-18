@@ -16,13 +16,13 @@ import br.com.juno.test.AbstractTest;
 public class DigitalAccountServiceTest extends AbstractTest {
 
     @Test
-    public void testFindDigitalAccount() {
+    public void findDigitalAccount() {
         DigitalAccount findDigitalAccount = JunoApiManager.getDigitalAccountService().findDigitalAccount(new DigitalAccountRequest());
         System.out.println(findDigitalAccount);
     }
 
     @Test
-    public void testCreateDigitalAccount() {
+    public void createDigitalAccount() {
 
         Address address = new Address();
         address.setStreet("R. Mariano Torres");
@@ -52,7 +52,7 @@ public class DigitalAccountServiceTest extends AbstractTest {
     }
 
     @Test
-    public void testUpdateDigitalAccount() {
+    public void updateDigitalAccount() {
 
         Address address = new Address();
         address.setStreet("R. Mariano Torres");

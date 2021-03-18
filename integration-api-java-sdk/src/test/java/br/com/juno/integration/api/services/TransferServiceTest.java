@@ -11,7 +11,7 @@ import br.com.juno.test.AbstractTest;
 public class TransferServiceTest extends AbstractTest {
 
     @Test
-    public void testTransfer() {
+    public void transfer() {
         BankAccount bankAccount = new BankAccount();
         bankAccount.setBankNumber("260");
         bankAccount.setAgencyNumber("0001");
@@ -25,14 +25,14 @@ public class TransferServiceTest extends AbstractTest {
     }
 
     @Test
-    public void testTransferDefaultBankAccount() {
+    public void transferDefaultBankAccount() {
         TransferRequest transferRequest = new TransferRequest("DEFAULT_BANK_ACCOUNT", null, null, "13.00", null);
         Transfer transfer = JunoApiManager.getTransferService().createTransfer(transferRequest);
         System.out.println(transfer);
     }
 
     @Test
-    public void testTransferP2P() {
+    public void transferP2P() {
         TransferRequest transferRequest = new TransferRequest("P2P", "Alfredo Avestruz", "84317951070", "13.00",
                 new BankAccount("dac_CBC7495DBB162CFB"));
         Transfer transfer = JunoApiManager.getTransferService().createTransfer(transferRequest);
