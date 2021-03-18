@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -99,7 +101,9 @@ public final class MockServerConfig {
     }
 
     private String getResource(String... resources) {
-        List<?> resourcesList = List.of("mockserver", resources);
+        List<String> resourcesList = new ArrayList<>();
+        resourcesList.add("mockserver");
+        Stream.of(resources).forEach(resourcesList::add);
         return FixtureHelper.getResource(resourcesList.toArray(new String[resourcesList.size()]));
     }
 
