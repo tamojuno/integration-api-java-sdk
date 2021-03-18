@@ -7,53 +7,77 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Transfer extends BaseModel {
 
-	private static final long serialVersionUID = -2887521733291703660L;
+    private static final long serialVersionUID = -2887521733291703660L;
 
-	private String digitalAccountId;
-	private String creationDate;
-	private String transferDate;
-	private BigDecimal amount;
-	private String status;
-	private Recipient recipient;
-	
-	protected Transfer() {
-		// NTD
-	}
+    private String digitalAccountId;
+    private String creationDate;
+    private String transferDate;
+    private BigDecimal amount;
+    private String status;
+    private Recipient recipient;
 
-	public String getDigitalAccountId() {
-		return digitalAccountId;
-	}
+    protected Transfer() {
+        // NTD
+    }
 
-	public String getCreationDate() {
-		return creationDate;
-	}
+    public String getDigitalAccountId() {
+        return digitalAccountId;
+    }
 
-	public String getTransferDate() {
-		return transferDate;
-	}
+    public String getCreationDate() {
+        return creationDate;
+    }
 
-	public BigDecimal getAmount() {
-		return amount;
-	}
+    public String getTransferDate() {
+        return transferDate;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-	public Recipient getRecipient() {
-		return recipient;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	@Override
-	public String toString() {
-		ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-		builder.append("id", getId());
-		builder.append("digitalAccountId", getDigitalAccountId());
-		builder.append("creationDate", getCreationDate());
-		builder.append("transferDate", getTransferDate());
-		builder.append("amount", getAmount());
-		builder.append("status", getStatus());
-		builder.append("recipient", getRecipient());
-		return builder.toString();
-	}
+    public Recipient getRecipient() {
+        return recipient;
+    }
+
+    protected void setDigitalAccountId(String digitalAccountId) {
+        this.digitalAccountId = digitalAccountId;
+    }
+
+    protected void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    protected void setTransferDate(String transferDate) {
+        this.transferDate = transferDate;
+    }
+
+    protected void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    protected void setStatus(String status) {
+        this.status = status;
+    }
+
+    protected void setRecipient(Recipient recipient) {
+        this.recipient = recipient;
+    }
+
+    @Override
+    public String toString() {
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getId());
+        builder.append(getDigitalAccountId());
+        builder.append(getCreationDate());
+        builder.append(getTransferDate());
+        builder.append(getAmount());
+        builder.append(getStatus());
+        builder.append(getRecipient());
+        return builder.toString();
+    }
 }

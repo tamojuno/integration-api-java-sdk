@@ -1,5 +1,7 @@
 package br.com.juno.integration.api.model;
 
+import java.time.LocalDate;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -9,11 +11,11 @@ public final class LegalRepresentative extends BaseModel {
 
     private String name;
     private String document;
-    private String birthDate;
+    private LocalDate birthDate;
     private String motherName;
     private String type;
 
-    protected LegalRepresentative() {
+    public LegalRepresentative() {
         // NTD
     }
 
@@ -25,7 +27,7 @@ public final class LegalRepresentative extends BaseModel {
         return document;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -37,23 +39,23 @@ public final class LegalRepresentative extends BaseModel {
         return type;
     }
 
-    protected void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    protected void setDocument(String document) {
+    public void setDocument(String document) {
         this.document = document;
     }
 
-    protected void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    protected void setMotherName(String motherName) {
+    public void setMotherName(String motherName) {
         this.motherName = motherName;
     }
 
-    protected void setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 

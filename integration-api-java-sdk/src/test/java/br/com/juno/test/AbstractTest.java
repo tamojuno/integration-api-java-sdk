@@ -15,8 +15,9 @@ public abstract class AbstractTest {
     @BeforeEach
     public void initialize() {
         if (!JunoApiManager.config().isConfigured()) {
-            JunoApiManager.config().setClientId("JfzNWs79Mcdn6jfw").setClientSecret("Yb#2(i;X<owxphN{M1Iy_BFTDc,4?1ok").setResourceToken(
-                    "0153B6F504FC71A0EF1EB69116010986AA4C4B2C3755F79042366E9D00B915D3");
+            JunoApiManager.config().setClientId("JfzNWs79Mcdn6jfw").setClientSecret("mh7=jU*=!@OPiNFG^n6Ug|>f7uw6;%73").setResourceToken(
+                    "0153B6F504FC71A0EF1EB69116010986AA4C4B2C3755F79042366E9D00B915D3").setPublicToken(
+                            "B2CA7FD9B9C0C1141E3BDEF641FA8E4AD74AB0E63DFAF9AAD0DA129F00C4835E").sandbox();
         }
 
         setDate(CURRENT_DATE_TIME);
@@ -56,6 +57,7 @@ public abstract class AbstractTest {
 
     protected static final String HOLDER_NAME = "John Doe";
     protected static final String HOLDER_DOCUMENT = "06085371950";
+    protected static final String PAYER_EMAIL = AUTH_TOKEN_USER_NAME;
 
     protected static final String CURRENT_DATE_TIME = "25/11/2019 16:12:00.000";
 

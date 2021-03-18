@@ -2,7 +2,6 @@ package br.com.juno.integration.api.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,7 +13,7 @@ public class Charge extends BaseModel {
 
     private Long code;
     private String reference;
-    private Calendar dueDate;
+    private String dueDate;
     private String link;
     private String checkoutUrl;
     private String installmentLink;
@@ -42,6 +41,14 @@ public class Charge extends BaseModel {
             // NTD
         }
 
+        protected BilletDetails(String bankAccount, String ourNumber, String barcodeNumber, String portfolio) {
+            super();
+            this.bankAccount = bankAccount;
+            this.ourNumber = ourNumber;
+            this.barcodeNumber = barcodeNumber;
+            this.portfolio = portfolio;
+        }
+
         public String getBankAccount() {
             return bankAccount;
         }
@@ -56,6 +63,22 @@ public class Charge extends BaseModel {
 
         public String getPortfolio() {
             return portfolio;
+        }
+
+        protected void setBankAccount(String bankAccount) {
+            this.bankAccount = bankAccount;
+        }
+
+        protected void setOurNumber(String ourNumber) {
+            this.ourNumber = ourNumber;
+        }
+
+        protected void setBarcodeNumber(String barcodeNumber) {
+            this.barcodeNumber = barcodeNumber;
+        }
+
+        protected void setPortfolio(String portfolio) {
+            this.portfolio = portfolio;
         }
 
         @Override
@@ -77,7 +100,7 @@ public class Charge extends BaseModel {
         return reference;
     }
 
-    public Calendar getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
@@ -115,6 +138,54 @@ public class Charge extends BaseModel {
 
     public List<PixStaticQRCode> getPix() {
         return pix;
+    }
+
+    protected void setCode(Long code) {
+        this.code = code;
+    }
+
+    protected void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    protected void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    protected void setLink(String link) {
+        this.link = link;
+    }
+
+    protected void setCheckoutUrl(String checkoutUrl) {
+        this.checkoutUrl = checkoutUrl;
+    }
+
+    protected void setInstallmentLink(String installmentLink) {
+        this.installmentLink = installmentLink;
+    }
+
+    protected void setPayNumber(String payNumber) {
+        this.payNumber = payNumber;
+    }
+
+    protected void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    protected void setStatus(String status) {
+        this.status = status;
+    }
+
+    protected void setBilletDetails(BilletDetails billetDetails) {
+        this.billetDetails = billetDetails;
+    }
+
+    protected void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    protected void setPix(List<PixStaticQRCode> pix) {
+        this.pix = pix;
     }
 
     @Override

@@ -3,6 +3,8 @@ package br.com.juno.integration.api.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +17,7 @@ public class LegalRepresentativeTest extends AbstractTest {
 
     private static final String MOTHER_NAME = "Alfredina";
     private static final String TYPE = "INDIVIDUAL";
-    private static final String BIRTH_DATE = "1994-12-12";
+    private static final LocalDate BIRTH_DATE = LocalDate.of(1994, 12, 12);
 
     @Test
     public void constructors() {

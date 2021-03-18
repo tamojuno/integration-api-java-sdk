@@ -2,11 +2,15 @@ package br.com.juno.integration.api.services.request.subscriptions;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.BaseResourceRequest;
+import br.com.juno.integration.api.utils.CalendarUtils;
 
 public class SubscriptionCreateRequest extends BaseResourceRequest {
 
@@ -15,8 +19,8 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
     private Integer dueDay;
     private String planId;
     private String chargeDescription;
-    private CreditCardDetails creditCardDetails;
-    private Billing billing;
+    private final CreditCardDetails creditCardDetails;
+    private final Billing billing;
 
     private List<Split> split = new LinkedList<>();
 
@@ -34,6 +38,14 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
         this.creditCardDetails = creditCardDetails;
         this.billing = billing;
         this.split = split;
+    }
+
+    public CreditCardDetails getCreditCardDetails() {
+        return creditCardDetails;
+    }
+
+    public Billing getBilling() {
+        return billing;
     }
 
     public static class CreditCardDetails implements Serializable {
@@ -59,56 +71,29 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
 
     public static class Billing implements Serializable {
 
-        private static final long serialVersionUID = -399033998073996520L;
+        private static final long serialVersionUID = -6641053350149713609L;
 
-        private final String name;
-        private final String document;
-        private final String email;
-        private final Address address;
+        private String name;
+        private String document;
+        private String email;
+        private Address address;
+        private String secondaryEmail;
+        private String phone;
+        private Boolean notify;
 
-        public Billing(String name, String email, String document, Address address) {
-            this.name = name;
-            this.email = email;
-            this.document = document;
-            this.address = address;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public String getDocument() {
-            return document;
-        }
-
-        public Address getAddress() {
-            return address;
-        }
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
+        private LocalDate birthDate;
 
         public static class Address implements Serializable {
 
-            private static final long serialVersionUID = 6736479782279626278L;
-
-            private final String street;
-            private final String number;
-            private final String city;
-            private final String state;
-            private final String postCode;
-
+            private static final long serialVersionUID = 550674101703674606L;
+            private String street;
+            private String number;
             private String complement;
             private String neighborhood;
-
-            public Address(String street, String number, String city, String state, String postCode) {
-                this.street = street;
-                this.number = number;
-                this.city = city;
-                this.state = state;
-                this.postCode = postCode;
-            }
+            private String city;
+            private String state;
+            private String postCode;
 
             public String getStreet() {
                 return street;
@@ -116,6 +101,14 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
 
             public String getNumber() {
                 return number;
+            }
+
+            public String getComplement() {
+                return complement;
+            }
+
+            public String getNeighborhood() {
+                return neighborhood;
             }
 
             public String getCity() {
@@ -130,12 +123,12 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
                 return postCode;
             }
 
-            public String getComplement() {
-                return complement;
+            public void setStreet(String street) {
+                this.street = street;
             }
 
-            public String getNeighborhood() {
-                return neighborhood;
+            public void setNumber(String number) {
+                this.number = number;
             }
 
             public void setComplement(String complement) {
@@ -146,7 +139,84 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
                 this.neighborhood = neighborhood;
             }
 
+            public void setCity(String city) {
+                this.city = city;
+            }
+
+            public void setState(String state) {
+                this.state = state;
+            }
+
+            public void setPostCode(String postCode) {
+                this.postCode = postCode;
+            }
+
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDocument() {
+            return document;
+        }
+
+        public void setDocument(String document) {
+            this.document = document;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public Address getAddress() {
+            return address;
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
+        }
+
+        public String getSecondaryEmail() {
+            return secondaryEmail;
+        }
+
+        public void setSecondaryEmail(String secondaryEmail) {
+            this.secondaryEmail = secondaryEmail;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public LocalDate getBirthDate() {
+            return birthDate;
+        }
+
+        public void setBirthDate(LocalDate birthDate) {
+            this.birthDate = birthDate;
+        }
+
+        public Boolean getNotify() {
+            return notify;
+        }
+
+        public void setNotify(Boolean notify) {
+            this.notify = notify;
+        }
+
     }
 
     public static class Split implements Serializable {
@@ -219,14 +289,6 @@ public class SubscriptionCreateRequest extends BaseResourceRequest {
 
     public String getChargeDescription() {
         return chargeDescription;
-    }
-
-    public CreditCardDetails getCreditCardDetails() {
-        return creditCardDetails;
-    }
-
-    public Billing getBilling() {
-        return billing;
     }
 
     public List<Split> getSplit() {

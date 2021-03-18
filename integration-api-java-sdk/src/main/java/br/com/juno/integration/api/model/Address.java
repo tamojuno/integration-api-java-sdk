@@ -15,7 +15,7 @@ public final class Address extends BaseModel {
     private String state;
     private String postCode;
 
-    protected Address() {
+    public Address() {
         // NTD
     }
 

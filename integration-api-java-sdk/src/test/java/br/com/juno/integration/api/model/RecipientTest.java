@@ -15,31 +15,52 @@ public class RecipientTest extends AbstractTest {
 
     @Test
     public void constructors() {
-        BankAccountHolder bankAccountHolder = new BankAccountHolder();
-        assertNull(bankAccountHolder.getName());
-        assertNull(bankAccountHolder.getDocument());
+        Recipient recipient = new Recipient();
+        assertNull(recipient.getName());
+        assertNull(recipient.getDocument());
+        assertNull(recipient.getBankAccount());
 
-        bankAccountHolder = new BankAccountHolder();
-        bankAccountHolder.setName(HOLDER_NAME);
-        bankAccountHolder.setDocument(HOLDER_DOCUMENT);
+        recipient = new Recipient();
+        recipient.setName(HOLDER_NAME);
+        recipient.setDocument(HOLDER_DOCUMENT);
 
-        assertEquals(HOLDER_NAME, bankAccountHolder.getName());
-        assertEquals(HOLDER_DOCUMENT, bankAccountHolder.getDocument());
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setBankNumber(BANK_NUMBER);
+        bankAccount.setAgencyNumber(AGENCY_NUMBER);
+        bankAccount.setAccountNumber(ACCOUNT_NUMBER);
+        bankAccount.setAccountComplementNumber(ACCOUNT_COMPLEMENT_NUMBER);
+        bankAccount.setAccountType(ACCOUNT_TYPE);
+        recipient.setBankAccount(bankAccount);
+
+        assertEquals(HOLDER_NAME, recipient.getName());
+        assertEquals(HOLDER_DOCUMENT, recipient.getDocument());
+        assertEquals(BANK_NUMBER, recipient.getBankAccount().getBankNumber());
+        assertEquals(AGENCY_NUMBER, recipient.getBankAccount().getAgencyNumber());
+        assertEquals(ACCOUNT_NUMBER, recipient.getBankAccount().getAccountNumber());
+        assertEquals(ACCOUNT_COMPLEMENT_NUMBER, recipient.getBankAccount().getAccountComplementNumber());
+        assertEquals(ACCOUNT_TYPE, recipient.getBankAccount().getAccountType());
 
     }
 
     @Test
     public void toStringComplete() {
-        BankAccountHolder bankAccountHolder = new BankAccountHolder();
-        bankAccountHolder.setName(HOLDER_NAME);
-        bankAccountHolder.setDocument(HOLDER_DOCUMENT);
-        assertEquals("BankAccountHolder[John Doe,06085371950]", bankAccountHolder.toString());
+        Recipient recipient = new Recipient();
+        recipient.setName(HOLDER_NAME);
+        recipient.setDocument(HOLDER_DOCUMENT);
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setBankNumber(BANK_NUMBER);
+        bankAccount.setAgencyNumber(AGENCY_NUMBER);
+        bankAccount.setAccountNumber(ACCOUNT_NUMBER);
+        bankAccount.setAccountComplementNumber(ACCOUNT_COMPLEMENT_NUMBER);
+        bankAccount.setAccountType(ACCOUNT_TYPE);
+        recipient.setBankAccount(bankAccount);
+        assertEquals("Recipient[John Doe,06085371950,BankAccount[104,4252,0065696-8,013,CHECKING]]", recipient.toString());
     }
 
     @Test
     public void toStringEmpty() {
-        BankAccountHolder bankAccountHolder = new BankAccountHolder();
-        assertEquals("BankAccountHolder[<null>,<null>]", bankAccountHolder.toString());
+        Recipient recipient = new Recipient();
+        assertEquals("Recipient[<null>,<null>,<null>]", recipient.toString());
     }
 
     //TODO: create equality test
@@ -57,11 +78,15 @@ public class RecipientTest extends AbstractTest {
 
         assertEquals(HOLDER_NAME, recipient.getName());
         assertEquals(HOLDER_DOCUMENT, recipient.getDocument());
-        //        assertEquals(BANK_ACCOUNT, recipient.getBankAccount());
+        assertEquals(BANK_NUMBER, recipient.getBankAccount().getBankNumber());
+        assertEquals(AGENCY_NUMBER, recipient.getBankAccount().getAgencyNumber());
+        assertEquals(ACCOUNT_NUMBER, recipient.getBankAccount().getAccountNumber());
+        assertEquals(ACCOUNT_COMPLEMENT_NUMBER, recipient.getBankAccount().getAccountComplementNumber());
+        assertEquals(ACCOUNT_TYPE, recipient.getBankAccount().getAccountType());
 
     }
 
     private String findOne() {
-        return "\"recipient\":{\"name\":\"John Doe\",\"document\":\"06085371950\",\"bankAccount\":{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"0065696-8\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}}";
+        return "{\"name\":\"John Doe\",\"document\":\"06085371950\",\"bankAccount\":{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"0065696-8\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}}";
     }
 }

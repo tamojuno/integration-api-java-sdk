@@ -3,7 +3,7 @@ package br.com.juno.integration.api.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Recipient extends BaseModel {
+public final class Recipient extends BaseModel {
 
     private static final long serialVersionUID = 2713548342303665977L;
 
@@ -42,9 +42,9 @@ public class Recipient extends BaseModel {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        builder.append(name);
-        builder.append(document);
-        builder.append(bankAccount);
+        builder.append(getName());
+        builder.append(getDocument());
+        builder.append(getBankAccount());
         return builder.toString();
     }
 }

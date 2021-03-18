@@ -15,7 +15,7 @@ public class Plan extends BaseModel {
     private String status;
     private BigDecimal amount;
 
-    protected Plan() {
+    public Plan() {
         // NTD
     }
 

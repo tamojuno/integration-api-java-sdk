@@ -13,8 +13,20 @@ public final class BankAccount extends BaseModel {
     private String accountComplementNumber;
     private BankAccountType accountType;
 
-    protected BankAccount() {
+    public BankAccount() {
         // NTD
+    }
+
+    public BankAccount(String accountNumber) {
+        this(null, null, accountNumber, null, null);
+    }
+
+    public BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType) {
+        this.bankNumber = bankNumber;
+        this.agencyNumber = agencyNumber;
+        this.accountNumber = accountNumber;
+        this.accountComplementNumber = accountComplementNumber;
+        this.accountType = accountType;
     }
 
     public String getBankNumber() {
@@ -37,23 +49,23 @@ public final class BankAccount extends BaseModel {
         return accountType;
     }
 
-    protected void setBankNumber(String bankNumber) {
+    public void setBankNumber(String bankNumber) {
         this.bankNumber = bankNumber;
     }
 
-    protected void setAgencyNumber(String agencyNumber) {
+    public void setAgencyNumber(String agencyNumber) {
         this.agencyNumber = agencyNumber;
     }
 
-    protected void setAccountNumber(String accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
-    protected void setAccountComplementNumber(String accountComplementNumber) {
+    public void setAccountComplementNumber(String accountComplementNumber) {
         this.accountComplementNumber = accountComplementNumber;
     }
 
-    protected void setAccountType(BankAccountType accountType) {
+    public void setAccountType(BankAccountType accountType) {
         this.accountType = accountType;
     }
 
