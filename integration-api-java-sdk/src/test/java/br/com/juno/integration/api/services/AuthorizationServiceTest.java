@@ -13,6 +13,6 @@ public class AuthorizationServiceTest extends AbstractTest {
     public void getToken() {
         String accessToken = JunoApiManager.getAuthorizationService().getToken();
 
-        assertEquals(FixtureHelper.DUMMY_BEARER_AUTHORIZATION, accessToken);
+        assertEquals(FixtureHelper.AUTH_TOKEN_ACCESS_TOKEN, accessToken);
     }
 }

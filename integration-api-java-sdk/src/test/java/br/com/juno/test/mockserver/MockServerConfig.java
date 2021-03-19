@@ -55,6 +55,7 @@ public final class MockServerConfig {
                                 .withStatusCode(200)); //
     }
 
+    // CHARGES
     public void expectCreateCharge(Object object) {
         client.when( //
                 getRequestExpectation() //
@@ -67,6 +68,7 @@ public final class MockServerConfig {
                                 .withStatusCode(200)); //
     }
 
+    // TOKENIZATION
     public void expectCreditCardTokenization(Object object) {
         client.when( //
                 getRequestExpectation() //
@@ -75,6 +77,114 @@ public final class MockServerConfig {
                         .withBody(toJson(object))) //
                 .respond( //
                         response(getResource("credit-cards", "tokenization", "POST.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    // BALANCE
+    public void expectBalance() {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.GET.name()) //
+                        .withPath("/balance")) //
+                .respond( //
+                        response(getResource("balance", "GET.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    // DIGITAL-ACCOUNTS
+    public void expectCreateDigitalAccount(Object object) {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.POST.name()) //
+                        .withPath("/digital-accounts") //
+                        .withBody(toJson(object))) //
+                .respond( //
+                        response(getResource("digital-accounts", "POST.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    public void expectFindDigitalAccount() {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.GET.name()) //
+                        .withPath("/digital-accounts")) //
+                .respond( //
+                        response(getResource("digital-accounts", "GET.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    public void expectUpdateDigitalAccount(Object object) {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.PATCH.name()) //
+                        .withPath("/digital-accounts") //
+                        .withBody(toJson(object))) //
+                .respond( //
+                        response(getResource("digital-accounts", "PATCH.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    // PLAN
+    public void expectCreatePlan(Object object) {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.POST.name()) //
+                        .withPath("/plans") //
+                        .withBody(toJson(object))) //
+                .respond( //
+                        response(getResource("plans", "POST.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    public void expectListPlans() {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.GET.name()) //
+                        .withPath("/plans")) //
+                .respond( //
+                        response(getResource("plans", "GET.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    public void expectFindPlan(Object object) {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.GET.name()) //
+                        .withPath("/plans") //
+                        .withBody(toJson(object))) //
+                .respond( //
+                        response(getResource("plans", "id", "POST.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    public void expectActivePlan(Object object) {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.POST.name()) //
+                        .withPath("/plans") //
+                        .withBody(toJson(object))) //
+                .respond( //
+                        response(getResource("plans", "id", "activation", "POST.mock")) //
+                                .withContentType(MediaType.APPLICATION_JSON) //
+                                .withStatusCode(200)); //
+    }
+
+    public void expectDeactivePlan(Object object) {
+        client.when( //
+                getRequestExpectation() //
+                        .withMethod(HttpMethod.POST.name()) //
+                        .withPath("/plans") //
+                        .withBody(toJson(object))) //
+                .respond( //
+                        response(getResource("plans", "id", "activation", "POST.mock")) //
                                 .withContentType(MediaType.APPLICATION_JSON) //
                                 .withStatusCode(200)); //
     }

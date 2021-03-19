@@ -1,13 +1,13 @@
 package br.com.juno.integration.api.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import br.com.juno.integration.api.model.Plan;
 import br.com.juno.integration.api.services.request.plans.PlanCreateRequest;
-import br.com.juno.integration.api.services.request.plans.PlanListRequest;
 import br.com.juno.integration.api.services.request.plans.PlanRequest;
 import br.com.juno.test.AbstractTest;
 
@@ -15,15 +15,28 @@ public class PlanServiceTest extends AbstractTest {
 
     @Test
     public void createPlan() {
-        PlanCreateRequest plan = new PlanCreateRequest("Premium", BigDecimal.valueOf(500.0D));
-        System.out.println(plan);
+        PlanCreateRequest request = new PlanCreateRequest("Premium", BigDecimal.valueOf(100.00));
+
+        mockServer().expectCreatePlan(request);
+
+        Plan createPlan = JunoApiManager.getPlanService().createPlan(request);
+        assertEquals("2021-03-19 14:42:13", createPlan.getCreatedOn());
+        assertEquals("Premium", createPlan.getName());
+        assertEquals("MONTHLY", createPlan.getFrequency());
+        assertEquals("ACTIVE", createPlan.getStatus());
+        assertEquals(BigDecimal.valueOf(100.00).setScale(2), createPlan.getAmount());
     }
 
-    @Test
-    public void listPlans() {
-        List<Plan> plans = JunoApiManager.getPlanService().listPlans(new PlanListRequest());
-        plans.forEach(System.out::println);
-    }
+    //    @Test
+    //    public void listPlans() {
+    //        PlanListRequest request = new PlanListRequest();
+    //
+    //        mockServer().expectListPlans();
+    //
+    //        //        List<Plan> plans = JunoApiManager.getPlanService().listPlans(request);
+    //        //        plans.forEach(System.out::println);
+    //        //        assertEquals()
+    //    }
 
     @Test
     public void findPlan() {

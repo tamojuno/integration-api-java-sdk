@@ -1,0 +1,13 @@
+{
+    "id": "pln_5223162F358A8CDB",
+    "createdOn": "2021-03-19 14:42:13",
+    "name": "Premium",
+    "frequency": "MONTHLY",
+    "status": "ACTIVE",
+    "amount": 100.00,
+    "_links": {
+        "self": {
+            "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_5223162F358A8CDB"
+        }
+    }
+}
