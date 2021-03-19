@@ -4,6 +4,7 @@ import static br.com.juno.integration.api.services.JunoApiManager.CONTENT_TYPE_H
 import static br.com.juno.integration.api.services.JunoApiManager.X_RESOURCE_TOKEN;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,20 +48,14 @@ public final class ChargeService extends BaseService {
     }
 
     public Responses<Charge> list(ChargeListRequest request) {
-        List<Responses<Charge>> responsePages = new LinkedList<>();
+        GetRequest httpRequest = Unirest.get(JunoApiManager.config().getResourceEndpoint() + CHARGES_ENDPOINT) //
+                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
+                .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
+                .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //
 
-        Responses<Charge> currentPage = getFirstPage(request.getResourceToken());
+        populateParameters(httpRequest, request);
 
-        if (request.getTotalPages() > 1) {
-            for (int pageIndex = 1; pageIndex < request.getTotalPages(); pageIndex++) {
-                responsePages.add(currentPage);
-                currentPage = listNextPage(currentPage);
-            }
-        }
-
-        responsePages.add(currentPage);
-
-        return new Responses<>(responsePages, request.getResourceToken());
+        return exchange(httpRequest);
     }
 
     public Responses<Charge> listNextPage(Responses<Charge> currentPage) {
@@ -82,21 +77,6 @@ public final class ChargeService extends BaseService {
         return exchange(httpRequest);
     }
 
-    private Responses<Charge> getPage(String resourceToken) {
-        GetRequest httpRequest = Unirest.get(CHARGES_ENDPOINT) //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
-                .header(X_RESOURCE_TOKEN, resourceToken) //
-                .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //
-
-        populateParameters(httpRequest);
-
-        return exchange(httpRequest);
-    }
-
-    private Responses<Charge> getFirstPage(String resourceToken) {
-        return getPage(resourceToken);
-    }
-
     private Responses<Charge> exchange(GetRequest httpRequest) {
         HttpResponse<Resources<Resource<Charge>>> response = httpRequest.asObject(new GenericType<Resources<Resource<Charge>>>() {
             // NTD
@@ -105,22 +85,27 @@ public final class ChargeService extends BaseService {
         return new Responses<>(response.getBody(), httpRequest.getHeaders().getFirst(X_RESOURCE_TOKEN));
     }
 
-    private void populateParameters(HttpRequest<GetRequest> httpRequest) {
+    private void populateParameters(HttpRequest<GetRequest> httpRequest, ChargeListRequest request) {
         try {
-            Field[] fields = this.getClass().getDeclaredFields();
+            Field[] fields = request.getClass().getDeclaredFields();
 
             for (Field field : fields) {
-                if (field.get(this) != null) {
+                field.setAccessible(true);
+                if (isNonStaticFinal(field) && field.get(request) != null) {
                     if (field.getType().isEnum()) {
-                        httpRequest.queryString(field.getName(), ((LabeledEnum)field.get(this)).getLabel());
+                        httpRequest.queryString(field.getName(), ((LabeledEnum)field.get(request)).getLabel());
                     } else {
-                        httpRequest.queryString(field.getName(), field.get(this));
+                        httpRequest.queryString(field.getName(), field.get(request));
                     }
                 }
             }
         } catch (IllegalArgumentException | IllegalAccessException e) {
             throw new JunoApiException(e);
         }
+    }
+
+    private boolean isNonStaticFinal(Field field) {
+        return !Modifier.isStatic(field.getModifiers()) && !Modifier.isFinal(field.getModifiers());
     }
 
 }

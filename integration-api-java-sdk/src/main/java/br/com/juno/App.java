@@ -1,8 +1,9 @@
 package br.com.juno;
 
-import br.com.juno.integration.api.model.PaymentRefundTransaction;
+import br.com.juno.integration.api.model.Charge;
 import br.com.juno.integration.api.services.JunoApiManager;
-import br.com.juno.integration.api.services.request.payment.PaymentRefundRequest;
+import br.com.juno.integration.api.services.request.charge.ChargeListRequest;
+import br.com.juno.integration.api.services.response.Responses;
 
 public class App {
 
@@ -10,17 +11,10 @@ public class App {
 
         // @formatter:off
         JunoApiManager.config()
-        // Sandbox
-//            .clientId("iH3Um6mPrlNNT98S")
-//            .clientSecret("e!LCWcO<EAxq){:EZejRv4XATAt^hU9M")
-//            .resourceToken("37013DDF21B83FFCA8AA6AF8912A9FBC91E5765DA991873CA407FA8CAFF22BB0")
-        // Local
-            .setClientId("X8I5PuJeD7AmgV1Q")
-            .setClientSecret("h|4KY73vf7ntn|:f4PAox@-^86QebA|s")
-            .setResourceToken("E3759A771310324A266F7B742FF0A44D48A29D7690614D8C")
-            .setPublicToken("CB1DA65A0AFDE882DB9AFFB598CE5DA6CF872195C2332724B22ECC8D075350C0")
-            .development();
-        // @formatter:on
+        .setClientId("JfzNWs79Mcdn6jfw")
+        .setClientSecret("mh7=jU*=!@OPiNFG^n6Ug|>f7uw6;%73")
+        .setResourceToken("0153B6F504FC71A0EF1EB69116010986AA4C4B2C3755F79042366E9D00B915D3")
+        .sandbox();
 
         // ## Charges
         //        ChargeCreateRequest.Billing billing = new ChargeCreateRequest.Billing();
@@ -43,15 +37,15 @@ public class App {
         //
         //        createdCharges.forEach(System.out::println);
         //
-        //        ChargeListRequest chargeListRequest = new ChargeListRequest();
-        //        Responses<Charge> listCharges = JunoApiManager.getChargeService().list(chargeListRequest);
-        //
-        //        listCharges.getContent().forEach(r -> System.out.println(r.getContent()));
-        //
-        //        while (listCharges.hasNext()) {
-        //            listCharges = JunoApiManager.getChargeService().listNextPage(listCharges);
-        //            listCharges.getContent().forEach(r -> System.out.println(r.getContent()));
-        //        }
+        ChargeListRequest chargeListRequest = new ChargeListRequest();
+        Responses<Charge> listCharges = JunoApiManager.getChargeService().list(chargeListRequest);
+
+        listCharges.getContent().forEach(r -> System.out.println(r.getContent()));
+
+        while (listCharges.hasNext()) {
+            listCharges = JunoApiManager.getChargeService().listNextPage(listCharges);
+            listCharges.getContent().forEach(r -> System.out.println(r.getContent()));
+        }
         //
         //        // ## Balance
         //        Balance balance = JunoApiManager.getBalanceService().getBalance(new GetBalanceRequest());
@@ -147,9 +141,9 @@ public class App {
         //        PaymentTransaction paymentTransaction = JunoApiManager.getPaymentService().createPayment(paymentCreateRequest);
         //        System.out.println(paymentTransaction);
 
-        PaymentRefundRequest paymentRefundRequest = new PaymentRefundRequest("pay_199DAA2FC4017E3D");
-        PaymentRefundTransaction refundTransaction = JunoApiManager.getPaymentService().refundPayment(paymentRefundRequest);
-        System.out.println(refundTransaction);
+//        PaymentRefundRequest paymentRefundRequest = new PaymentRefundRequest("pay_199DAA2FC4017E3D");
+//        PaymentRefundTransaction refundTransaction = JunoApiManager.getPaymentService().refundPayment(paymentRefundRequest);
+//        System.out.println(refundTransaction);
 
     }
 }

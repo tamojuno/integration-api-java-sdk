@@ -11,9 +11,9 @@ import br.com.juno.integration.api.model.DigitalAccount;
 import br.com.juno.integration.api.services.request.digitalaccounts.DigitalAccountCreateRequest;
 import br.com.juno.integration.api.services.request.digitalaccounts.DigitalAccountRequest;
 import br.com.juno.integration.api.services.request.digitalaccounts.DigitalAccountUpdateRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class DigitalAccountServiceTest extends AbstractTest {
+public class DigitalAccountServiceTest extends AbstractServiceTest {
 
     @Test
     public void findDigitalAccount() {

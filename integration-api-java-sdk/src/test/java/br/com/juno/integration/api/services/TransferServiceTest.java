@@ -6,9 +6,9 @@ import br.com.juno.integration.api.model.BankAccount;
 import br.com.juno.integration.api.model.BankAccountType;
 import br.com.juno.integration.api.model.Transfer;
 import br.com.juno.integration.api.services.request.transfer.TransferRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class TransferServiceTest extends AbstractTest {
+public class TransferServiceTest extends AbstractServiceTest {
 
     @Test
     public void transfer() {

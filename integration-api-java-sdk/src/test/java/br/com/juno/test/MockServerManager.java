@@ -1,4 +1,4 @@
-package br.com.juno.test.mockserver;
+package br.com.juno.test;
 
 import static br.com.juno.integration.api.services.AuthorizationService.AUTHORIZATION_HEADER;
 import static br.com.juno.integration.api.services.JunoApiManager.X_API_VERSION;
@@ -22,26 +22,21 @@ import org.mockserver.model.ParameterBody;
 
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.utils.JacksonUtils;
-import br.com.juno.test.FixtureHelper;
 import kong.unirest.HttpMethod;
 
-public final class MockServerConfig {
+public final class MockServerManager {
 
-    public MockServerConfig(MockServerClient client) {
-        this.client = client;
-        configureMockServer();
-    }
-
-    private void configureMockServer() {
+    public MockServerManager(MockServerClient client) {
+        this.mockServer = client;
         configureDefaultExpectations();
     }
 
     private void configureDefaultExpectations() {
-        configureAccessTokenExpectations();
+        expectAccessToken();
     }
 
-    private void configureAccessTokenExpectations() {
-        client.when( //
+    private void expectAccessToken() {
+        mockServer.when( //
                 request() //
                         .withMethod(HttpMethod.POST.name()) //
                         .withPath("/oauth/token") //
@@ -56,7 +51,7 @@ public final class MockServerConfig {
     }
 
     public void expectCreateCharge(Object object) {
-        client.when( //
+        mockServer.when( //
                 getRequestExpectation() //
                         .withMethod(HttpMethod.POST.name()) //
                         .withPath("/charges") //
@@ -68,7 +63,7 @@ public final class MockServerConfig {
     }
 
     public void expectCreditCardTokenization(Object object) {
-        client.when( //
+        mockServer.when( //
                 getRequestExpectation() //
                         .withMethod(HttpMethod.POST.name()) //
                         .withPath("/credit-cards/tokenization") //
@@ -107,5 +102,5 @@ public final class MockServerConfig {
         return FixtureHelper.getResource(resourcesList.toArray(new String[resourcesList.size()]));
     }
 
-    private MockServerClient client;
+    private MockServerClient mockServer;
 }

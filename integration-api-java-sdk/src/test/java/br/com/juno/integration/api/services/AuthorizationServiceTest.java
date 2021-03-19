@@ -4,15 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 import br.com.juno.test.FixtureHelper;
 
-public class AuthorizationServiceTest extends AbstractTest {
+public class AuthorizationServiceTest extends AbstractServiceTest {
 
     @Test
     public void getToken() {
         String accessToken = JunoApiManager.getAuthorizationService().getToken();
 
-        assertEquals(FixtureHelper.DUMMY_BEARER_AUTHORIZATION, accessToken);
+        assertEquals(FixtureHelper.ACCESS_TOKEN, accessToken);
     }
 }

@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import br.com.juno.integration.api.base.exception.JunoApiException;
 import br.com.juno.integration.api.model.TokenizedCreditCard;
 import br.com.juno.integration.api.services.request.creditcard.CreditCardTokenizationRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class CreditCardServiceTest extends AbstractTest {
+public class CreditCardServiceTest extends AbstractServiceTest {
 
     @Test
     public void tokenize() {

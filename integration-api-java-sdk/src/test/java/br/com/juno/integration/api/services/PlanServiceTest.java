@@ -9,9 +9,9 @@ import br.com.juno.integration.api.model.Plan;
 import br.com.juno.integration.api.services.request.plans.PlanCreateRequest;
 import br.com.juno.integration.api.services.request.plans.PlanListRequest;
 import br.com.juno.integration.api.services.request.plans.PlanRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class PlanServiceTest extends AbstractTest {
+public class PlanServiceTest extends AbstractServiceTest {
 
     @Test
     public void createPlan() {

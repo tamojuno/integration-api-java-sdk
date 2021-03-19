@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import br.com.juno.integration.api.model.BillPayment;
 import br.com.juno.integration.api.services.request.billpayment.RegisterBillPaymentRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class BillPaymentServiceTest extends AbstractTest {
+public class BillPaymentServiceTest extends AbstractServiceTest {
 
     @Test
     public void registerBillPayment() {
