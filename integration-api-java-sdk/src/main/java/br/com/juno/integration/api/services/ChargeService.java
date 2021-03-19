@@ -49,7 +49,6 @@ public final class ChargeService extends BaseService {
 
     public Responses<Charge> list(ChargeListRequest request) {
         GetRequest httpRequest = Unirest.get(JunoApiManager.config().getResourceEndpoint() + CHARGES_ENDPOINT) //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, request.getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //
 
@@ -70,7 +69,6 @@ public final class ChargeService extends BaseService {
 
     private Responses<Charge> getPage(String resourceToken, String hateoasLink) {
         GetRequest httpRequest = Unirest.get(hateoasLink) //
-                .headers(JunoApiManager.getAuthorizationService().getAuthorizationHeader()) //
                 .header(X_RESOURCE_TOKEN, resourceToken)//
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE); //
 
