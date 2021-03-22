@@ -25,7 +25,7 @@ JunoApiManager.config()
     .clientId("CLIENTID")
     .clientSecret("SECRET")
     .resourceToken("X-RESOURCE-TOKEN")
-    .publicToken("PRIVATE-TOKEN")
+    .publicToken("PUBLIC-TOKEN")
     .sandbox();
 ````
 
