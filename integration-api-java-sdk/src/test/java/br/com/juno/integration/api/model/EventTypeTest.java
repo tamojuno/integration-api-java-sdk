@@ -65,7 +65,6 @@ public class EventTypeTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         EventType eventType = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(NAME, eventType.getName());
         assertEquals(LABEL, eventType.getLabel());

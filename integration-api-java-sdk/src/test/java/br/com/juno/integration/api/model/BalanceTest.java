@@ -62,7 +62,6 @@ public class BalanceTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         Balance balance = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(BigDecimal.valueOf(36424.02D), balance.getBalance());
         assertEquals(BigDecimal.valueOf(1434.63D), balance.getWithheldBalance());

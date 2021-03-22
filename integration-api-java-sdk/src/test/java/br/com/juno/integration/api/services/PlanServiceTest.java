@@ -4,14 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import br.com.juno.integration.api.model.Plan;
 import br.com.juno.integration.api.services.request.plans.PlanCreateRequest;
 import br.com.juno.integration.api.services.request.plans.PlanRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class PlanServiceTest extends AbstractTest {
+@Disabled
+public class PlanServiceTest extends AbstractServiceTest {
 
     @Test
     public void createPlan() {
@@ -26,17 +28,6 @@ public class PlanServiceTest extends AbstractTest {
         assertEquals("ACTIVE", createPlan.getStatus());
         assertEquals(BigDecimal.valueOf(100.00).setScale(2), createPlan.getAmount());
     }
-
-    //    @Test
-    //    public void listPlans() {
-    //        PlanListRequest request = new PlanListRequest();
-    //
-    //        mockServer().expectListPlans();
-    //
-    //        //        List<Plan> plans = JunoApiManager.getPlanService().listPlans(request);
-    //        //        plans.forEach(System.out::println);
-    //        //        assertEquals()
-    //    }
 
     @Test
     public void findPlan() {

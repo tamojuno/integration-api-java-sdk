@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import br.com.juno.integration.api.services.request.payment.PaymentCreateRequest;
 import br.com.juno.integration.api.services.request.payment.PaymentCreateRequest.Billing;
 import br.com.juno.integration.api.services.request.payment.PaymentCreateRequest.CreditCardDetails;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 import br.com.juno.test.FixtureHelper;
 
-public class PaymentServiceTest extends AbstractTest {
+public class PaymentServiceTest extends AbstractServiceTest {
 
     @Test
     public void createPayment() {

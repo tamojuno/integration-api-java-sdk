@@ -67,7 +67,6 @@ public class PaymentTransactionTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         PaymentRefundTransaction paymentRefundTransaction = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(TRANSACTION_ID, paymentRefundTransaction.getTransactionId());
         assertEquals(INSTALLMENTS, paymentRefundTransaction.getInstallments());

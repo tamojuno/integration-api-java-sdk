@@ -2,14 +2,16 @@ package br.com.juno.integration.api.services;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import br.com.juno.integration.api.model.Bank;
 import br.com.juno.integration.api.model.BusinessArea;
 import br.com.juno.integration.api.model.CompanyType;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class DataServiceTest extends AbstractTest {
+@Disabled
+public class DataServiceTest extends AbstractServiceTest {
 
     @Test
     public void getBanks() {

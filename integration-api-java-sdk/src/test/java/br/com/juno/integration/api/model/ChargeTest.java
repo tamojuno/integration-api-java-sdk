@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.hateoas.Resource;
 
@@ -16,6 +17,7 @@ import br.com.juno.integration.api.model.Charge.BilletDetails;
 import br.com.juno.integration.api.services.response.Response;
 import br.com.juno.test.AbstractTest;
 
+@Disabled
 public class ChargeTest extends AbstractTest {
 
     private static final Long CODE = 136392404L;

@@ -89,7 +89,6 @@ public class PaymentRefundTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         PaymentRefund paymentRefund = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(CHARGE_ID, paymentRefund.getChargeId());
         assertEquals(RELEASE_DATE, paymentRefund.getReleaseDate());

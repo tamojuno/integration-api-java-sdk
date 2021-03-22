@@ -60,7 +60,6 @@ public class TokenizedCreditCardTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         TokenizedCreditCard tokenizedCreditCard = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals("string", tokenizedCreditCard.getCreditCardId());
         assertEquals("string", tokenizedCreditCard.getLast4CardNumber());

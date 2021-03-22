@@ -59,7 +59,6 @@ public class BankTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         Bank bank = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(BANK_NUMBER, bank.getNumber());
         assertEquals(BANK_NAME, bank.getName());

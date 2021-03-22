@@ -92,7 +92,6 @@ public class BillPaymentTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         BillPayment billPayment = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(NUMERICAL_BAR_CODE, billPayment.getNumericalBarCode());
         assertEquals(BILL_AMOUNT, billPayment.getBillAmount());

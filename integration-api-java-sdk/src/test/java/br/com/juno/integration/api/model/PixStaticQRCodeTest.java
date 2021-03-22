@@ -52,7 +52,6 @@ public class PixStaticQRCodeTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         PixStaticQRCode pixStatic = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals("string", pixStatic.getQrcodeInBase64());
         assertEquals("string", pixStatic.getImageInBase64());

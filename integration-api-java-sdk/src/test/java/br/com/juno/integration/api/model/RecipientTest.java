@@ -61,7 +61,7 @@ public class RecipientTest extends AbstractTest {
         bankAccount.setAccountComplementNumber(ACCOUNT_COMPLEMENT_NUMBER);
         bankAccount.setAccountType(ACCOUNT_TYPE);
         recipient.setBankAccount(bankAccount);
-        assertEquals("Recipient[John Doe,06085371950,BankAccount[104,4252,0065696-8,013,CHECKING]]", recipient.toString());
+        assertEquals("Recipient[John Doe,06085371950,BankAccount[104,4252,10000224836,013,CHECKING]]", recipient.toString());
     }
 
     @Test
@@ -81,7 +81,6 @@ public class RecipientTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         Recipient recipient = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(HOLDER_NAME, recipient.getName());
         assertEquals(HOLDER_DOCUMENT, recipient.getDocument());
@@ -94,6 +93,6 @@ public class RecipientTest extends AbstractTest {
     }
 
     private String findOne() {
-        return "{\"name\":\"John Doe\",\"document\":\"06085371950\",\"bankAccount\":{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"0065696-8\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}}";
+        return "{\"name\":\"John Doe\",\"document\":\"06085371950\",\"bankAccount\":{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"10000224836\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}}";
     }
 }

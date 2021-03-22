@@ -13,10 +13,10 @@ import br.com.juno.integration.api.model.DigitalAccount;
 import br.com.juno.integration.api.services.request.digitalaccounts.DigitalAccountCreateRequest;
 import br.com.juno.integration.api.services.request.digitalaccounts.DigitalAccountRequest;
 import br.com.juno.integration.api.services.request.digitalaccounts.DigitalAccountUpdateRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 import br.com.juno.test.FixtureHelper;
 
-public class DigitalAccountServiceTest extends AbstractTest {
+public class DigitalAccountServiceTest extends AbstractServiceTest {
 
     @Test
     public void findDigitalAccount() {
@@ -43,9 +43,9 @@ public class DigitalAccountServiceTest extends AbstractTest {
         address.setPostCode("80060120");
 
         BankAccount bankAccount = new BankAccount();
-        bankAccount.setBankNumber("260");
-        bankAccount.setAgencyNumber("0001");
-        bankAccount.setAccountNumber("20704584");
+        bankAccount.setBankNumber(FixtureHelper.BANK_NUMBER);
+        bankAccount.setAgencyNumber(FixtureHelper.AGENCY_NUMBER);
+        bankAccount.setAccountNumber(FixtureHelper.ACCOUNT_NUMBER);
         bankAccount.setAccountType(BankAccountType.CHECKING);
 
         DigitalAccountCreateRequest request = new DigitalAccountCreateRequest("PAYMENT", "Alfredo Maroto", "84317951070", "9spiderman@liabravin.ml",
@@ -75,9 +75,9 @@ public class DigitalAccountServiceTest extends AbstractTest {
         address.setPostCode("80060120");
 
         BankAccount bankAccount = new BankAccount();
-        bankAccount.setBankNumber("260");
-        bankAccount.setAgencyNumber("0001");
-        bankAccount.setAccountNumber("20704584");
+        bankAccount.setBankNumber(FixtureHelper.BANK_NUMBER);
+        bankAccount.setAgencyNumber(FixtureHelper.AGENCY_NUMBER);
+        bankAccount.setAccountNumber(FixtureHelper.ACCOUNT_NUMBER);
         bankAccount.setAccountType(BankAccountType.CHECKING);
         DigitalAccountUpdateRequest request = new DigitalAccountUpdateRequest("Alfredao", "1995-09-06", "41999002102", 2029L, "QualquerCoisa", "MEI",
                 "QualquerCoisa", null, address, bankAccount);

@@ -11,10 +11,10 @@ import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest;
 import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest.Billing;
 import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest.Billing.Address;
 import br.com.juno.integration.api.services.request.charge.ChargeCreateRequest.Charge;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 import br.com.juno.test.FixtureHelper;
 
-public class ChargeServiceTest extends AbstractTest {
+public class ChargeServiceTest extends AbstractServiceTest {
 
     @Test
     public void create() {

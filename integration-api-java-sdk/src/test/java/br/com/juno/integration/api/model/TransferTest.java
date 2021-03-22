@@ -93,7 +93,7 @@ public class TransferTest extends AbstractTest {
         recipient.setBankAccount(bankAccount);
 
         assertEquals(
-                "Transfer[<null>,dac_56101832681175AD,2021-03-16 14:45:00,<null>,10.0,REQUESTED,Recipient[John Doe,06085371950,BankAccount[104,4252,0065696-8,013,CHECKING]]]",
+                "Transfer[<null>,dac_56101832681175AD,2021-03-16 14:45:00,<null>,10.0,REQUESTED,Recipient[John Doe,06085371950,BankAccount[104,4252,10000224836,013,CHECKING]]]",
                 transfer.toString());
     }
 
@@ -114,7 +114,6 @@ public class TransferTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         Transfer transfer = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(DAC_ID, transfer.getDigitalAccountId());
         assertEquals(CREATION_DATE, transfer.getCreationDate());
@@ -131,7 +130,7 @@ public class TransferTest extends AbstractTest {
     }
 
     private String findOne() {
-        return "{\"id\":\"trf_063FB7C442D863AF\",\"digitalAccountId\":\"dac_56101832681175AD\",\"creationDate\":\"2021-03-16 14:45:00\",\"transferDate\":null,\"amount\":10.0,\"status\":\"REQUESTED\",\"recipient\":{\"name\":\"John Doe\",\"document\":\"06085371950\",\"bankAccount\":{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"0065696-8\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}}}";
+        return "{\"id\":\"trf_063FB7C442D863AF\",\"digitalAccountId\":\"dac_56101832681175AD\",\"creationDate\":\"2021-03-16 14:45:00\",\"transferDate\":null,\"amount\":10.0,\"status\":\"REQUESTED\",\"recipient\":{\"name\":\"John Doe\",\"document\":\"06085371950\",\"bankAccount\":{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"10000224836\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}}}";
     }
 
 }

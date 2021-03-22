@@ -96,7 +96,6 @@ public class PaymentTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         Payment payment = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(CHARGE_ID, payment.getChargeId());
         assertEquals(PAYMENT_DATE, payment.getDate());

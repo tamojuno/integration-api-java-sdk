@@ -3,13 +3,14 @@ package br.com.juno.integration.api.services;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import br.com.juno.integration.api.model.BillPayment;
 import br.com.juno.integration.api.services.request.billpayment.RegisterBillPaymentRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 
-public class BillPaymentServiceTest extends AbstractTest {
+@Disabled
+public class BillPaymentServiceTest extends AbstractServiceTest {
 
     @Test
     public void registerBillPayment() {
@@ -20,7 +21,6 @@ public class BillPaymentServiceTest extends AbstractTest {
                 BigDecimal.valueOf(134.73D), //
                 LocalDate.now()); //
 
-        BillPayment billPayment = JunoApiManager.getBillPaymentService().registerBillPayment(billPaymentRequest);
-        System.out.println(billPayment);
+        JunoApiManager.getBillPaymentService().registerBillPayment(billPaymentRequest);
     }
 }

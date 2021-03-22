@@ -55,7 +55,6 @@ public class BankAccountHolderTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         BankAccountHolder bankAccountHolder = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(HOLDER_NAME, bankAccountHolder.getName());
         assertEquals(HOLDER_DOCUMENT, bankAccountHolder.getDocument());

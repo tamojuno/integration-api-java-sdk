@@ -73,7 +73,6 @@ public class LegalRepresentativeTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         LegalRepresentative legalRepresentative = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(HOLDER_NAME, legalRepresentative.getName());
         assertEquals(HOLDER_DOCUMENT, legalRepresentative.getDocument());

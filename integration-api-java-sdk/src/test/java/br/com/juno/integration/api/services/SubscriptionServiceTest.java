@@ -2,6 +2,7 @@ package br.com.juno.integration.api.services;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import br.com.juno.integration.api.model.Subscription;
@@ -11,10 +12,11 @@ import br.com.juno.integration.api.services.request.subscriptions.SubscriptionCr
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionCreateRequest.CreditCardDetails;
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionListRequest;
 import br.com.juno.integration.api.services.request.subscriptions.SubscriptionRequest;
-import br.com.juno.test.AbstractTest;
+import br.com.juno.test.AbstractServiceTest;
 import br.com.juno.test.FixtureHelper;
 
-public class SubscriptionServiceTest extends AbstractTest {
+@Disabled
+public class SubscriptionServiceTest extends AbstractServiceTest {
 
     @Test
     public void createSubscription() {

@@ -49,7 +49,7 @@ public class BankAccountTest extends AbstractTest {
         bankAccount.setAccountNumber(ACCOUNT_NUMBER);
         bankAccount.setAccountComplementNumber(ACCOUNT_COMPLEMENT_NUMBER);
         bankAccount.setAccountType(ACCOUNT_TYPE);
-        assertEquals("BankAccount[104,4252,0065696-8,013,CHECKING]", bankAccount.toString());
+        assertEquals("BankAccount[104,4252,10000224836,013,CHECKING]", bankAccount.toString());
     }
 
     @Test
@@ -69,7 +69,6 @@ public class BankAccountTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         BankAccount bankAccount = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(BANK_NUMBER, bankAccount.getBankNumber());
         assertEquals(AGENCY_NUMBER, bankAccount.getAgencyNumber());
@@ -79,7 +78,7 @@ public class BankAccountTest extends AbstractTest {
     }
 
     private String findOne() {
-        return "{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"0065696-8\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}";
+        return "{\"bankNumber\":\"104\",\"agencyNumber\":\"4252\",\"accountNumber\":\"10000224836\",\"accountComplementNumber\":\"013\",\"accountType\":\"CHECKING\"}";
     }
 
 }

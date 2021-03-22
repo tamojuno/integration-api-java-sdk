@@ -71,7 +71,6 @@ public class DocumentTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         Document document = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(TYPE, document.getType());
         assertEquals(DESCRIPTION, document.getDescription());

@@ -66,7 +66,6 @@ public class WebhookTest extends AbstractTest {
         assertEquals(null, res.getHrefSelf());
 
         Webhook webhook = res.getContent();
-        System.out.println(res.getContent());
 
         assertEquals(URL, webhook.getUrl());
         assertEquals(SECRET, webhook.getSecret());
@@ -85,9 +84,6 @@ public class WebhookTest extends AbstractTest {
         assertEquals(null, res.getHrefPrevious());
 
         List<Response<Webhook>> list = res.getContent();
-        for (Response<Webhook> response : list) {
-            System.out.println("list:" + response.getContent());
-        }
 
         assertEquals(URL, list.get(0).getContent().getUrl());
         assertEquals(SECRET, list.get(0).getContent().getSecret());
