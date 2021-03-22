@@ -16,7 +16,7 @@ Para utilizar a SDK é necessário:
 1. Possuir uma conta Juno em produção e/ou sandbox.
 2. Gerar credenciais de acesso à API.
 
-**Lembrando:** Deve ser criado uma conta por ambiente e para cada ambiente as credenciais são diferentes. 
+**Lembrando:** Deve ser criada uma conta por ambiente e para cada ambiente as credenciais são diferentes. 
 
 Você deve definir que ambiente irá utilizar e inserir suas credenciais para autenticação e assim poder consumir todos os recursos disponíveis.
 
