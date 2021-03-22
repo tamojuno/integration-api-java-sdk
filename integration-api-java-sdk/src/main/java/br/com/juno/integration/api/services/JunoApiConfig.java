@@ -35,6 +35,11 @@ public final class JunoApiConfig {
         return this;
     }
 
+    public JunoApiConfig unitTests() {
+        this.env = new UnitTestEnviroment();
+        return this;
+    }
+
     public JunoApiConfig setClientId(String clientId) {
         this.clientId = clientId;
         return this;
@@ -86,11 +91,11 @@ public final class JunoApiConfig {
     public boolean hasPublicTokenConfigured() {
         return StringUtils.isNotBlank(publicToken);
     }
-    
+
     public boolean isCredentialsComplete() {
-    	return StringUtils.isNoneBlank(clientId, clientSecret, resourceToken);
+        return StringUtils.isNoneBlank(clientId, clientSecret, resourceToken);
     }
-    
+
     public boolean isConfigured() {
         return isCredentialsComplete() && env != null;
     }
@@ -100,6 +105,23 @@ public final class JunoApiConfig {
         String getAuthorizationServerEndpoint();
 
         String getResourceServerEndpoint();
+
+    }
+
+    public static class UnitTestEnviroment implements Environment {
+
+        private static final String AUTHORIZATION_SERVER = "http://localhost:8888";
+        private static final String RESOURCE_SERVER = "http://localhost:8888";
+
+        @Override
+        public String getAuthorizationServerEndpoint() {
+            return AUTHORIZATION_SERVER;
+        }
+
+        @Override
+        public String getResourceServerEndpoint() {
+            return RESOURCE_SERVER;
+        }
 
     }
 

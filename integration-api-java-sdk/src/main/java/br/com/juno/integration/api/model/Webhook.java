@@ -40,6 +40,22 @@ public class Webhook extends BaseModel {
         return eventTypes;
     }
 
+    protected void setUrl(String url) {
+        this.url = url;
+    }
+
+    protected void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    protected void setStatus(WebhookStatusEnum status) {
+        this.status = status;
+    }
+
+    protected void setEventTypes(Set<EventType> eventTypes) {
+        this.eventTypes = eventTypes;
+    }
+
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);

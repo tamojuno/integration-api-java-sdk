@@ -1,0 +1,274 @@
+{
+    "_embedded": {
+        "plans": [
+            {
+                "id": "pln_5223162F358A8CDB",
+                "createdOn": "2021-03-19 14:42:13",
+                "name": "Primeiro plano",
+                "frequency": "MONTHLY",
+                "status": "INACTIVE",
+                "amount": 100.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_5223162F358A8CDB"
+                    }
+                }
+            },
+            {
+                "id": "pln_FB19C73B4EF9E2F1",
+                "createdOn": "2021-03-15 12:30:10",
+                "name": "Primeiro plano",
+                "frequency": "MONTHLY",
+                "status": "INACTIVE",
+                "amount": 100.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_FB19C73B4EF9E2F1"
+                    }
+                }
+            },
+            {
+                "id": "pln_9CC4A6A1141AE778",
+                "createdOn": "2021-03-10 10:43:49",
+                "name": "Primeiro plano",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 100.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_9CC4A6A1141AE778"
+                    }
+                }
+            },
+            {
+                "id": "pln_BAB597895402B8D3",
+                "createdOn": "2021-02-10 11:34:17",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_BAB597895402B8D3"
+                    }
+                }
+            },
+            {
+                "id": "pln_9D6DA1267C012317",
+                "createdOn": "2021-02-10 11:33:51",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "INACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_9D6DA1267C012317"
+                    }
+                }
+            },
+            {
+                "id": "pln_1199C8D26C70CAE2",
+                "createdOn": "2021-02-10 11:33:17",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "INACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_1199C8D26C70CAE2"
+                    }
+                }
+            },
+            {
+                "id": "pln_6DE9A46A117080B5",
+                "createdOn": "2021-02-10 11:31:47",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "INACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_6DE9A46A117080B5"
+                    }
+                }
+            },
+            {
+                "id": "pln_902FDD5E681515EF",
+                "createdOn": "2021-02-10 11:30:49",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_902FDD5E681515EF"
+                    }
+                }
+            },
+            {
+                "id": "pln_90EF323FAE05BDAE",
+                "createdOn": "2021-02-10 11:28:28",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_90EF323FAE05BDAE"
+                    }
+                }
+            },
+            {
+                "id": "pln_B60024F86DC75914",
+                "createdOn": "2021-02-10 11:26:45",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_B60024F86DC75914"
+                    }
+                }
+            },
+            {
+                "id": "pln_2199A94529CCB1F9",
+                "createdOn": "2021-02-10 11:14:26",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_2199A94529CCB1F9"
+                    }
+                }
+            },
+            {
+                "id": "pln_B4E77D3D731AFDB4",
+                "createdOn": "2021-02-08 15:41:43",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_B4E77D3D731AFDB4"
+                    }
+                }
+            },
+            {
+                "id": "pln_3201B2BB81E9E6DD",
+                "createdOn": "2021-02-08 15:40:29",
+                "name": "Plano Premium",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_3201B2BB81E9E6DD"
+                    }
+                }
+            },
+            {
+                "id": "pln_84CB8B14FD1134B1",
+                "createdOn": "2021-02-08 12:53:27",
+                "name": "Awesome plan",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_84CB8B14FD1134B1"
+                    }
+                }
+            },
+            {
+                "id": "pln_124DB260B12EAAD5",
+                "createdOn": "2021-01-21 11:54:34",
+                "name": "new plan to check address object",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_124DB260B12EAAD5"
+                    }
+                }
+            },
+            {
+                "id": "pln_C99117B341458F8E",
+                "createdOn": "2021-01-11 17:34:01",
+                "name": "new plan to check address object",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 50.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_C99117B341458F8E"
+                    }
+                }
+            },
+            {
+                "id": "pln_D1BCC0B5F7C1772B",
+                "createdOn": "2020-11-30 20:23:43",
+                "name": "Plano silver - Academia",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 100.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_D1BCC0B5F7C1772B"
+                    }
+                }
+            },
+            {
+                "id": "pln_05858A20719D4514",
+                "createdOn": "2020-11-10 10:48:41",
+                "name": "Teste de Assinatura",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 100.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_05858A20719D4514"
+                    }
+                }
+            },
+            {
+                "id": "pln_AA108F38DDDFA4B0",
+                "createdOn": "2020-07-30 13:24:57",
+                "name": "Plano Platinum - Academia",
+                "frequency": "MONTHLY",
+                "status": "ACTIVE",
+                "amount": 100.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_AA108F38DDDFA4B0"
+                    }
+                }
+            },
+            {
+                "id": "pln_8C81A20111CD3F6B",
+                "createdOn": "2020-06-23 10:20:55",
+                "name": "Plano silver - Academia",
+                "frequency": "MONTHLY",
+                "status": "INACTIVE",
+                "amount": 100.00,
+                "_links": {
+                    "self": {
+                        "href": "https://sandbox.boletobancario.com/api-integration/plans/pln_8C81A20111CD3F6B"
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://sandbox.boletobancario.com/api-integration/plans?page=1&pageSize=20"
+        },
+        "next": {
+            "href": "https://sandbox.boletobancario.com/api-integration/plans?page=2&pageSize=20"
+        }
+    }
+}

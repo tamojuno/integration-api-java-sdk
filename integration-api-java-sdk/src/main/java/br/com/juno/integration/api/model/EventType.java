@@ -32,6 +32,18 @@ public class EventType extends BaseModel {
         return status;
     }
 
+    protected void setName(String name) {
+        this.name = name;
+    }
+
+    protected void setLabel(String label) {
+        this.label = label;
+    }
+
+    protected void setStatus(EventStatus status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);

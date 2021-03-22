@@ -37,6 +37,26 @@ public class Document extends BaseModel {
         return details;
     }
 
+    protected void setType(String type) {
+        this.type = type;
+    }
+
+    protected void setDescription(String description) {
+        this.description = description;
+    }
+
+    protected void setApprovalStatus(String approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
+    protected void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+
+    protected void setDetails(String details) {
+        this.details = details;
+    }
+
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);

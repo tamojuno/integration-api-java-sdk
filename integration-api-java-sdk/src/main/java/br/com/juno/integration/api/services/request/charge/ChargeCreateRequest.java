@@ -170,12 +170,83 @@ public final class ChargeCreateRequest extends BaseResourceRequest {
         private String name;
         private String document;
         private String email;
+        private Address address;
         private String secondaryEmail;
         private String phone;
         private Boolean notify;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
         private LocalDate birthDate;
+
+        public static class Address implements Serializable {
+
+            private static final long serialVersionUID = -399033998073996520L;
+
+            private String street;
+            private String number;
+            private String complement;
+            private String neighborhood;
+            private String city;
+            private String state;
+            private String postCode;
+
+            public String getStreet() {
+                return street;
+            }
+
+            public String getNumber() {
+                return number;
+            }
+
+            public String getComplement() {
+                return complement;
+            }
+
+            public String getNeighborhood() {
+                return neighborhood;
+            }
+
+            public String getCity() {
+                return city;
+            }
+
+            public String getState() {
+                return state;
+            }
+
+            public String getPostCode() {
+                return postCode;
+            }
+
+            public void setStreet(String street) {
+                this.street = street;
+            }
+
+            public void setNumber(String number) {
+                this.number = number;
+            }
+
+            public void setComplement(String complement) {
+                this.complement = complement;
+            }
+
+            public void setNeighborhood(String neighborhood) {
+                this.neighborhood = neighborhood;
+            }
+
+            public void setCity(String city) {
+                this.city = city;
+            }
+
+            public void setState(String state) {
+                this.state = state;
+            }
+
+            public void setPostCode(String postCode) {
+                this.postCode = postCode;
+            }
+
+        }
 
         public String getName() {
             return name;
@@ -199,6 +270,14 @@ public final class ChargeCreateRequest extends BaseResourceRequest {
 
         public void setEmail(String email) {
             this.email = email;
+        }
+
+        public Address getAddress() {
+            return address;
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
         }
 
         public String getSecondaryEmail() {

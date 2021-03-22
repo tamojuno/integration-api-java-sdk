@@ -1,5 +1,11 @@
 package br.com.juno.integration.api.model;
 
+import static br.com.juno.test.FixtureHelper.AUTH_TOKEN_ACCESS_TOKEN;
+import static br.com.juno.test.FixtureHelper.AUTH_TOKEN_EXPIRES_IN;
+import static br.com.juno.test.FixtureHelper.AUTH_TOKEN_JTI;
+import static br.com.juno.test.FixtureHelper.AUTH_TOKEN_SCOPE;
+import static br.com.juno.test.FixtureHelper.AUTH_TOKEN_TOKEN_TYPE;
+import static br.com.juno.test.FixtureHelper.AUTH_TOKEN_USER_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;

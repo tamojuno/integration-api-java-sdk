@@ -14,11 +14,6 @@ public final class BankAccountHolder extends BaseModel {
         // NTD
     }
 
-	public BankAccountHolder(String name, String document) {
-        this.name = name;
-        this.document = document;
-    }
-
     public String getName() {
         return name;
     }
@@ -26,21 +21,21 @@ public final class BankAccountHolder extends BaseModel {
     public String getDocument() {
         return document;
     }
-    
-    public void setName(String name) {
-		this.name = name;
-	}
 
-	public void setDocument(String document) {
-		this.document = document;
-	}
+    protected void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
+    protected void setDocument(String document) {
+        this.document = document;
+    }
+
+    @Override
     public String toString() {
-    	ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-    	builder.append(getName());
-    	builder.append(getDocument());
-    	return builder.toString();
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append(getName());
+        builder.append(getDocument());
+        return builder.toString();
     }
 
 }

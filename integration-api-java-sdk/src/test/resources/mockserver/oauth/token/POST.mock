@@ -1,0 +1,8 @@
+{
+    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCx9.eyJ1c2VyX25hbWUiOiJub3J0b250Z3Vlbm9AaG90bWFpbC5jb20iLCJzY29wZSI6WyJhbGwiXSwiZXhwIjoxNjE2MTYyMTE0LCJqdGkiOiJQTmtSalVrMnZUcUZDTnJEU2g5bDVwb2NEZDQiLCJjbGllbnRfaWQiOiIyaGZCdXd5UjIxQ1liNUU4In0.nGkj78Sh_KcYflrAzGHPHjuo6XDLY_pGiE6mZAarChWHJN2DjM0ejhL9ynV081b3sB8c5yn_03f3Leq6sqXVgLpP_39Pb_yWANJ3IKOO3B3L1tUunrl-Ex4Tpw8Ixsl_qIQc0z4-Rj3xcygkWYhGWeDwA4EM67HdTovy9IFgA8lzeRZvxd8lx-VEC_sPmOLIgzlB1GDNcY4CXX4vGQ2-g5xk7a97hCAv-zTslbbmi1HFTTM1v79zBa3PdQLPWEYdIBeJ6bukWabYveI33jIi2A8BryZWesJWQtwCVvQTtIBWGd_ttQI5dvEeQXIQ_t-2SZbgrWzIklIsUtub7fAndw",
+    "token_type": "bearer",
+    "expires_in": 86399,
+    "scope": "all",
+    "user_name": "dummy@email.com",
+    "jti": "PNkRjUk2vTqFCNrDSh9l5pocDd4"
+}

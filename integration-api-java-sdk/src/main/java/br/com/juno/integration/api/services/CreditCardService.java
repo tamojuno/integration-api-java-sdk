@@ -13,10 +13,10 @@ import br.com.juno.integration.api.base.exception.Assert;
 import br.com.juno.integration.api.model.TokenizedCreditCard;
 import br.com.juno.integration.api.services.request.creditcard.CreditCardTokenizationRequest;
 import br.com.juno.integration.api.services.response.Response;
+import br.com.juno.integration.api.utils.JacksonUtils;
 import kong.unirest.GenericType;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
-import kong.unirest.json.JSONObject;
 
 public class CreditCardService extends BaseService {
 
@@ -32,13 +32,12 @@ public class CreditCardService extends BaseService {
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("creditCardHash", request.getCreditCardHash());
-        JSONObject jsonObject = new JSONObject(requestBody);
 
         HttpResponse<Resource<TokenizedCreditCard>> response = Unirest.post( //
                 JunoApiManager.config().getResourceEndpoint() + CREDIT_CARDS_ENDPOINT) //
                 .header(X_RESOURCE_TOKEN, JunoApiManager.config().getResourceToken()) //
                 .header(CONTENT_TYPE_HEADER, MediaType.APPLICATION_JSON_VALUE) //
-                .body(jsonObject.toString()) //
+                .body(JacksonUtils.toJson(request)) //
                 .asObject(new GenericType<Resource<TokenizedCreditCard>>() { //
                     // NTD
                 });//

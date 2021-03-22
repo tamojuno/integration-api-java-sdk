@@ -1,0 +1,10 @@
+{
+    "balance": 35840.87,
+    "withheldBalance": 1575.50,
+    "transferableBalance": 34265.37,
+    "_links": {
+        "self": {
+            "href": "https://unit-test/api-integration/balance"
+        }
+    }
+}

@@ -1,7 +1,6 @@
 package br.com.juno.integration.api.model;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -10,26 +9,27 @@ public class Payment extends BaseModel {
 
     private static final long serialVersionUID = 1378601766705618751L;
 
-    private Calendar date;
-    private Calendar releaseDate;
+    private String date;
+    private String releaseDate;
+
     private BigDecimal amount;
     private BigDecimal fee;
 
     private String type;
     private String status;
-    private String chargeId;
     private String transactionId;
-    private String creditCardId;
+    private String chargeId;
+    private String failReason;
 
     protected Payment() {
         // NTD
     }
 
-    public Calendar getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Calendar getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
@@ -53,8 +53,44 @@ public class Payment extends BaseModel {
         return transactionId;
     }
 
-    public String getCreditCardId() {
-        return creditCardId;
+    public String getFailReason() {
+        return failReason;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public void setChargeId(String chargeId) {
+        this.chargeId = chargeId;
+    }
+
+    public void setFailReason(String failReason) {
+        this.failReason = failReason;
     }
 
     @Override
@@ -69,7 +105,7 @@ public class Payment extends BaseModel {
         builder.append(type);
         builder.append(status);
         builder.append(transactionId);
-        builder.append(creditCardId);
+        builder.append(failReason);
         return builder.toString();
     }
 

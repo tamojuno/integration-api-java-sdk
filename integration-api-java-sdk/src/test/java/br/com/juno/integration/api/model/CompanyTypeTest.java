@@ -32,7 +32,7 @@ public class CompanyTypeTest extends AbstractTest {
     }
 
     @Test
-    public void toStringFull() {
+    public void toStringComplete() {
         CompanyType companyType = new CompanyType(MEI);
         assertEquals("CompanyType[MEI]", companyType.toString());
     }

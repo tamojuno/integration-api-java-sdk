@@ -1,0 +1,15 @@
+{
+    "id": "dac_6A1ACDE3A3660E54",
+    "type": "PAYMENT",
+    "status": "AWAITING_DOCUMENTS",
+    "personType": "F",
+    "document": "06085371950",
+    "createdOn": "2021-03-19T16:56:26.975-03:00",
+    "resourceToken": "0153B6F504FC71A0EF1EB69116010986AA4C4B2C3755F79042366E9D00B915D3",
+    "accountNumber": 10000224836,
+    "_links": {
+        "self": {
+            "href": "https://unit-test/api-integration/digital-accounts/dac_6A1ACDE3A3660E54"
+        }
+    }
+}

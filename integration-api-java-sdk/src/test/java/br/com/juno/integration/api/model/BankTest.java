@@ -1,6 +1,10 @@
 package br.com.juno.integration.api.model;
 
+import static br.com.juno.test.FixtureHelper.BANK_NAME;
+import static br.com.juno.test.FixtureHelper.BANK_NUMBER;
+import static br.com.juno.test.FixtureHelper.BASE_URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
@@ -15,6 +19,36 @@ import br.com.juno.integration.api.services.response.Responses;
 import br.com.juno.test.AbstractTest;
 
 public class BankTest extends AbstractTest {
+
+    @Test
+    public void constructors() {
+        Bank bank = new Bank();
+        assertNull(bank.getNumber());
+        assertNull(bank.getName());
+
+        bank = new Bank();
+        bank.setNumber(BANK_NUMBER);
+        bank.setName(BANK_NAME);
+
+        assertEquals(BANK_NUMBER, bank.getNumber());
+        assertEquals(BANK_NAME, bank.getName());
+    }
+
+    @Test
+    public void toStringComplete() {
+        Bank bank = new Bank();
+        bank.setNumber(BANK_NUMBER);
+        bank.setName(BANK_NAME);
+        assertEquals("Bank[104,Caixa Econômica Federal]", bank.toString());
+    }
+
+    @Test
+    public void toStringEmpty() {
+        Bank bank = new Bank();
+        assertEquals("Bank[<null>,<null>]", bank.toString());
+    }
+
+    //TODO: create equality test
 
     @Test
     public void jsonToObject() throws Exception {
@@ -41,8 +75,6 @@ public class BankTest extends AbstractTest {
         assertEquals(null, res.getHrefPrevious());
 
         List<Response<Bank>> list = res.getContent();
-
-        System.out.print("Resultado: " + list);
 
         assertEquals(null, list.get(0).getHrefSelf());
         assertEquals("001", list.get(0).getContent().getNumber());

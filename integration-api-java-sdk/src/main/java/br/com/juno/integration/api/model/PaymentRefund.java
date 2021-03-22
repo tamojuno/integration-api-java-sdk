@@ -1,51 +1,83 @@
 package br.com.juno.integration.api.model;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import br.com.juno.integration.api.utils.CalendarUtils;
 
 public class PaymentRefund extends BaseModel {
 
     private static final long serialVersionUID = 1539599625216489779L;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
-    private Calendar releaseDate;
+    private String releaseDate;
+    private String paybackDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
-    private Calendar paybackDate;
+    private BigDecimal amount;
+    private BigDecimal fee;
 
-    private BigDecimal paybackAmount;
     private String status;
     private String chargeId;
+
+    private String transactionId;
 
     protected PaymentRefund() {
         // NTD
     }
 
-    public Calendar getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public Calendar getPaybackDate() {
+    public String getPaybackDate() {
         return paybackDate;
     }
 
-    public BigDecimal getPaybackAmount() {
-        return paybackAmount;
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public BigDecimal getFee() {
+        return fee;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setPaybackDate(String paybackDate) {
+        this.paybackDate = paybackDate;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getChargeId() {
         return chargeId;
+    }
+
+    public void setChargeId(String chargeId) {
+        this.chargeId = chargeId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     @Override
@@ -55,8 +87,10 @@ public class PaymentRefund extends BaseModel {
         builder.append(chargeId);
         builder.append(releaseDate);
         builder.append(paybackDate);
-        builder.append(paybackAmount);
+        builder.append(amount);
+        builder.append(fee);
         builder.append(status);
+        builder.append(transactionId);
         return builder.toString();
     }
 

@@ -1,9 +1,13 @@
 package br.com.juno.integration.api.services.request.payment;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.juno.integration.api.services.JunoApiManager;
 import br.com.juno.integration.api.services.request.BaseResourceRequest;
+import br.com.juno.integration.api.utils.CalendarUtils;
 
 public class PaymentCreateRequest extends BaseResourceRequest {
 
@@ -26,14 +30,22 @@ public class PaymentCreateRequest extends BaseResourceRequest {
 
     public static class Billing implements Serializable {
 
-        private static final long serialVersionUID = -399033998073996520L;
+        private static final long serialVersionUID = 2168079270412107521L;
 
-        private final String email;
-        private final Address address;
+        private String name;
+        private String document;
+        private String email;
+        private Address address;
+        private String secondaryEmail;
+        private String phone;
+        private Boolean notify;
 
-        public Billing(String email, Address address) {
-            this.email = email;
-            this.address = address;
+        public String getName() {
+            return name;
+        }
+
+        public String getDocument() {
+            return document;
         }
 
         public String getEmail() {
@@ -44,26 +56,68 @@ public class PaymentCreateRequest extends BaseResourceRequest {
             return address;
         }
 
+        public String getSecondaryEmail() {
+            return secondaryEmail;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public Boolean getNotify() {
+            return notify;
+        }
+
+        public LocalDate getBirthDate() {
+            return birthDate;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setDocument(String document) {
+            this.document = document;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
+        }
+
+        public void setSecondaryEmail(String secondaryEmail) {
+            this.secondaryEmail = secondaryEmail;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public void setNotify(Boolean notify) {
+            this.notify = notify;
+        }
+
+        public void setBirthDate(LocalDate birthDate) {
+            this.birthDate = birthDate;
+        }
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CalendarUtils.API_DATE_FORMAT)
+        private LocalDate birthDate;
+
         public static class Address implements Serializable {
 
-            private static final long serialVersionUID = -8092145998657374456L;
+            private static final long serialVersionUID = -2343326568851744536L;
 
-            private final String street;
-            private final String number;
-            private final String city;
-            private final String state;
-            private final String postCode;
-
+            private String street;
+            private String number;
             private String complement;
             private String neighborhood;
-
-            public Address(String street, String number, String city, String state, String postCode) {
-                this.street = street;
-                this.number = number;
-                this.city = city;
-                this.state = state;
-                this.postCode = postCode;
-            }
+            private String city;
+            private String state;
+            private String postCode;
 
             public String getStreet() {
                 return street;
@@ -71,6 +125,14 @@ public class PaymentCreateRequest extends BaseResourceRequest {
 
             public String getNumber() {
                 return number;
+            }
+
+            public String getComplement() {
+                return complement;
+            }
+
+            public String getNeighborhood() {
+                return neighborhood;
             }
 
             public String getCity() {
@@ -85,12 +147,12 @@ public class PaymentCreateRequest extends BaseResourceRequest {
                 return postCode;
             }
 
-            public String getComplement() {
-                return complement;
+            public void setStreet(String street) {
+                this.street = street;
             }
 
-            public String getNeighborhood() {
-                return neighborhood;
+            public void setNumber(String number) {
+                this.number = number;
             }
 
             public void setComplement(String complement) {
@@ -99,6 +161,18 @@ public class PaymentCreateRequest extends BaseResourceRequest {
 
             public void setNeighborhood(String neighborhood) {
                 this.neighborhood = neighborhood;
+            }
+
+            public void setCity(String city) {
+                this.city = city;
+            }
+
+            public void setState(String state) {
+                this.state = state;
+            }
+
+            public void setPostCode(String postCode) {
+                this.postCode = postCode;
             }
 
         }
@@ -111,15 +185,8 @@ public class PaymentCreateRequest extends BaseResourceRequest {
         private String creditCardId;
         private String creditCardHash;
 
-        private boolean storeCreditCardData;
-
         public CreditCardDetails(String creditCardId) {
             this.creditCardId = creditCardId;
-        }
-
-        public CreditCardDetails(String creditCardHash, boolean storeCreditCardData) {
-            this.creditCardHash = creditCardHash;
-            this.storeCreditCardData = storeCreditCardData;
         }
 
         public String getCreditCardId() {
@@ -128,10 +195,6 @@ public class PaymentCreateRequest extends BaseResourceRequest {
 
         public String getCreditCardHash() {
             return creditCardHash;
-        }
-
-        public boolean isStoreCreditCardData() {
-            return storeCreditCardData;
         }
 
     }

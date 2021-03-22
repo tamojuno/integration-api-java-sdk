@@ -1,7 +1,5 @@
 package br.com.juno.integration.api.model;
 
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,31 +12,21 @@ public final class BankAccount extends BaseModel {
     private String accountNumber;
     private String accountComplementNumber;
     private BankAccountType accountType;
-    private BankAccountHolder accountHolder;
-    
-    protected BankAccount() {
+
+    public BankAccount() {
         // NTD
     }
-    
-    protected BankAccount(String accountNumber) {
-    	this.accountNumber = accountNumber;
+
+    public BankAccount(String accountNumber) {
+        this(null, null, accountNumber, null, null);
     }
 
-    protected BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType) {
+    public BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType) {
         this.bankNumber = bankNumber;
         this.agencyNumber = agencyNumber;
         this.accountNumber = accountNumber;
-    	this.accountComplementNumber = accountComplementNumber;
+        this.accountComplementNumber = accountComplementNumber;
         this.accountType = accountType;
-    }
-    
-    protected BankAccount(String bankNumber, String agencyNumber, String accountNumber, String accountComplementNumber, BankAccountType accountType, BankAccountHolder accountHolder) {
-        this.bankNumber = bankNumber;
-        this.agencyNumber = agencyNumber;
-        this.accountNumber = accountNumber;
-    	this.accountComplementNumber = accountComplementNumber;
-        this.accountType = accountType;
-        this.accountHolder = accountHolder;
     }
 
     public String getBankNumber() {
@@ -60,40 +48,36 @@ public final class BankAccount extends BaseModel {
     public BankAccountType getAccountType() {
         return accountType;
     }
-    
-    public BankAccountHolder getAccountHolder() {
-    	return accountHolder;
-    }
-    
-    public void setBankAccountHolder(BankAccountHolder accountHolder) {
-    	this.accountHolder = accountHolder;
+
+    public void setBankNumber(String bankNumber) {
+        this.bankNumber = bankNumber;
     }
 
-    public boolean isCaixa() {
-    	return !StringUtils.isBlank(accountComplementNumber);
+    public void setAgencyNumber(String agencyNumber) {
+        this.agencyNumber = agencyNumber;
     }
-    
-    public boolean isP2P() {
-    	return StringUtils.isAllBlank(bankNumber, agencyNumber, accountComplementNumber);
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
-    
+
+    public void setAccountComplementNumber(String accountComplementNumber) {
+        this.accountComplementNumber = accountComplementNumber;
+    }
+
+    public void setAccountType(BankAccountType accountType) {
+        this.accountType = accountType;
+    }
+
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.JSON_STYLE);
-        
-        if (BooleanUtils.isTrue(isP2P())) {
-        	builder.append("accountNumber", accountNumber);
-        } else {
-		    builder.append("bankNumber", bankNumber);
-		    builder.append("agencyNumber", agencyNumber);
-		    builder.append("accountNumber", accountNumber);
-		    
-		    if (BooleanUtils.isTrue(isCaixa())) {
-		    	builder.append("accountComplementNumber", accountComplementNumber);
-		    } 
-		    
-		    builder.append("accountType", accountType);
-        }
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+
+        builder.append(bankNumber);
+        builder.append(agencyNumber);
+        builder.append(accountNumber);
+        builder.append(accountComplementNumber);
+        builder.append(accountType);
         return builder.toString();
     }
 
