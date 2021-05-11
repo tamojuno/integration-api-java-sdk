@@ -5,9 +5,20 @@ Esta SDK foi desenvolvida para abstrair aos desenvolvedores os principais detalh
 Você pode acessar a documentação base aqui:  
 dev.juno.com.br/api/v2
 
-# Requisitos
+## Requisitos
 
 - Java 11 ou superior 
+
+## Integração
+
+**Maven**
+````
+<dependency>
+  <groupId>io.github.tamojuno</groupId>
+  <artifactId>integration-api-java-sdk</artifactId>
+  <version>1.0.4</version>
+</dependency>
+````
 
 ## Guia de uso
 
