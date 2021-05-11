@@ -6,10 +6,43 @@
 
     <groupId>io.github.tamojuno</groupId>
     <artifactId>integration-api-java-sdk</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.4</version>
+    <packaging>jar</packaging>
 
     <name>integration-api-java-sdk</name>
+    <description>Library developed to integrate with Juno API 2.0</description>
     <url>https://juno.com.br</url>
+    <licenses>
+      <license>
+        <name>The Apache License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Guilherme Sales</name>
+            <email>guilherme.sales@juno.com.br</email>
+            <organization>io.github.tamojuno</organization>
+            <organizationUrl>https://github.com/guilhermaosales</organizationUrl>
+        </developer>
+        <developer>
+            <name>Norton Gueno</name>
+            <email>norton@juno.com.br</email>
+            <organization>io.github.tamojuno</organization>
+            <organizationUrl>https://github.com/ngueno</organizationUrl>
+        </developer>
+        <developer>
+            <name>Eduardo Hamerski</name>
+            <email>hamerski@juno.com.br</email>
+            <organization>io.github.tamojuno</organization>
+            <organizationUrl>https://github.com/ehamerski</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+      <connection>scm:git:git://github.com/tamojuno/integration-api-java-sdk.git</connection>
+      <developerConnection>scm:git:ssh://github.com:tamojuno/integration-api-java-sdk.git</developerConnection>
+      <url>http://github.com/tamojuno/integration-api-java-sdk/tree/master</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -118,17 +151,28 @@
         </dependency>
 
     </dependencies>
+    
+    <distributionManagement>
+      <snapshotRepository>
+        <id>ossrh</id>
+        <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+      </snapshotRepository>
+      <repository>
+        <id>ossrh</id>
+        <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      </repository>
+    </distributionManagement>
 
     <build>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven
+        <!-- <pluginManagement>lock down plugins versions to avoid using Maven
                 defaults (may be moved to parent pom) -->
             <plugins>
                 <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-                <plugin>
+                <!-- <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
-                <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+                default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.0.2</version>
@@ -153,7 +197,7 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
-                <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+                site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.7.1</version>
@@ -161,8 +205,59 @@
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin> -->
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.7</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-source-plugin</artifactId>
+                  <version>2.2.1</version>
+                  <executions>
+                    <execution>
+                      <id>attach-sources</id>
+                      <goals>
+                        <goal>jar-no-fork</goal>
+                      </goals>
+                    </execution>
+                  </executions>
+                </plugin>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-javadoc-plugin</artifactId>
+                  <version>3.2.0</version>
+                  <executions>
+                    <execution>
+                      <id>attach-javadocs</id>
+                      <goals>
+                        <goal>jar</goal>
+                      </goals>
+                    </execution>
+                  </executions>
+                </plugin>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-gpg-plugin</artifactId>
+                  <version>1.5</version>
+                  <executions>
+                    <execution>
+                      <id>sign-artifacts</id>
+                      <phase>verify</phase>
+                      <goals>
+                        <goal>sign</goal>
+                      </goals>
+                    </execution>
+                  </executions>
                 </plugin>
             </plugins>
-        </pluginManagement>
+        <!-- </pluginManagement> -->
     </build>
 </project>
